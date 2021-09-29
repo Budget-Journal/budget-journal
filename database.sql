@@ -12,16 +12,12 @@ CREATE TABLE "user" (
     "total_budget" DECIMAL(5,2)
 );
 
+
 CREATE TABLE "goals" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user" NOT NULL,
-	"journal" VARCHAR (65000),
-	"key_motivation" VARCHAR (1000),
-	"next_step" VARCHAR (1000),
-	"deadline" DATE,
-	"reward" VARCHAR (1000),
-	"reflection_text" VARCHAR (1000),
-	"reflection_img" VARCHAR (1000)
+	"name" VARCHAR(1000),
+	"reasons" VARCHAR(1000),
+	"is_completed" boolean DEFAULT false
 );
 
 CREATE TABLE "budget" (
@@ -30,4 +26,18 @@ CREATE TABLE "budget" (
 	"expense" VARCHAR (1000),
 	"price" DECIMAL(5,2),
 	"notes" VARCHAR (1000)
+);
+
+CREATE TABLE "journal_feed" (
+	"id" SERIAL PRIMARY KEY,
+	"post_text" VARCHAR(1000),
+	"goal_relation" VARCHAR(1000),
+	"date_posted" TIMESTAMP WITHOUT TIME ZONE
+);
+
+CREATE TABLE "goals_journals" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user" NOT NULL,
+	"journal_feed_id" INT REFERENCES "journal_feed" NOT NULL,
+	"goals_id" INT REFERENCES "goals" NOT NULL
 );
