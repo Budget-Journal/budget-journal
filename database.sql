@@ -15,8 +15,10 @@ CREATE TABLE "user" (
 
 CREATE TABLE "goals" (
 	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user" NOT NULL,
+	"journal_feed_id" INT REFERENCES "journal_feed" NOT NULL,
 	"name" VARCHAR(1000),
-	"reasons" VARCHAR(1000),
+	"reasons" TEXT,
 	"is_completed" boolean DEFAULT false
 );
 
@@ -33,11 +35,4 @@ CREATE TABLE "journal_feed" (
 	"post_text" VARCHAR(1000),
 	"goal_relation" VARCHAR(1000),
 	"date_posted" TIMESTAMP WITHOUT TIME ZONE
-);
-
-CREATE TABLE "goals_journals" (
-	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user" NOT NULL,
-	"journal_feed_id" INT REFERENCES "journal_feed" NOT NULL,
-	"goals_id" INT REFERENCES "goals" NOT NULL
 );
