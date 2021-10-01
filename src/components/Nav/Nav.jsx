@@ -24,12 +24,19 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className="navLink" to="/user">
-              Home
+            <Link className="navLink" to="/activegoals">
+              Active Goals
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/creategoal">
+              Create Goal
+            </Link>
+
+            <Link className="navLink" to="/journal">
+              Journal
+            </Link>
+            <Link className="navLink" to="/accomplishedgoals">
+              Accomplished Goals
             </Link>
 
             <LogOutButton className="navLink" />

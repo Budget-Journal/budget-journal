@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import SideBar from "../SideBar";
+// import "../App.css";
 import {
   HashRouter as Router,
   Redirect,
@@ -45,7 +47,7 @@ function App() {
             exact
             path="/about"
           >
-            <AboutPage />
+            {/* <AboutPage /> */}
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -55,17 +57,45 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/user"
+            path="/activegoals"
           >
-            <UserPage />
+            <div className ="app__page">
+            <SideBar />
+            </div>
+            {/* Body of activegoals page component */}
           </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/creategoal"
           >
-            <InfoPage />
+            <div className ="app__page">
+            <SideBar />
+            </div>
+            {/* Body of create goal component */}
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/journal"
+          >
+            <div className ="app__page">
+            <SideBar />
+            </div>
+            {/* Body of journal component */}
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/accomplishedgoals"
+          >
+            <div className ="app__page">
+            <SideBar />
+            </div>
+            {/* Body of accomplished goals component */}
           </ProtectedRoute>
 
           <Route
