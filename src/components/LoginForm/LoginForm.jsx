@@ -3,8 +3,11 @@ import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 
 function LoginForm() {
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('email')
   const [password, setPassword] = useState('');
+  const [totalBudget, setTotalBudget] = useState(0);
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
 
@@ -15,8 +18,11 @@ function LoginForm() {
       dispatch({
         type: 'LOGIN',
         payload: {
+          //name: name,
           username: username,
+          //email: email,
           password: password,
+          //totalBudget: totalBudget
         },
       });
     } else {
