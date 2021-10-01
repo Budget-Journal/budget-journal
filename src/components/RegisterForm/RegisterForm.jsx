@@ -1,3 +1,5 @@
+import { PhotoSizeSelectActual } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,7 +23,7 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h2 className= "titlePanel">Budget Journal</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -29,10 +31,12 @@ function RegisterForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
+          
+          <TextField
+            placeholder="Username" 
+            
+            size="small"
+            variant="filled"
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
@@ -41,8 +45,11 @@ function RegisterForm() {
       </div>
       <div>
         <label htmlFor="password">
-          Password:
-          <input
+          
+          <TextField
+            placeholder="Password"
+            size="small"
+            variant="filled"
             type="password"
             name="password"
             value={password}
