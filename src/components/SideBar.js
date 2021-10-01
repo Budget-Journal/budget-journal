@@ -22,7 +22,7 @@ function SideBar() {
     history.push("/journal");
   };
   const accomplishedGoals = () => {
-    history.push("/accomplishedGoals");
+    history.push("/accomplishedgoals");
   };
 
   return (
