@@ -2,6 +2,10 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+/*
+    Handles when a goal is completed
+*/
+
 /**
  * GET route template
  */

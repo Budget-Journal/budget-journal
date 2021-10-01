@@ -2,6 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+/*
+    Handle the creation of a new budget
+    Handle editing an existing budget
+*/
+
 /**
  * GET route template
  */
