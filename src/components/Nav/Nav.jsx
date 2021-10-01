@@ -25,18 +25,18 @@ function Nav() {
         {user.id && (
           <>
             <Link className="navLink" to="/activegoals">
-              Active Goals
+             
             </Link>
 
             <Link className="navLink" to="/creategoal">
-              Create Goal
+             
             </Link>
 
             <Link className="navLink" to="/journal">
-              Journal
+              
             </Link>
             <Link className="navLink" to="/accomplishedgoals">
-              Accomplished Goals
+              
             </Link>
 
             <LogOutButton className="navLink" />
@@ -44,7 +44,7 @@ function Nav() {
         )}
 
         <Link className="navLink" to="/about">
-          About
+          
         </Link>
       </div>
     </div>

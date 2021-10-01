@@ -2,26 +2,30 @@
   display: flex;
   flex: 0.4;
   /* align-items: center; */
-  padding: 5px 30px;
+  padding: 10px 30px;
   font-family: "Work Sans", Sans-Serif;
   font-size: 30px;
 }
 .sidebarRow__icon {
-  color: rgb(29, 62, 88);
+  color: rgb(6, 13, 19);
   font-size: large !important;
+  padding-top: 10px;
   
 }
 .sidebarRow__title {
-  flex: 1;
+  flex: 2;
+  align-content: center;
   margin-left: 18px;
-  padding:0px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
   font-size: 16px;
   font-weight: 500px;
-  color: gray;
+  color: rgb(109, 104, 104);
+  
   /* padding-top: 5px; */
 }
 .sidebarRow:hover {
-  background-color: rgb(190, 224, 243);
+  background-color: rgb(253, 253, 253);
   cursor: pointer;
 }
 .sidebarRow:hover > .sidebarRow__icon {
