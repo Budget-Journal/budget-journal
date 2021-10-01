@@ -9,30 +9,29 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "email" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "total_budget" DECIMAL(5,2)
+    "total_budget" DECIMAL(38,2)
 );
 
 
-CREATE TABLE "goals" (
+CREATE TABLE "goal" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user" NOT NULL,
-	"journal_feed_id" INT REFERENCES "journal_feed" NOT NULL,
 	"name" VARCHAR(1000),
 	"reasons" TEXT,
-	"is_completed" boolean DEFAULT false
+	"completed" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "budget" (
 	"id" SERIAL PRIMARY KEY,
-	"goals_id" INT REFERENCES "goals" NOT NULL,
+	"goal_id" INT REFERENCES "goal" NOT NULL,
 	"expense" VARCHAR (1000),
-	"price" DECIMAL(5,2),
+	"price" DECIMAL(38,2),
 	"notes" VARCHAR (1000)
 );
 
-CREATE TABLE "journal_feed" (
+CREATE TABLE "journal_post" (
 	"id" SERIAL PRIMARY KEY,
+	"goal_id" INT REFERENCES "goal" DEFAULT NULL,
 	"post_text" VARCHAR(1000),
-	"goal_relation" VARCHAR(1000),
-	"date_posted" TIMESTAMP WITHOUT TIME ZONE
+	"date_posted" TIMESTAMP DEFAULT NOW() NOT NULL
 );
