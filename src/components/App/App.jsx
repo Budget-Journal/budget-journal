@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import SideBar from "../SideBar";
+import ActiveGoals from '../ActiveGoals';
+
 // import "../App.css";
 import {
   HashRouter as Router,
@@ -14,13 +16,10 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Editor from '../../Editor/Editor';
 
 import './App.css';
 
@@ -36,7 +35,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        <Nav/>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -59,8 +58,10 @@ function App() {
             exact
             path="/activegoals"
           >
+            
             <div className ="app__page">
             <SideBar />
+            <ActiveGoals />
             </div>
             {/* Body of activegoals page component */}
           </ProtectedRoute>
@@ -69,7 +70,9 @@ function App() {
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/creategoal"
+            
           >
+            
             <div className ="app__page">
             <SideBar />
             </div>
@@ -81,8 +84,10 @@ function App() {
             exact
             path="/journal"
           >
+            
             <div className ="app__page">
             <SideBar />
+            <Editor />
             </div>
             {/* Body of journal component */}
           </ProtectedRoute>
@@ -92,6 +97,7 @@ function App() {
             exact
             path="/accomplishedgoals"
           >
+            
             <div className ="app__page">
             <SideBar />
             </div>
