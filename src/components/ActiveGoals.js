@@ -18,6 +18,9 @@ function ActiveGoals() {
 
           <h4 className="home__subtitle">
             Click the '+' to add a Goal
+            <br/>
+            <br/>
+            These goal should be something you strive to accomplish on a daily basis
           </h4>
         </div>
        
