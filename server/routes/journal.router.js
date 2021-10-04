@@ -14,11 +14,26 @@ router.get('/', (req, res) => {
     // GET route code here
 });
 
-/**
- * POST route template
- */
+
 router.post('/', (req, res) => {
-    // POST route code here
+
+    // if (req.body.goal === NULL){
+
+    // } else {
+
+    // }
+
+    const sqlText = `
+        INSERT INTO "journal_post" ("user_id", "post_text")
+        VALUES = $1, $2
+    `;
+
+    const sqlParams = [
+        req.user.id;
+        req.body
+    ];
+
+    pool.query
 });
 
 module.exports = router;
