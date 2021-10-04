@@ -8,24 +8,30 @@ export default function Journal () {
   const dispatch = useDispatch();
 
   // Holds the value of the users post locally
-  const [journalPost, setJournalPost] = useState();
-  let newEntry;
+  const [journalPost, setJournalPost] = useState({
+    entry: '',
+    goal: ''
+  });
 
-  function handlePostInput(e) {
-    setJournalPost(e.target.value)
+  const handlePostInput = (e) => {
+    setJournalPost({
+      ...journalPost, [e.target.name]: e.target.value
+    })
   }
-  
+
+  let newEntry;
   function PostEntry(e) {
     e.preventDefault(e);
     console.log("Post", journalPost);
-    newEntry = {entry: journalPost}
-
+    newEntry = {
+      entry: journalPost.entry,
+      goal: journalPost.goal
+    }
 
     dispatch({
       type: "ADD_JOURNAL_POST",
       payload: newEntry
     });
-
   }
 
 
@@ -35,21 +41,24 @@ export default function Journal () {
 
       <form onSubmit={PostEntry}>
         <TextField 
+          type="text"
+          name="entry"
           className="inputField"
           id="outlined-basic" 
           label="Outlined" 
           variant="outlined" 
-          value={journalPost}
+          value={journalPost.entry}
           onChange={handlePostInput}
         />
         <Select
+          name="goal"
           displayEmpty
-          inputProps={{ 'aria-label': 'Without label' }}
+          onChange={handlePostInput}
         >
           <MenuItem value="NULL"> <em>None</em> </MenuItem>
-          <MenuItem value="Run a 5k">Run a 5k</MenuItem>
-          <MenuItem value="Buy a Maserati">Buy a Maserati</MenuItem>
-          <MenuItem value="Family trip to Barcelona">Family trip to Barcelona</MenuItem>
+          <MenuItem value="1">Run a 5k</MenuItem>
+          <MenuItem value="2">Buy a Maserati</MenuItem>
+          <MenuItem value="3">Family trip to Barcelona</MenuItem>
         </Select>
         <FormHelperText>Optional: Select a Goal this post is related too</FormHelperText>
         <br />
