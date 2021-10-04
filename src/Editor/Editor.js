@@ -29,6 +29,10 @@ export const Editor = () => {
         modules={modules}
         formats={formats}
       />
+      <br/>
+      <br/>
+      <br/>
+
       <table>
         <tr>
           <th>Expense</th>
@@ -42,10 +46,12 @@ export const Editor = () => {
         <td><TextField></TextField></td>
         <td><Button size="small"variant="contained">Add Row</Button></td>
       </table>
-
+        <br/>
+        <br/>
+        <br/>
       <Card>
             <CardContent>
-                <Typography className="recentlistings" variant="h5" component="h3">Feed to Display Posts for Goal...</Typography>
+                <Typography className="recentlistings" variant="h5" component="h3">Feed to Display Entries</Typography>
             </CardContent>
 
         </Card>
