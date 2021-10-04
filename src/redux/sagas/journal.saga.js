@@ -25,7 +25,7 @@ export default function* journalSaga() {
         try {
             const response = axios.get('/api/journal');
             console.log('axios response', response);
-
+            yield put({ type: 'SET_JOURNAL_POST', payload: response })
             
         } catch (error) {
             console.error("Error fetching journal posts", error);
