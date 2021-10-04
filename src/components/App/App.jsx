@@ -75,6 +75,7 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
+            <Editor />
             </div>
             {/* Body of create goal component */}
           </ProtectedRoute>
@@ -87,7 +88,7 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
-            <Editor />
+            
             </div>
             {/* Body of journal component */}
           </ProtectedRoute>

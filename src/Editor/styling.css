@@ -1,0 +1,10 @@
+.text-editor {
+    
+    padding-right: 200px;
+    width: 600px;
+    margin: 0 auto;
+  }
+  .ql-editor {
+    display: flex;
+    min-height: 100px;
+  }
