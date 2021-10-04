@@ -12,6 +12,11 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
     // GET route code here
+    const query = `SELECT * 
+    FROM "budget"
+    JOIN "goal"
+        ON "budget"."id" = ;`;
+
 });
 
 /**
