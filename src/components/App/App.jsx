@@ -19,7 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import Editor from '../../Editor/Editor';
+import Editor from '../../Journal/journal';
 
 import './App.css';
 
