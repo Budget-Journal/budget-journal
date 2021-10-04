@@ -16,7 +16,7 @@ export default function Journal () {
     console.log("Post", journalPost);
 
     dispatch({
-      type: "ADD_NEW_JOURNAL_POST",
+      type: "ADD_JOURNAL_POST",
       payload: journalPost
     });
 
