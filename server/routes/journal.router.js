@@ -16,24 +16,28 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req, res) => {
+    console.log('req.body', req.body.entry);
+    
 
     // if (req.body.goal === NULL){
-
     // } else {
-
     // }
 
     const sqlText = `
         INSERT INTO "journal_post" ("user_id", "post_text")
-        VALUES = $1, $2
+        VALUES ($1, $2);
     `;
-
     const sqlParams = [
-        req.user.id;
-        req.body
+        req.user.id,
+        req.body.entry
     ];
 
-    pool.query
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.error("Error /POST new journal entry", error);
+        res.sendStatus(500);
+    })
 });
 
 module.exports = router;

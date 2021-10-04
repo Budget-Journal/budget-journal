@@ -12,7 +12,6 @@ CREATE TABLE "user" (
     "total_budget" DECIMAL(38,2)
 );
 
-
 CREATE TABLE "goal" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user" NOT NULL,
@@ -36,6 +35,8 @@ CREATE TABLE "journal_post" (
 	"post_text" VARCHAR(1000),
 	"date_posted" TIMESTAMP DEFAULT NOW() NOT NULL
 );
+
+
 
 INSERT INTO "user"("id", "name", "username", "email", "password", "total_budget")
 VALUES(1, 'Sarah', 'Sarah123', 'sarah@email.com', '123', 10000);

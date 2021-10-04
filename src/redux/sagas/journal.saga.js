@@ -6,6 +6,7 @@ export default function* journalSaga() {
 
     function* addJournalPost(action) {
         try {
+            console.log("payload", action.payload);
             axios.post('/api/journal', action.payload);
 
 
