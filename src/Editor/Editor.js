@@ -5,38 +5,62 @@ import { Card, CardContent, Typography, TextField, Button } from "@mui/material"
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
-
+import { useDispatch } from "react-redux";
 export const Editor = () => {
 
 
     const [state, setState] = React.useState({ value: null });
-    // const [goal, setGoal] = useState("");
+    const [goal, setGoal] = useState("");
+    const [notes, setNotes] = useState("");
+    const [price, setPrice] = useState("");
+    const [expense, setExpense] = useState("");
+    const dispatch = useDispatch();
+
     const handleChange = (value) => {
         setState({ value });
+    };
+
+    const handleAddRow =()=>{
+        console.log('Am i working')
+        return(
+            <div>
+                
+                <td><TextField/></td>
+                <td><TextField/></td>
+                <td><TextField/></td>
+            </div>
+            
+        )
+    }
 
 
-        // const postGoals = () => {
-        //     dispatch({
-        //         type: "POST_GOALS",
-        //         payload: {
-        //             goal: goal,
-        //             state: state,
+        const postGoals = (event) => {
+            dispatch({
+                type: "POST_GOALS",
+                payload: {
+                    goal: goal,
+                    state: state,
+                    expense: expense,
+                    price: price,
+                    notes: notes
+                    
 
-        //         },
-        //     });
+                },
+            });
 
-        // };
+        };
 
-        // const handleGoal = (event) => {
-        //     //Handles input from Goal Input Field
-        //     console.log("handleGoal");
-        //     setGoal(event.target.value);
-        // };
+       
 
         return (
 
             <div className="text-editor">
-                <h1>Goal:<TextField size="small" > </TextField></h1>
+                <form name="frm" onSubmit={postGoals} >
+                <h1>Goal:<TextField 
+                label="Goals"
+                size="small" 
+                value={goal}
+                onChange={(event) => setGoal(event.target.value)}/></h1>
                 <EditorToolbar />
                 <ReactQuill
                     theme="snow"
@@ -53,19 +77,39 @@ export const Editor = () => {
                 <br />
 
                 <table>
-                    <tr>
-                        <th>Expense</th>
-                        <th>Price</th>
-                        <th>Notes</th>
+                    <thead>
+                        <tr>
+                            <th>Expense</th>
+                            <th>Price</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td><TextField 
+                        label="Expense" 
+                        size="small"
+                        value={expense}
+                        onChange={(event) => setExpense(event.target.value)}/></td>
 
+                        <td><TextField
+                        label="Price"
+                        size="small"
+                        value={price}
+                        onChange={(event) => setPrice(event.target.value)}/></td>
 
-                    </tr>
-                    <td><TextField size="small"></TextField></td>
-                    <td><TextField size="small"></TextField></td>
-                    <td><TextField size="small"></TextField></td>
-                    <td><Button size="small" variant="contained">Add Row</Button></td>
+                        <td><TextField 
+                        label="Notes"
+                        size="small"
+                        value={notes}
+                        onChange={(event) => setNotes(event.target.value)}/></td>
+                        
+                        <td><Button 
+                        onClick={handleAddRow}
+                        size="small" 
+                        variant="contained">Add Row</Button></td>
+                    </tbody>
                 </table>
-                {/* <Button onClick={postGoals}>Set Goal</Button> */}
+                <Button type="submit">Set Goal</Button>
                 <br />
                 <br />
                 <br />
@@ -77,10 +121,10 @@ export const Editor = () => {
         </Card> */}
 
 
-
+             </form>
             </div>
         );
-    };
+    
     
 }
 

@@ -15,8 +15,16 @@ router.get('/', (req, res) => {
     const query = `SELECT * 
     FROM "budget"
     JOIN "goal"
-        ON "budget"."id" = ;`;
-
+        ON "budget"."id" = "goal"."id" 
+    WHERE "budget" = $1;`;
+    pool.query(query)
+    .then(result => {
+        res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('GET budget Error', error)
+        res.sendStatus(500)
+    })
 });
 
 /**
@@ -24,6 +32,9 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     // POST route code here
+    let query = `INSERT INTO "budget" ("expense", "price", "notes")
+                 VALUE($1, $2, $3)`;
+    pool.query(query, [])
 });
 
 module.exports = router;
