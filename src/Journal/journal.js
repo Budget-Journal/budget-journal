@@ -13,6 +13,17 @@ export default function Journal () {
     goal: ''
   });
 
+  useEffect(() => {
+    fetchJournalPosts();
+  }, []);
+
+ const fetchJournalPosts = () => {
+  dispatch({
+    type: "FETCH_JOURNAL_POSTS"
+  })
+ }
+
+
   const handlePostInput = (e) => {
     setJournalPost({
       ...journalPost, [e.target.name]: e.target.value

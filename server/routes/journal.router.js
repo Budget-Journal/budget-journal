@@ -2,16 +2,29 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/*
-    Handles fetching a journal post
-    Handles posting a journal post
-*/
 
-/**
- * GET route template
- */
+
 router.get('/', (req, res) => {
-    // GET route code here
+    const sqlText = `
+        SELECT
+            "post_text",
+            "date_posted"
+        FROM "journal_post"
+        JOIN "user" 
+            ON "journal_post".user_id = "user".id
+        WHERE "user".id = $1
+        ORDER BY "date_posted" DESC;
+    `;
+    const sqlParams = [
+        req.user.id         // $1
+    ]
+
+    pool.query(sqlText, sqlParams).then(result => {
+        console.log('Results', result.rows);
+        res.send(result.rows)
+    }).catch (error => {
+        console.error('Fetching all journal posts failed', error);
+    })
 });
 
 

@@ -30,7 +30,7 @@ CREATE TABLE "budget" (
 
 CREATE TABLE "journal_post" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCE "user" NOT NULL,
+	"user_id" INT REFERENCES "user" NOT NULL,
 	"goal_id" INT REFERENCES "goal" DEFAULT NULL,
 	"post_text" VARCHAR(1000),
 	"date_posted" TIMESTAMP DEFAULT NOW() NOT NULL
