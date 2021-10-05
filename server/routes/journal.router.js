@@ -7,11 +7,14 @@ const router = express.Router();
 router.get('/', (req, res) => {
     const sqlText = `
         SELECT
-            "post_text",
-            "date_posted"
+            "journal_post"."post_text",
+            "journal_post"."date_posted",
+            "goal"."name"
         FROM "journal_post"
         JOIN "user" 
             ON "journal_post".user_id = "user".id
+        LEFT JOIN "goal"
+	        ON "journal_post".goal_id = "goal".id
         WHERE "user".id = $1
         ORDER BY "date_posted" DESC;
     `;
@@ -21,9 +24,10 @@ router.get('/', (req, res) => {
 
     pool.query(sqlText, sqlParams).then(result => {
         console.log('Results', result.rows);
-        res.send(result.rows)
+        res.send(result.rows);
     }).catch (error => {
         console.error('Fetching all journal posts failed', error);
+        res.sendStatus(500);
     })
 });
 

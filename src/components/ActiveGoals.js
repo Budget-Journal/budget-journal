@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 function ActiveGoals() {
   const history = useHistory();
-
+  // pull from reducer
  
 
   return (

@@ -13,6 +13,7 @@ const goalRouter = require('./routes/goal.router');
 const budgetRouter = require('./routes/budget.router');
 const journalRouter = require('./routes/journal.router');
 const completedRouter = require('./routes/completed.router');
+const journalSelectGoal = require('./routes/journalSelectGoal.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/goal', goalRouter);
 app.use('/api/budget', budgetRouter);
 app.use('/api/journal', journalRouter);
 app.use('/api/completed', completedRouter);
+app.use('/api/journalSelectGoal', journalSelectGoal)
 
 // Serve static files
 app.use(express.static('build'));
