@@ -59,7 +59,7 @@ export const Editor = () => {
 
             <div className="text-editor">
                 <form name="frm" onSubmit={postGoals} >
-                <h1>Goal:<TextField 
+                <h1>Goal:  <TextField 
                 label="Goal Name"
                 size="small" 
                 value={goal}
@@ -89,7 +89,8 @@ export const Editor = () => {
                     </thead>
                     <tbody>
                         <td><TextField 
-                        label="Expense" 
+                        
+                        label="Specific Expense" 
                         size="small"
                         value={expense}
                         onChange={(event) => setExpense(event.target.value)}/></td>

@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   text-align: center;
-  padding-top: 40px;
+  padding:10px;
   margin: 0 0 30px;
   background-color:#1F4364;
   overflow: hidden;
@@ -53,7 +53,14 @@
 .nav__left{
   text-align: center;
   
-  margin-left: 625px;
+  margin-left: 760px;
 
 }
+h1{
+  font-size: 16px;
+  padding-right: 20px;
+  color: white;
+  
+}
+
 

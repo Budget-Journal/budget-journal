@@ -13,7 +13,7 @@ function Nav() {
     <div className="nav">
       <Link to="/activegoals">
       <div className="nav__left">
-        {/* <MenuSharpIcon /> */}
+     
         <img className="header__logo" src={Logo1} alt="" />
       </div>
       </Link>
@@ -29,28 +29,28 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className="navLink" to="/activegoals">
+            {/* <Link className="navLink" to="/activegoals">
              
             </Link>
 
             <Link className="navLink" to="/creategoal">
              
-            </Link>
+            </Link> */}
 
-            <Link className="navLink" to="/journal">
+            {/* <Link className="navLink" to="/journal">
               
-            </Link>
-            <Link className="navLink" to="/accomplishedgoals">
+            </Link> */}
+            {/* <Link className="navLink" to="/accomplishedgoals">
               
-            </Link>
-
+            </Link> */}
+            <h1>{user ? <h2> {user.username}</h2> : <h3>No user logged-in</h3>}</h1>
             <LogOutButton className="navLink" />
           </>
         )}
 
-        <Link className="navLink" to="/about">
+        {/* <Link className="navLink" to="/about">
           
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
