@@ -30,11 +30,11 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-    // POST route code here
-    let query = `INSERT INTO "budget" ("expense", "price", "notes")
-                 VALUE($1, $2, $3)`;
-    pool.query(query, [])
-});
+// router.post('/', (req, res) => {
+//     // POST route code here
+//     let query = `INSERT INTO "budget" ("expense", "price", "notes")
+//                  VALUE($1, $2, $3)`;
+//     pool.query(query, [])
+// });
 
 module.exports = router;

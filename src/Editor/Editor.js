@@ -41,8 +41,8 @@ export const Editor = () => {
             dispatch({
                 type: "POST_GOALS",
                 payload: {
-                    goal: goal,
-                    state: state,
+                    name: goal,
+                    reasons: state,
                     expense: expense,
                     price: price,
                     notes: notes
