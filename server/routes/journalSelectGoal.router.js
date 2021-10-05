@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-
+// Obtains all the users goals that are currently active
 router.get('/', (req, res) => {
     const sqlText = `
         SELECT * FROM "goal"

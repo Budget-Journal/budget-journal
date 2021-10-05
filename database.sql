@@ -16,7 +16,7 @@ CREATE TABLE "goal" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user" NOT NULL,
 	"name" VARCHAR(1000),
-	"reasons" TEXT,
+	"reasons" VARCHAR(65000),
 	"completed" BOOLEAN DEFAULT FALSE
 );
 

@@ -16,6 +16,7 @@ export default function JournalEntries({entry, index}){
         return d = d.toLocaleDateString();
     }
 
+    // Styling of the journal posts
     const card = (
         <React.Fragment>
             <CardContent>
@@ -31,6 +32,8 @@ export default function JournalEntries({entry, index}){
             </CardContent>
         </React.Fragment>
     );
+
+    
     return (
         <Box sx={{ maxWidth: 700 }}>
             <Card 

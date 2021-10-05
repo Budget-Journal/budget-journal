@@ -5,8 +5,6 @@ import "./styles.css";
 import JournalEntries from "./journalEntries";
 import userReducer from "../../redux/reducers/user.reducer";
 
-import Box from '@mui/material/Box';
-
 
 
 
@@ -14,6 +12,7 @@ export default function Journal () {
   // Set react hooks to variables
   const dispatch = useDispatch();
 
+  // Pulling stored data from Redux
   const journal = useSelector(store => store.journal);
   const selectGoal = useSelector(store => store.selectGoal);
 
@@ -27,32 +26,38 @@ export default function Journal () {
     goal: ''
   });
 
+  // Run on page load
   useEffect(() => {
     fetchActiveGoals();
     fetchJournalPosts();
   }, []);
 
+  // Responsible for fetching all the active goals related to the user
   const fetchActiveGoals = () => {
     dispatch({
       type: "FETCH_ACTIVE_GOALS"
     })
   }
 
+// Responsible for fetching all journal posts related to the user
   const fetchJournalPosts = () => {
     dispatch({
       type: "FETCH_JOURNAL_POSTS"
     })
   }
 
-
+  // Responsible for grabbing user inputs and setting the state 
   const handlePostInput = (e) => {
     setJournalPost({
       ...journalPost, [e.target.name]: e.target.value
     })
   }
 
+  // Variable used to pass to the database
   let newEntry;
-  function PostEntry(e) {
+
+  // Responsible for sending user inputs to the database
+  const PostEntry = (e) => {
     e.preventDefault(e);
     console.log("Post", journalPost);
     newEntry = {
@@ -112,8 +117,6 @@ export default function Journal () {
         </Button>
       </form>
 
-    <br />
-    <br />
     <div>
         {journal.map((entry, index) => (
           <JournalEntries entry={entry} index={index} />
