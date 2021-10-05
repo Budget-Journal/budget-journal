@@ -13,9 +13,7 @@ const router = express.Router();
 /**
  * GET route template
  */
-//  JOIN "goal"
-//  ON "budget"."goal_id" = "goal"."id" 
-//  WHERE "budget"."id" = $1;
+
  router.get('/', (req, res) => {
     // GET route code here
     const query = `SELECT * FROM "goal"
@@ -29,7 +27,29 @@ const router = express.Router();
         res.sendStatus(500)
     })
 });
-
+    //GET Card Details
+    router.get('/details/:id', (req, res) => {
+        const clubId = [req.params.id];
+        const query = `SELECT 
+        "budget"."id" as "budgetid",
+        "budget"."expense" as "expense"
+        "budget"."price" as "price"
+        "budget".notes" as "notes"
+        FROM "budget"
+        JOIN "goal"
+        ON "budget"."goal_id" = "goal"."id" 
+        WHERE "budget"."id" = $1;
+        GROUP BY "expense", "price", "notes", "budgetid";`;
+      
+          pool.query(query, clubId)
+          .then(result => {
+            console.log('result', result)
+            res.send(result.rows)
+          }).catch(error => {
+            console.log('Details GET error', error)
+            res.sendStatus(500)
+          });
+      });
 /**
  * POST route template
  */

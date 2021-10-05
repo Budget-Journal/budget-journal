@@ -20,6 +20,17 @@ function* fetchGoals() {
         console.log('fetchGoals Error at goal.saga', error)
     }
 };
+// Card View Details
+function* cardViewDetails(action) {
+    try{
+        const cardDetails = yield axios.get(`/api/goal/details/${action.payload}`)
+        yield put ({ type: 'CARD_DETAILS', payload: cardDetails.data})
+    }
+    catch(error) {
+        console.log('cardDetails saga ERROR', error)
+    }
+};
+
 function* postGoals(action) {
 
     try{
@@ -35,5 +46,7 @@ function* postGoals(action) {
 export default function* goalSaga(){
     yield takeLatest('FETCH_GOALS', fetchGoals);
     yield takeLatest('POST_GOALS', postGoals);
+    yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
+
 
 }

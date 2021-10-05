@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import SideBar from "../SideBar";
 import ActiveGoals from '../ActiveGoals';
 import GoalCard from '../GoalCard/GoalCard';
+import GoalCardView from '../GoalCardView/GoalCardView';
+import GoalCardDetails from '../GoalCardView/GoalCardDetails';
 // import "../App.css";
 import {
   HashRouter as Router,
@@ -104,6 +106,20 @@ function App() {
             <GoalCard />
             </div>
             {/* Body of accomplished goals component */}
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/view"
+          >
+            
+            <div className ="app__page">
+              <GoalCardView />
+              <GoalCardDetails/>
+            
+            
+            </div>
+            
           </ProtectedRoute>
 
           <Route
