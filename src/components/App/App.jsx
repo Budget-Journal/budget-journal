@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import SideBar from "../SideBar";
 import ActiveGoals from '../ActiveGoals';
-
+import GoalCard from '../GoalCard/GoalCard';
 // import "../App.css";
 import {
   HashRouter as Router,
@@ -101,6 +101,7 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
+            <GoalCard />
             </div>
             {/* Body of accomplished goals component */}
           </ProtectedRoute>

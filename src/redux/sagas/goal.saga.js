@@ -9,12 +9,14 @@ import { put, takeLatest } from 'redux-saga/effects';
 */
 
 function* fetchGoals() {
-
     try{
-        const goals = yield axios.get ('api/budget')
-        yield put({ type: 'SET_GOALS', payload: goals.data});
-    }
-    catch(error){
+        const goals = yield axios.get ("api/goal")
+        console.log("get goals", goals.data);
+        yield put({ 
+            type: 'SET_GOALS', 
+            payload: goals.data
+        });
+    }catch(error){
         console.log('fetchGoals Error at goal.saga', error)
     }
 };

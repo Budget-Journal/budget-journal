@@ -13,8 +13,21 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+//  JOIN "goal"
+//  ON "budget"."goal_id" = "goal"."id" 
+//  WHERE "budget"."id" = $1;
+ router.get('/', (req, res) => {
     // GET route code here
+    const query = `SELECT * FROM "goal"
+    `;
+    pool.query(query)
+    .then(result => {
+        res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('GET budget Error', error)
+        res.sendStatus(500)
+    })
 });
 
 /**
