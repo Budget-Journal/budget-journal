@@ -1,13 +1,11 @@
 const goalReducer = (state = [], action) => {
-//     switch (action) {
-//         case value:
+    switch (action.type) {
+        case "SET_GOALS":
+            return action.payload
+        default:
+            break;
 
-//             break;
-
-//         default:
-//             break;
-
-//     }
+    }
 return state; //placeholder
 };
 
