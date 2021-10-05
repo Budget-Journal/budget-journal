@@ -5,8 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     const sqlText = `
-        SELECT "goal"."name" 
-        FROM "goal"
+        SELECT * FROM "goal"
         WHERE "user_id" = $1 AND "completed" = FALSE;
     `;
     const sqlParams = [

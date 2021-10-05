@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import "./styles.css";
 
 
 
@@ -32,7 +33,10 @@ export default function JournalEntries({entry, index}){
     );
     return (
         <Box sx={{ maxWidth: 700 }}>
-            <Card variant="outlined">{card}</Card>
+            <Card 
+                variant="outlined"
+                className="journal-posts"
+                >{card}</Card>
         </Box>
     )
 }

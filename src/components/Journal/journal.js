@@ -1,8 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { FormHelperText, TextField, Container, Select, Button,  Grid, InputLabel, FormControl, makeStyles, MenuItem } from '@material-ui/core';
+import { FormHelperText, TextField, Container, Select, Button,  Grid, InputLabel, FormControl, makeStyles, MenuItem, } from '@material-ui/core';
 import "./styles.css";
 import JournalEntries from "./journalEntries";
+import userReducer from "../../redux/reducers/user.reducer";
+
+import Box from '@mui/material/Box';
+
+
+
 
 export default function Journal () {
   // Set react hooks to variables
@@ -11,7 +17,7 @@ export default function Journal () {
   const journal = useSelector(store => store.journal);
   const selectGoal = useSelector(store => store.selectGoal);
   console.log('journalReducer******', journal);
-  console.log('activeGoalsReducer******', selectGoal);
+  console.log('selectGoalsReducer******', selectGoal);
 
   // Holds the value of the users post locally
   const [journalPost, setJournalPost] = useState({
@@ -56,34 +62,40 @@ export default function Journal () {
       type: "ADD_JOURNAL_POST",
       payload: newEntry
     });
+
+    
   }
 
 
   return (
    <Container>
-    <h1>J's Journal</h1>
-
       <form onSubmit={PostEntry}>
         <TextField 
           type="text"
           name="entry"
           className="inputField"
           id="outlined-basic" 
-          label="Outlined" 
-          variant="outlined" 
+          label="Write a new journal post" 
+          variant="outlined"
           value={journalPost.entry}
           onChange={handlePostInput}
         />
-        <Select
-          name="goal"
-          displayEmpty
-          onChange={handlePostInput}
-        >
-          <MenuItem value="NULL"> <em>None</em> </MenuItem>
-          <MenuItem value="1">Run a 5k</MenuItem>
-          <MenuItem value="2">Buy a Maserati</MenuItem>
-          <MenuItem value="3">Family trip to Barcelona</MenuItem>
-        </Select>
+
+        <FormControl className="dropdown-menu">
+          <InputLabel id="current-active-goals">Select Goal</InputLabel>
+          <Select
+            labelId="current-active-goals"
+            id="demo-simple-select"
+            label="Select Goal"
+            name="goal"
+            onChange={handlePostInput}
+          > 
+            <MenuItem value="NULL"> <em>None</em> </MenuItem>
+            {selectGoal.map((goal, index) => (
+              <MenuItem value={goal.id}>{goal.name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <FormHelperText>Optional: Select a Goal this post is related too</FormHelperText>
         <br />
         <Button
@@ -97,7 +109,7 @@ export default function Journal () {
     <br />
     <br />
     <div>
-        {journal.map((entry, index) =>(
+        {journal.map((entry, index) => (
           <JournalEntries entry={entry} index={index} />
         ))}
     </div>
