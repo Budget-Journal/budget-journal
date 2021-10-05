@@ -59,11 +59,15 @@ export const Editor = () => {
 
             <div className="text-editor">
                 <form name="frm" onSubmit={postGoals} >
-                <h1>Goal:  <TextField 
+                <p>Goal:</p>  <TextField 
                 label="Goal Name"
                 size="small" 
                 value={goal}
-                onChange={(event) => setGoal(event.target.value)}/></h1>
+                onChange={(event) => setGoal(event.target.value)}/>
+                <br/>
+                <br/>
+                
+                
                 <EditorToolbar />
                 <ReactQuill className="quill"
                     theme="snow"
@@ -89,8 +93,7 @@ export const Editor = () => {
                     </thead>
                     <tbody>
                         <td><TextField 
-                        
-                        label="Specific Expense" 
+                        label="Specific" 
                         size="small"
                         value={expense}
                         onChange={(event) => setExpense(event.target.value)}/></td>
