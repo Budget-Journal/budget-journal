@@ -1,0 +1,25 @@
+.text-editor {
+    
+    padding-right: 200px;
+    width: 600px;
+    margin: 0 auto;
+    Font-Family: 'Open Sans', Sans-Serif;
+  }
+  .ql-editor {
+    display: flex;
+    min-height: 100px;
+  }
+  .quill{
+    Font-Family: 'Open Sans', Sans-Serif;
+  }
+  h1{
+    Font-Family: 'Work Sans', Sans-Serif;
+  }
+  
+
+  /* Font-Family: 'Work Sans', Sans-Serif;
+Font-Size: 45px;
+Font-Family: 'Open Sans', Sans-Serif;
+Font-Size: 15px; */
+
+ 

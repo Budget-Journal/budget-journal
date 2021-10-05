@@ -20,6 +20,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
+import Editor from '../Editor/Editor';
+
+
+
 
 import './App.css';
 
