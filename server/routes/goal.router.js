@@ -22,18 +22,16 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     // POST route code here
-    router.post('/', (req, res) => {
-        // POST route code here
         let query = `INSERT INTO "goal" ("name", "reasons", "completed")
                      VALUE($1, $2, $3);`;
         pool.query(query, [req.body.name, req.body.reasons, req.body.completed])
         .then(result => {
+            console.log('Post results', result.data)
             res.sendStatus(201);
         }).catch(error => {
             console.log("POST budget has Error", error)
             res.sendStatus(500)
         })
     });
-});
 
 module.exports = router;

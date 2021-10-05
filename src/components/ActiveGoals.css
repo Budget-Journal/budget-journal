@@ -12,7 +12,7 @@
   background-size: 90%;
   background-position: left, bottom;
   background-repeat: no-repeat;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(223, 223, 223);
   border-radius: 24px 24px 24px 24px;
 }
 
@@ -23,7 +23,7 @@
 
   /* margin-left: 570px;
   margin-top: 45px; */
-  color: #314783;
+  color: #1F4364;
 }
 
 .home__title {
@@ -31,6 +31,8 @@
   padding-left: 430px; */
   padding-top: 45px;
   padding-bottom: 10px;
+  Font-Family: 'Work Sans', Sans-Serif;
+
 }
 
 .home__Icon:hover {
@@ -41,6 +43,7 @@
   /* padding-left: 460px; */
   padding-top: 45px;
   padding-bottom: 60px;
+  Font-Family: 'Open Sans', Sans-Serif;
   
 }
 /* .home__foot{
@@ -61,3 +64,7 @@
   align-content: center;
   float: left;
 } */
+/* Font-Family: 'Work Sans', Sans-Serif;
+Font-Size: 45px;
+Font-Family: 'Open Sans', Sans-Serif;
+Font-Size: 15px; */

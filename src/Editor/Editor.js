@@ -23,12 +23,15 @@ export const Editor = () => {
     const handleAddRow =()=>{
         console.log('Am i working')
         return(
+            <>
             <div>
-                
+                <tbody>
                 <td><TextField/></td>
                 <td><TextField/></td>
                 <td><TextField/></td>
+                </tbody>
             </div>
+            </>
             
         )
     }
@@ -57,12 +60,12 @@ export const Editor = () => {
             <div className="text-editor">
                 <form name="frm" onSubmit={postGoals} >
                 <h1>Goal:<TextField 
-                label="Goals"
+                label="Goal Name"
                 size="small" 
                 value={goal}
                 onChange={(event) => setGoal(event.target.value)}/></h1>
                 <EditorToolbar />
-                <ReactQuill
+                <ReactQuill className="quill"
                     theme="snow"
                     value={state.value}
                     onChange={handleChange}

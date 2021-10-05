@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo1 from "../Logo1.png";
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -10,7 +12,10 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/activegoals">
-        <h2 className="nav-title">Budget Journal</h2>
+      <div className="nav__left">
+        {/* <MenuSharpIcon /> */}
+        <img className="header__logo" src={Logo1} alt="" />
+      </div>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
