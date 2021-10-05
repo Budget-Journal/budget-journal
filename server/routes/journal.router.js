@@ -21,9 +21,10 @@ router.get('/', (req, res) => {
 
     pool.query(sqlText, sqlParams).then(result => {
         console.log('Results', result.rows);
-        res.send(result.rows)
+        res.send(result.rows);
     }).catch (error => {
         console.error('Fetching all journal posts failed', error);
+        res.sendStatus(500);
     })
 });
 

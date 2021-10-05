@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { FormHelperText, TextField, Container, Select, Button, Grid, InputLabel, FormControl, makeStyles, MenuItem } from '@material-ui/core';
+import { FormHelperText, TextField, Container, Select, Button, Box, Grid, InputLabel, FormControl, makeStyles, MenuItem, Card, Paper } from '@material-ui/core';
 import "./styles.css";
+import JournalEntries from "./journalEntries";
 
 export default function Journal () {
   // Set react hooks to variables
   const dispatch = useDispatch();
+
+  const journal = useSelector(store => store.journal);
+  console.log('journalReducer******', journal);
 
   // Holds the value of the users post locally
   const [journalPost, setJournalPost] = useState({
@@ -85,6 +89,9 @@ export default function Journal () {
     <br />
     <div>
       Feed will be posted here
+        {journal.map((entry, index) =>(
+          <JournalEntries entry={entry} index={index} />
+        ))}
     </div>
    </Container>
   );

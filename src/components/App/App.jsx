@@ -19,8 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-//import Editor from '../../Journal/journal';
-import Editor from '../Journal/journal';
+import Journal from '../Journal/journal';
 
 import './App.css';
 
@@ -89,7 +88,7 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
-            <Editor />
+            <Journal />
             </div>
             {/* Body of journal component */}
           </ProtectedRoute>
