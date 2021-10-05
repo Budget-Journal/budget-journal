@@ -9,7 +9,9 @@ export default function Journal () {
   const dispatch = useDispatch();
 
   const journal = useSelector(store => store.journal);
+  const selectGoal = useSelector(store => store.selectGoal);
   console.log('journalReducer******', journal);
+  console.log('activeGoalsReducer******', selectGoal);
 
   // Holds the value of the users post locally
   const [journalPost, setJournalPost] = useState({
@@ -18,14 +20,21 @@ export default function Journal () {
   });
 
   useEffect(() => {
+    fetchActiveGoals();
     fetchJournalPosts();
   }, []);
 
- const fetchJournalPosts = () => {
-  dispatch({
-    type: "FETCH_JOURNAL_POSTS"
-  })
- }
+  const fetchActiveGoals = () => {
+    dispatch({
+      type: "FETCH_ACTIVE_GOALS"
+    })
+  }
+
+  const fetchJournalPosts = () => {
+    dispatch({
+      type: "FETCH_JOURNAL_POSTS"
+    })
+  }
 
 
   const handlePostInput = (e) => {
