@@ -16,6 +16,8 @@ export default function Journal () {
 
   const journal = useSelector(store => store.journal);
   const selectGoal = useSelector(store => store.selectGoal);
+
+
   console.log('journalReducer******', journal);
   console.log('selectGoalsReducer******', selectGoal);
 
@@ -63,6 +65,10 @@ export default function Journal () {
       payload: newEntry
     });
 
+    
+    // Handle refresh
+    // window.location.reload();
+    history.go(0)
     
   }
 
