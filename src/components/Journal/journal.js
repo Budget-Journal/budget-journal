@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { FormHelperText, TextField, Container, Select, Button, Box, Grid, InputLabel, FormControl, makeStyles, MenuItem, Card, Paper } from '@material-ui/core';
+import { FormHelperText, TextField, Container, Select, Button,  Grid, InputLabel, FormControl, makeStyles, MenuItem } from '@material-ui/core';
 import "./styles.css";
 import JournalEntries from "./journalEntries";
 
@@ -88,7 +88,6 @@ export default function Journal () {
     <br />
     <br />
     <div>
-      Feed will be posted here
         {journal.map((entry, index) =>(
           <JournalEntries entry={entry} index={index} />
         ))}
