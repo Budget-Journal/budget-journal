@@ -22,7 +22,7 @@ export default function JournalEntries({entry, index}){
                     {formatDate(entry.date_posted)}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Goal:
+                    Goal: {entry.name}
                 </Typography>
                 <Typography variant="body2">
                     {entry.post_text}

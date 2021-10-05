@@ -7,11 +7,14 @@ const router = express.Router();
 router.get('/', (req, res) => {
     const sqlText = `
         SELECT
-            "post_text",
-            "date_posted"
+            "journal_post"."post_text",
+            "journal_post"."date_posted",
+            "goal"."name"
         FROM "journal_post"
         JOIN "user" 
             ON "journal_post".user_id = "user".id
+        LEFT JOIN "goal"
+	        ON "journal_post".goal_id = "goal".id
         WHERE "user".id = $1
         ORDER BY "date_posted" DESC;
     `;
