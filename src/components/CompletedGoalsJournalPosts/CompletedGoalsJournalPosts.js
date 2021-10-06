@@ -4,15 +4,14 @@ import { useSelector } from 'react-redux';
 // NEED TO RENAME THIS COMPONENT LATER
 // THIS WILL BE FOR THE COMPLETED GOAL CARDS
 // DISPATCH WILL BE CALLED WHEN THE VIEW BUTTON IS CLICKED ON THE GOAL CARD
-export default function CompletedGoalsJournalPosts() {
-
-    const journal = useSelector(store => store.journal);
-
-
+export default function CompletedGoalsJournalPosts({journal}) {
 
     return (
         <div>
-            <p>Journal Posts:</p>
+            <h5>Journal Posts</h5>
+            {journal.map(entry => (
+                <p>{entry.post_text}</p>
+            ))}
         
         </div>
     )

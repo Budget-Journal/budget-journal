@@ -29,8 +29,8 @@ router.get('/', (req, res) => {
 
 //GET Card Details
 router.get('/details/:id', (req, res) => {
-    console.log('Text ********',req.params.id);
     const sqlParams = [req.params.id];
+    console.log("Goal id", sqlParams)
     const sqlText = `
         SELECT 
             "budget"."id",
@@ -56,7 +56,7 @@ router.get('/details/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log('Goal to POST:', req.body);
-    // sqlQuery to insert into goal table
+    
     const sqlText = `
         INSERT INTO "goal" ("user_id", "name", "reasons")
         VALUES ($1, $2, $3)
@@ -68,10 +68,9 @@ router.post('/', (req, res) => {
         req.body.name,          // $2
         req.body.reasons,       // $3
     ]
-    console.log('*********', sqlParams);
 
+    // First query makes the goal
     pool.query(sqlText, sqlParams).then(result => {
-    // Second sqlQuery to insert users data into budget table 
         console.log('Post results', result.rows);
         
         const goalId = result.rows[0].id;
@@ -82,25 +81,21 @@ router.post('/', (req, res) => {
         `;
 
         const sqlParams = [
-            goalId.             // $1
+            goalId,             // $1
             req.body.expense,   // $2
             req.body.price,     // $3
             req.body.notes      // $4
         ]
         console.log('*******', sqlParams);
 
-        pool.query(sqlText, sqlParams)
-        .then(result => {
-            //Should sent back created successful if both query are posted
+        // Second query creates the budget
+        pool.query(sqlText, sqlParams).then(result => {
             res.sendStatus(201)
-        }).catch(error => {
-            console.log('Error posting goal/budget to database', error)
-        });
-    //First post query Error
-    }).catch(error => {
-        console.log("GOAL post has Error", error)
-        res.sendStatus(500) 
         })
+    }).catch(error => {
+        console.error("Creating Goal & Budget Failed", error);
+        res.sendStatus(500);
+    })
 });
 
 module.exports = router;

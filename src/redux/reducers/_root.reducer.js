@@ -5,6 +5,8 @@ import journal from './journal.reducer';
 import goal from './goal.reducer';
 import details from './cardDetails.reducer';
 import selectGoal from './journalSelectGoal.reducer';
+import activePosts from './activeJournalPosts.reducer';
+
 
 
 // rootReducer is the primary reducer for our entire project
@@ -18,8 +20,9 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   journal, // will hold data relating to the journal feed
   goal, // will hold data relating goals
-  details,
-  selectGoal  // will gold the current active goals that will be shown on the dropdown on the journal post
+  details, // will hold goal and budget details based on a specific goal
+  selectGoal,  // will hold the current active goals that will be shown on the dropdown on the journal post
+  activePosts // will hold all journal posts related to a specific goal that is active
 
 });
 

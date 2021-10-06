@@ -23,10 +23,11 @@ function* fetchGoals() {
 // Card View Details
 function* cardViewDetails(action) {
     try{
-        console.log(action.payload);
         const cardDetails = yield axios.get(`/api/goal/details/${action.payload}`)
-            console.log('WHERES MY STUFF*******', cardDetails)
-        yield put ({ type: 'SET_CARD_DETAILS', payload: cardDetails.data})
+        console.log('WHERES MY STUFF*******', cardDetails)
+        yield put ({ 
+            type: 'SET_CARD_DETAILS', 
+            payload: cardDetails.data})
     }
     catch(error) {
         console.log('cardDetails saga ERROR', error)

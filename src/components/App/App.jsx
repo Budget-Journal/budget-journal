@@ -120,6 +120,7 @@ function App() {
           >
             
             <div className ="app__page">
+              <SideBar />
               <GoalCardView />
             
             
