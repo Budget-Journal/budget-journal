@@ -6,8 +6,10 @@ import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
 import { useDispatch } from "react-redux";
-export const Editor = () => {
 
+
+
+export const Editor = () => {
 
     const [state, setState] = React.useState({ value: null });
     const [goal, setGoal] = useState("");
@@ -36,101 +38,97 @@ export const Editor = () => {
         )
     }
 
-
-        const postGoals = (event) => {
-            dispatch({
-                type: "POST_GOALS",
-                payload: {
-                    name: goal,
-                    reasons: state,
-                    expense: expense,
-                    price: price,
-                    notes: notes
-                    
-
-                },
-            });
-
-        };
+    const postGoals = (event) => {
+        dispatch({
+            type: "POST_GOALS",
+            payload: {
+                name: goal,
+                reasons: state,
+                expense: expense,
+                price: price,
+                notes: notes
+            },
+        });
+    };
 
        
 
-        return (
+    return (
 
-            <div className="text-editor">
-                <form name="frm" onSubmit={postGoals} >
-                <p>Goal:</p>  <TextField 
-                label="Goal Name"
-                size="small" 
-                value={goal}
-                onChange={(event) => setGoal(event.target.value)}/>
-                <br/>
-                <br/>
-                
-                
-                <EditorToolbar />
-                <ReactQuill className="quill"
-                    theme="snow"
-                    value={state.value}
-                    onChange={handleChange}
-                    placeholder={
-                        "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
-                    }
-                    modules={modules}
-                    formats={formats}
-                />
-                <br />
-                <br />
-                <br />
+        <div className="text-editor">
+            <form name="frm" onSubmit={postGoals} >
+            <p>Goal:</p>  <TextField 
+            label="Goal Name"
+            size="small" 
+            value={goal}
+            onChange={(event) => setGoal(event.target.value)}/>
+            <br/>
+            <br/>
+            
+            
+            <EditorToolbar />
+            <ReactQuill className="quill"
+                theme="snow"
+                value={state.value}
+                onChange={handleChange}
+                placeholder={
+                    "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+                }
+                modules={modules}
+                formats={formats}
+            />
+            <br />
+            <br />
+            <br />
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Expense</th>
-                            <th>Price</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td><TextField 
-                        label="Specific" 
-                        size="small"
-                        value={expense}
-                        onChange={(event) => setExpense(event.target.value)}/></td>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense</th>
+                        <th>Price</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td><TextField 
+                    label="Specific" 
+                    size="small"
+                    value={expense}
+                    onChange={(event) => setExpense(event.target.value)}/></td>
 
-                        <td><TextField
-                        label="Price"
-                        size="small"
-                        value={price}
-                        onChange={(event) => setPrice(event.target.value)}/></td>
+                    <td><TextField
+                    label="Price"
+                    size="small"
+                    value={price}
+                    onChange={(event) => setPrice(event.target.value)}/></td>
 
-                        <td><TextField 
-                        label="Notes"
-                        size="small"
-                        value={notes}
-                        onChange={(event) => setNotes(event.target.value)}/></td>
-                        
-                        <td><Button 
-                        onClick={handleAddRow}
-                        size="small" 
-                        variant="contained">Add Row</Button></td>
-                    </tbody>
-                </table>
-                <Button type="submit">Set Goal</Button>
-                <br />
-                <br />
-                <br />
-                {/* <Card>
-            <CardContent>
-                <Typography className="recentlistings" variant="h5" component="h3">Feed to Display Entries</Typography>
-            </CardContent>
+                    <td><TextField 
+                    label="Notes"
+                    size="small"
+                    value={notes}
+                    onChange={(event) => setNotes(event.target.value)}/></td>
+                    
+                    <td><Button 
+                    onClick={handleAddRow}
+                    size="small" 
+                    variant="contained">Add Row</Button></td>
+                </tbody>
+            </table>
+            <Button type="submit">Set Goal</Button>
+            <br />
+            <br />
+            <br />
+            {/* <Card>
+        <CardContent>
+            <Typography className="recentlistings" variant="h5" component="h3">Feed to Display Entries</Typography>
+        </CardContent>
 
-        </Card> */}
+    </Card> */}
 
 
-             </form>
-            </div>
-        );
+            </form>
+        </div>
+    );
     
     
 }

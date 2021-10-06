@@ -34,11 +34,18 @@ function* cardViewDetails(action) {
 };
 
 function* postGoals(action) {
-
     try{
         yield axios.post('/api/goal', action.payload)
-        yield put({ type: 'FETCH_GOALS'})  // Takes information retrieved from DB
+        // Takes information retrieved from DB
+
+
+        // Why do we have this?
+        yield put({ 
+            type: 'SET_GOALS'
+        })  
         // puts it in Fetch Goals Saga and is assigned fetchGoals Function
+
+
     }
     catch(error) {
         console.log('Post Goals has an error', error)

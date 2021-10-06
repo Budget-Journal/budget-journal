@@ -1,8 +1,4 @@
 import React, { useEffect } from 'react';
-import SideBar from "../SideBar";
-import ActiveGoals from '../ActiveGoals';
-import GoalCard from '../GoalCard/GoalCard';
-import GoalCardView from '../GoalCardView/GoalCardView';
 // import "../App.css";
 import {
   HashRouter as Router,
@@ -13,9 +9,12 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
+// Imported Components
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
+import SideBar from "../SideBar/SideBar";
+import ActiveGoals from '../ActiveGoals/ActiveGoals';
+import GoalCard from '../GoalCard/GoalCard';
+import GoalCardView from '../GoalCardView/GoalCardView';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -23,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
 import Editor from '../Editor/Editor';
 import CompletedGoalsJournalPosts from '../CompletedGoalsJournalPosts/CompletedGoalsJournalPosts';
+import Footer from '../Footer/Footer';
 
 
 
@@ -44,7 +44,7 @@ function App() {
         <Nav/>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/activegoals" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -81,7 +81,8 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
-            
+            <Editor />
+
             </div>
             {/* Body of create goal component */}
           </ProtectedRoute>

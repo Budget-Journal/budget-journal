@@ -9,18 +9,10 @@ export default function CompletedGoalsJournalPosts() {
     const journal = useSelector(store => store.journal);
 
 
-    function submitView() {
-        console.log("View Button");
-    }
 
     return (
         <div>
-            <p>Goals:</p>
-            
             <p>Journal Posts:</p>
-
-            <button onClick={submitView}>view</button>
-            
         
         </div>
     )

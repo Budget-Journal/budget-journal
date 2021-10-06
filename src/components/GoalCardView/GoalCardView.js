@@ -5,10 +5,10 @@ import GoalCardDetails from './GoalCardDetails';
 
 function GoalCardView() {
 
-    
-    
-    const details = useSelector(store => store.details)
-    console.log('Redux Store details', details)
+    // Setting reducers to variables
+    const details = useSelector(store => store.details);
+    const journal = useSelector(store => store.journal);
+    console.log("Journal Entries related to this goal", journal);
 
     
     return (

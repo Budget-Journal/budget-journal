@@ -34,8 +34,13 @@ function GoalCard() {
        type: 'CARD_VIEW_DETAILS',
        payload: id
      })
+
+     dispatch({
+       type: "FETCH_COMPLETED_GOAL_POSTS",
+       payload: id
+     })
+
      history.push('/view')
-     
    }
   
     return (
