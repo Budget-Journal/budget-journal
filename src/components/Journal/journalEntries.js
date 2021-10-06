@@ -33,7 +33,7 @@ export default function JournalEntries({entry, index}){
         </React.Fragment>
     );
 
-    
+
     return (
         <Box sx={{ maxWidth: 700 }}>
             <Card 

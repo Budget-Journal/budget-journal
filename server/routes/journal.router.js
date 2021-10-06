@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-
+// Obtains all journal posts related to the user logged in
 router.get('/', (req, res) => {
     const sqlText = `
         SELECT
@@ -31,7 +31,25 @@ router.get('/', (req, res) => {
     })
 });
 
+// Used to select the journal posts related to a specific goal (based on id)
+router.get('/:id', (req, res) => {
+    const sqlText = `
+        SELECT * FROM "journal_post"
+        WHERE "goal_id" = $1;
+    `;
 
+    const sqlParams = [
+        req.params.id
+    ]
+    pool.query(sqlText, sqlParams).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
+        console.error("Failed fetching journal posts", error);
+        res.sendStatus(500);
+    })
+});
+
+// Responsible for adding new posts to the database
 router.post('/', (req, res) => {
     console.log('req.body', req.body);
     let sqlText;

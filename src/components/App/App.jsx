@@ -22,6 +22,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
 import Editor from '../Editor/Editor';
+import CompletedGoalsJournalPosts from '../CompletedGoalsJournalPosts/CompletedGoalsJournalPosts';
 
 
 
@@ -107,6 +108,7 @@ function App() {
             <div className ="app__page">
             <SideBar />
             <GoalCard />
+
             </div>
             {/* Body of accomplished goals component */}
           </ProtectedRoute>
