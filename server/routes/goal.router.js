@@ -11,10 +11,46 @@ const router = express.Router();
 */
 
 
-router.get('/', (req, res) => {
-    // GET route code here
-});
 
+router.get('/', (req, res) => {
+
+    // GET route code here
+    const query = `SELECT * FROM "goal"
+    `;
+    pool.query(query)
+    .then(result => {
+        res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('GET budget Error', error)
+        res.sendStatus(500)
+    })
+});
+    //GET Card Details
+    router.get('/details/:id', (req, res) => {
+        console.log('Text ********',req.params.id);
+        const cardId = [req.params.id];
+        const query = `SELECT 
+        "budget"."id" as "budgetid",
+        "budget"."expense" as "expense",
+        "budget"."price" as "price",
+        "budget"."notes" as "notes",
+        "goal"."name" as "name"
+        FROM "budget"
+        JOIN "goal"
+        ON "budget"."goal_id" = "goal"."id" 
+        WHERE "goal"."id" = $1
+        GROUP BY "expense", "name", "price", "notes", "budgetid";`;
+      
+          pool.query(query, cardId)
+          .then(result => {
+            console.log('result', result.rows)
+            res.send(result.rows)
+          }).catch(error => {
+            console.log('Details GET router has an error', error)
+            res.sendStatus(500)
+          });
+      });
 /**
  * POST route template
  */
