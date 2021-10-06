@@ -10,10 +10,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchGoals() {
     try{
-        const goals = yield axios.get ("api/goal")
+        const goals = yield axios.get ("api/goal") //Server
         console.log("get goals", goals.data);
         yield put({ 
-            type: 'SET_GOALS', 
+            type: 'SET_GOALS', //Set
             payload: goals.data
         });
     }catch(error){
@@ -23,8 +23,10 @@ function* fetchGoals() {
 // Card View Details
 function* cardViewDetails(action) {
     try{
+        console.log(action.payload);
         const cardDetails = yield axios.get(`/api/goal/details/${action.payload}`)
-        yield put ({ type: 'CARD_DETAILS', payload: cardDetails.data})
+            console.log('WHERES MY STUFF*******', cardDetails)
+        yield put ({ type: 'SET_CARD_DETAILS', payload: cardDetails.data})
     }
     catch(error) {
         console.log('cardDetails saga ERROR', error)
@@ -35,7 +37,8 @@ function* postGoals(action) {
 
     try{
         yield axios.post('/api/goal', action.payload)
-        yield put({ type: 'FETCH_GOALS'}) 
+        yield put({ type: 'FETCH_GOALS'})  // Takes information retrieved from DB
+        // puts it in Fetch Goals Saga and is assigned fetchGoals Function
     }
     catch(error) {
         console.log('Post Goals has an error', error)

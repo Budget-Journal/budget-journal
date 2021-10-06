@@ -28,6 +28,15 @@ function GoalCard() {
             type: 'FETCH_GOALS'       });
    }, []);
   
+   const handleView = (id) => {
+    console.log('this goal id', id)
+     dispatch({
+       type: 'CARD_VIEW_DETAILS',
+       payload: id
+     })
+     history.push('/view')
+     
+   }
   
     return (
     <Grid item xs={6} sm={3}>
@@ -47,7 +56,7 @@ function GoalCard() {
               <CardActions>
                 {/* {" "} */}
                 &nbsp; &nbsp; &nbsp;
-                <Button onClick={() => history.push("/view")}>View</Button>
+                <Button onClick={() => handleView(fetchGoal.id)}>View</Button>
                 <Button
                   color="secondary"
                 >

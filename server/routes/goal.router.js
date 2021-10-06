@@ -29,24 +29,26 @@ const router = express.Router();
 });
     //GET Card Details
     router.get('/details/:id', (req, res) => {
-        const clubId = [req.params.id];
+        console.log('Text ********',req.params.id);
+        const cardId = [req.params.id];
         const query = `SELECT 
         "budget"."id" as "budgetid",
-        "budget"."expense" as "expense"
-        "budget"."price" as "price"
-        "budget".notes" as "notes"
+        "budget"."expense" as "expense",
+        "budget"."price" as "price",
+        "budget"."notes" as "notes",
+        "goal"."name" as "name"
         FROM "budget"
         JOIN "goal"
         ON "budget"."goal_id" = "goal"."id" 
-        WHERE "budget"."id" = $1;
-        GROUP BY "expense", "price", "notes", "budgetid";`;
+        WHERE "goal"."id" = $1
+        GROUP BY "expense", "name", "price", "notes", "budgetid";`;
       
-          pool.query(query, clubId)
+          pool.query(query, cardId)
           .then(result => {
-            console.log('result', result)
+            console.log('result', result.rows)
             res.send(result.rows)
           }).catch(error => {
-            console.log('Details GET error', error)
+            console.log('Details GET router has an error', error)
             res.sendStatus(500)
           });
       });

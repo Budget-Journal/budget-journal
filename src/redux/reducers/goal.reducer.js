@@ -2,8 +2,6 @@ const goalReducer = (state = [], action) => {
     switch (action.type) {
         case "SET_GOALS":
             return action.payload
-        case "CARD_DETAILS":
-            return action.payload
         default:
             break;
 

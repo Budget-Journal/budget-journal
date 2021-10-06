@@ -3,7 +3,6 @@ import SideBar from "../SideBar";
 import ActiveGoals from '../ActiveGoals';
 import GoalCard from '../GoalCard/GoalCard';
 import GoalCardView from '../GoalCardView/GoalCardView';
-import GoalCardDetails from '../GoalCardView/GoalCardDetails';
 // import "../App.css";
 import {
   HashRouter as Router,
@@ -115,7 +114,6 @@ function App() {
             
             <div className ="app__page">
               <GoalCardView />
-              <GoalCardDetails/>
             
             
             </div>
