@@ -3,6 +3,7 @@ import SideBar from "../SideBar";
 import ActiveGoals from '../ActiveGoals';
 import GoalCard from '../GoalCard/GoalCard';
 import GoalCardView from '../GoalCardView/GoalCardView';
+
 // import "../App.css";
 import {
   HashRouter as Router,
@@ -130,7 +131,10 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
+              
               <LoginPage />
+            
+              
             }
           </Route>
 

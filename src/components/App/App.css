@@ -29,14 +29,16 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
+  margin-left: 100px;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #555757;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
+  
 }
 
 .btn_sizeMin {
@@ -55,7 +57,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #5b5e5e;
   text-decoration: none;
 }
 
@@ -103,9 +105,11 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
+  background-color: #1F4364;
+  border-radius: 24px 24px 24px 24px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  color: white;
+  Font-Family: 'Work Sans', Sans-Serif;
 }
 .titlePanel{
   text-align: center;

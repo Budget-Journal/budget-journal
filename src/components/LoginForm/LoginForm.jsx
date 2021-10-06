@@ -31,6 +31,7 @@ function LoginForm() {
   }; // end login
 
   return (
+    <body>
     <form className="formPanel" onSubmit={login}>
       <h2>Login</h2>
       {errors.loginMessage && (
@@ -52,8 +53,8 @@ function LoginForm() {
       </div>
       <div>
         <label htmlFor="password">
-          Password:
-          <input
+          Password :  
+            <input
             type="password"
             name="password"
             required
@@ -65,7 +66,25 @@ function LoginForm() {
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
+      <div>  
+      </div>
     </form>
+                <h1>Clarify your Goals</h1>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <h1>Keep Goal Associated with Costs in Mind</h1>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <h1>Keep Journal Entries of your Progress</h1>
+
+
+    </body>
+    
+
   );
 }
 
