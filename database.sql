@@ -12,12 +12,11 @@ CREATE TABLE "user" (
     "total_budget" DECIMAL(38,2)
 );
 
-
 CREATE TABLE "goal" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user" NOT NULL,
 	"name" VARCHAR(1000),
-	"reasons" TEXT,
+	"reasons" VARCHAR(65000),
 	"completed" BOOLEAN DEFAULT FALSE
 );
 
@@ -31,10 +30,13 @@ CREATE TABLE "budget" (
 
 CREATE TABLE "journal_post" (
 	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user" NOT NULL,
 	"goal_id" INT REFERENCES "goal" DEFAULT NULL,
 	"post_text" VARCHAR(1000),
 	"date_posted" TIMESTAMP DEFAULT NOW() NOT NULL
 );
+
+
 
 INSERT INTO "user"("id", "name", "username", "email", "password", "total_budget")
 VALUES(1, 'Sarah', 'Sarah123', 'sarah@email.com', '123', 10000);
