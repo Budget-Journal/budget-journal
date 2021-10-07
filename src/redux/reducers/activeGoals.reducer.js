@@ -1,6 +1,6 @@
-const journalReducer = (state = [], action) => {
+const activeGoalsReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_JOURNAL_POST':
+        case 'SET_ACTIVE_GOALS':
             return action.payload;
         default:
             return state;
@@ -9,4 +9,4 @@ const journalReducer = (state = [], action) => {
 
 // user will be on the redux state at:
 // state.user
-export default journalReducer;
+export default activeGoalsReducer;

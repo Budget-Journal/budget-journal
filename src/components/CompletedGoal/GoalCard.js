@@ -17,15 +17,18 @@ const useStyles = makeStyles((theme) => ({
     // },
   }));
 
-function GoalCard() {
+export default function GoalCard() {
+  // Set hooks as variables
    const classes = useStyles();
-   const fetchGoal = useSelector(store => store.goal)
    const dispatch = useDispatch();
    const history = useHistory();
 
-   useEffect(() => {
-       dispatch({
-            type: 'FETCH_GOALS'       });
+   const completedGoals= useSelector(store => store.completedGoal);
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_COMPLETED_GOALS'
+          });
    }, []);
   
    const handleView = (id) => {
@@ -34,29 +37,31 @@ function GoalCard() {
        type: 'CARD_VIEW_DETAILS',
        payload: id
      })
+
+     dispatch({
+       type: "FETCH_COMPLETED_GOAL_POSTS",
+       payload: id
+     })
+
      history.push('/view')
-     
    }
   
     return (
     <Grid item xs={6} sm={3}>
       <Grid container>
-        {fetchGoal.map((fetchGoal) => (
+        {completedGoals.map((goal) => (
           <Grid item xs>
             {/* {" "} */}
             &nbsp;
-            <Card key={fetchGoal.id}>
+            <Card key={goal.id}>
               <CardContent className={classes.card}>
-                <Typography>Goal: {fetchGoal.name} </Typography>
-                {/* <Typography>{fetchGoal.reasons}</Typography>
-                <Typography>{fetchGoal.expense}</Typography>
-                <Typography>{fetchGoal.price}</Typography>
-                <Typography>{fetchGoal.notes}</Typography> */}
+                <Typography>Goal: {goal.name} </Typography>
+
               </CardContent>
               <CardActions>
                 {/* {" "} */}
                 &nbsp; &nbsp; &nbsp;
-                <Button onClick={() => handleView(fetchGoal.id)}>View</Button>
+                <Button onClick={() => handleView(goal.id)}>View</Button>
                 <Button
                   color="secondary"
                 >
@@ -70,5 +75,3 @@ function GoalCard() {
     </Grid>
   );
 }
-
-export default GoalCard;

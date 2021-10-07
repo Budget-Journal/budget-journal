@@ -8,12 +8,25 @@ import { put, takeLatest } from 'redux-saga/effects';
     Handles completing a goal
 */
 
-function* fetchGoals() {
+function* fetchActiveGoals() {
     try{
-        const goals = yield axios.get ("api/goal") //Server
+        const response = yield axios.get ("api/goal/active");
+        console.log("Current active goals*****************", response.data);
+        yield put ({
+            type: 'SET_ACTIVE_GOALS',
+            payload: response.data
+        })
+    } catch(error) {
+        console.error('Failed to fetch active goals', error);
+    }
+};
+
+function* fetchCompletedGoals() {
+    try{
+        const goals = yield axios.get ("api/goal/completed") //Server
         console.log("get goals", goals.data);
         yield put({ 
-            type: 'SET_GOALS', //Set
+            type: 'SET_COMPLETED_GOALS', //Set
             payload: goals.data
         });
     }catch(error){
@@ -23,10 +36,11 @@ function* fetchGoals() {
 // Card View Details
 function* cardViewDetails(action) {
     try{
-        console.log(action.payload);
         const cardDetails = yield axios.get(`/api/goal/details/${action.payload}`)
-            console.log('WHERES MY STUFF*******', cardDetails)
-        yield put ({ type: 'SET_CARD_DETAILS', payload: cardDetails.data})
+        console.log('WHERES MY STUFF*******', cardDetails)
+        yield put ({ 
+            type: 'SET_CARD_DETAILS', 
+            payload: cardDetails.data})
     }
     catch(error) {
         console.log('cardDetails saga ERROR', error)
@@ -34,10 +48,13 @@ function* cardViewDetails(action) {
 };
 
 function* postGoals(action) {
-
     try{
         yield axios.post('/api/goal', action.payload)
-        yield put({ type: 'FETCH_GOALS'})  // Takes information retrieved from DB
+        // Takes information retrieved from DB
+        // Why do we have this?
+        yield put({ 
+            type: 'SET_GOALS'
+        })  
         // puts it in Fetch Goals Saga and is assigned fetchGoals Function
     }
     catch(error) {
@@ -47,9 +64,8 @@ function* postGoals(action) {
 
 
 export default function* goalSaga(){
-    yield takeLatest('FETCH_GOALS', fetchGoals);
+    yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
+    yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
-
-
 }
