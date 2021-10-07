@@ -21,3 +21,11 @@ export default function CompletedGoalsJournalPosts({journal}) {
 
 // need to do a fetch based on goal id
 // return only the posts related to that goal id
+
+
+
+// {goals.length === 0 ? 
+//     <CreateGoal />
+//         :
+//     <ActiveGoals />
+// }

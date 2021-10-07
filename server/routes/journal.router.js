@@ -1,10 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 
 // Obtains all journal posts related to the user logged in
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT
             "journal_post"."post_text",
@@ -32,7 +35,7 @@ router.get('/', (req, res) => {
 });
 
 // Used to select the journal posts related to a specific goal (based on id)
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT * FROM "journal_post"
         WHERE "goal_id" = $1;
@@ -50,7 +53,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Responsible for adding new posts to the database
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('req.body', req.body);
     let sqlText;
     let sqlParams

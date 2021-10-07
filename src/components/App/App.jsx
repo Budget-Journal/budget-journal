@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Imported Components
 import Nav from '../Nav/Nav';
 import SideBar from "../SideBar/SideBar";
-import ActiveGoals from '../ActiveGoals/ActiveGoals';
+import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
 import GoalCard from '../GoalCard/GoalCard';
 import GoalCardView from '../GoalCardView/GoalCardView';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';

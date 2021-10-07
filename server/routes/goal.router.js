@@ -1,6 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 /*
     Handles fetching a goal
@@ -10,25 +13,40 @@ const router = express.Router();
     
 */
 
-
-
-router.get('/', (req, res) => {
-
+router.get('/active', rejectUnauthenticated, (req, res) => {
     // GET route code here
-    const query = `SELECT * FROM "goal"
+    const sqlText = `
+        SELECT * FROM "goal"
+        JOIN "budget" 
+            ON "goal".id = "budget".goal_id
+        WHERE "completed" = FALSE
     `;
-    pool.query(query)
-    .then(result => {
+    pool.query(sqlText).then(result => {
         res.send(result.rows);
+    }).catch(error => {
+        console.log('GET budget Error', error)
+        res.sendStatus(500)
     })
-    .catch(error => {
+});
+
+router.get('/completed', rejectUnauthenticated, (req, res) => {
+    // GET route code here
+    const sqlText = `
+        SELECT * FROM "goal"
+        JOIN "budget" 
+            ON "goal".id = "budget".goal_id
+        WHERE "completed" = TRUE
+    `;
+    pool.query(sqlText).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
         console.log('GET budget Error', error)
         res.sendStatus(500)
     })
 });
 
 //GET Card Details
-router.get('/details/:id', (req, res) => {
+router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     const sqlParams = [req.params.id];
     console.log("Goal id", sqlParams)
     const sqlText = `
@@ -51,10 +69,10 @@ router.get('/details/:id', (req, res) => {
             console.log('Details GET router has an error', error)
             res.sendStatus(500)
         });
-    });
+});
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('Goal to POST:', req.body);
     
     const sqlText = `

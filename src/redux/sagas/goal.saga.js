@@ -8,6 +8,14 @@ import { put, takeLatest } from 'redux-saga/effects';
     Handles completing a goal
 */
 
+function* fetchActiveGoals() {
+    try{
+        const response = yield axios.get ("api/active/goal");
+    } catch(error) {
+        console.error('Failed to fetch active goals', error);
+    }
+}
+
 function* fetchGoals() {
     try{
         const goals = yield axios.get ("api/goal") //Server
@@ -38,15 +46,11 @@ function* postGoals(action) {
     try{
         yield axios.post('/api/goal', action.payload)
         // Takes information retrieved from DB
-
-
         // Why do we have this?
         yield put({ 
             type: 'SET_GOALS'
         })  
         // puts it in Fetch Goals Saga and is assigned fetchGoals Function
-
-
     }
     catch(error) {
         console.log('Post Goals has an error', error)
@@ -55,6 +59,7 @@ function* postGoals(action) {
 
 
 export default function* goalSaga(){
+    yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
     yield takeLatest('FETCH_GOALS', fetchGoals);
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
