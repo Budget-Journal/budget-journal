@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-import SideBar from "../SideBar";
-import ActiveGoals from '../ActiveGoals';
-
 // import "../App.css";
 import {
   HashRouter as Router,
@@ -12,14 +9,20 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
+// Imported Components
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
+import SideBar from "../SideBar/SideBar";
+import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
+import GoalCard from '../CompletedGoal/GoalCard';
+import GoalCardView from '../CompletedGoal/GoalCardView';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import Editor from '../Journal/journal';
+import Journal from '../Journal/journal';
+import CreateGoal from '../CreateGoal/CreateGoal';
+import Footer from '../Footer/Footer';
+
 
 import './App.css';
 
@@ -38,7 +41,7 @@ function App() {
         <Nav/>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/activegoals" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -75,7 +78,8 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
-            <Editor />
+            <CreateGoal />
+
             </div>
             {/* Body of create goal component */}
           </ProtectedRoute>
@@ -88,7 +92,7 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
-            
+            <Journal />
             </div>
             {/* Body of journal component */}
           </ProtectedRoute>
@@ -101,8 +105,24 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
+            <GoalCard />
+
             </div>
             {/* Body of accomplished goals component */}
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/view"
+          >
+            
+            <div className ="app__page">
+              <SideBar />
+              <GoalCardView />
+            
+            
+            </div>
+            
           </ProtectedRoute>
 
           <Route
@@ -115,7 +135,10 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
+              
               <LoginPage />
+            
+              
             }
           </Route>
 
@@ -126,7 +149,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/activegoals" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
