@@ -1,6 +1,6 @@
 const activeJournalPosts = (state = [], action) => {
     switch (action.type) {
-        case 'SET_COMPLETED_GOAL_JOURNAL_POSTS':
+        case 'SET_GOAL_JOURNAL_POSTS':
             return action.payload;
         default:
             return state;

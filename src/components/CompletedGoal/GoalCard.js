@@ -39,7 +39,7 @@ export default function GoalCard() {
      })
 
      dispatch({
-       type: "FETCH_COMPLETED_GOAL_POSTS",
+       type: "FETCH_GOAL_JOURNAL_POSTS",
        payload: id
      })
 

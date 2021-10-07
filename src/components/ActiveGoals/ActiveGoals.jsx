@@ -21,6 +21,7 @@ export default function ActiveGoals() {
       type: "FETCH_ACTIVE_GOALS"
     })
   }, []); //activeGoals?
+
  
 
   return (
@@ -31,7 +32,7 @@ export default function ActiveGoals() {
       :
         <div>
           {activeGoals.map((goal, index) => (
-            <RenderedGoals goals={goal} index={index} />
+            <RenderedGoals goal={goal} index={index} />
           ))}
         </div>
       }

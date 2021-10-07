@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
+
 //Material UI Imports
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -16,7 +18,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 //End Material UI Imports
-import CompletedGoalsJournal from '../CompletedGoalsJournalPosts/CompletedGoalsJournalPosts';
+
+
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -38,7 +41,7 @@ function GoalCardView() {
     // Setting reducers to variables
     const details = useSelector(store => store.details);
     console.log("Goal details", details);
-    const journal = useSelector(store => store.activePosts);
+    const journal = useSelector(store => store.journalPosts);
     console.log("Journal Entries related to this goal", journal);
 
     
@@ -96,13 +99,16 @@ function GoalCardView() {
                         <Collapse in={expanded} timeout="auto" unmountOnExit>
                             <CardContent>
                             <Typography paragraph>
-                               <CompletedGoalsJournal journal = {journal}/>
+                               <JournalPosts journal = {journal}/>
                             </Typography>
                             </CardContent>
                         </Collapse>
                         </Card>
                 </div>
             ))}
+
+            
+
             
         </div>
     )

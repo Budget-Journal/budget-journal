@@ -54,6 +54,7 @@ export default function CreateGoal () {
         });
 
         history.push('/activegoals')
+        history.go(0);
     };
 
        

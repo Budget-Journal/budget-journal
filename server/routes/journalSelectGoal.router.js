@@ -6,6 +6,7 @@ const {
 } = require('../modules/authentication-middleware');
 
 // Obtains all the users goals that are currently active
+// Will be viewed in the dropdown menu on create a journal
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT * FROM "goal"
