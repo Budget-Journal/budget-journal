@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
 import "./ActiveGoals.css";
 import NoGoals from "./NoGoals";
-import Editor from '../Editor/Editor';
 import RenderedGoals from "./RenderedGoals";
 
 export default function ActiveGoals() {

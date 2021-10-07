@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import GoalCardDetails from './GoalCardDetails';
+import { Card } from '@mui/material';
 import CompletedGoalsJournal from '../CompletedGoalsJournalPosts/CompletedGoalsJournalPosts';
 
 
@@ -15,9 +15,16 @@ function GoalCardView() {
     
     return (
         <div>
-           {details.map(detail => (
-               <GoalCardDetails key={detail.id} detail={detail} />
-           ))}
+            {details.map(detail => (
+                <div>
+                    <Card>
+                        <p>{detail.name}</p>
+                        <p>{detail.price}</p>
+                        <p>{detail.reasons}</p> 
+                        <p>{detail.notes}</p>
+                    </Card>
+                </div>
+            ))}
             <div> 
                 <CompletedGoalsJournal journal={journal}/> 
             </div>

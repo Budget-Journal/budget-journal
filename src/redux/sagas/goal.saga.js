@@ -21,12 +21,12 @@ function* fetchActiveGoals() {
     }
 };
 
-function* fetchGoals() {
+function* fetchCompletedGoals() {
     try{
-        const goals = yield axios.get ("api/goal") //Server
+        const goals = yield axios.get ("api/goal/completed") //Server
         console.log("get goals", goals.data);
         yield put({ 
-            type: 'SET_GOALS', //Set
+            type: 'SET_COMPLETED_GOALS', //Set
             payload: goals.data
         });
     }catch(error){
@@ -65,9 +65,7 @@ function* postGoals(action) {
 
 export default function* goalSaga(){
     yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
-    yield takeLatest('FETCH_GOALS', fetchGoals);
+    yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
-
-
 }

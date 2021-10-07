@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 
 
 
-export const Editor = () => {
+export default function CreateGoal () {
 
     const history = useHistory();
 
@@ -22,7 +22,7 @@ export const Editor = () => {
     const dispatch = useDispatch();
 
     const handleChange = (value) => {
-        setState({ value });
+        setState({ value }); 
     };
 
     const handleAddRow =()=>{
@@ -52,7 +52,7 @@ export const Editor = () => {
                 notes: notes
             },
         });
-        
+
         history.push('/activegoals')
     };
 
@@ -139,6 +139,4 @@ export const Editor = () => {
     );
     
     
-}
-
-export default Editor;
+};
