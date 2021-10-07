@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import SideBar from "../SideBar";
 import ActiveGoals from '../ActiveGoals';
+import GoalCard from '../GoalCard/GoalCard';
+import GoalCardView from '../GoalCardView/GoalCardView';
 
 // import "../App.css";
 import {
@@ -105,8 +107,22 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
+            <GoalCard />
             </div>
             {/* Body of accomplished goals component */}
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/view"
+          >
+            
+            <div className ="app__page">
+              <GoalCardView />
+            
+            
+            </div>
+            
           </ProtectedRoute>
 
           <Route
@@ -119,7 +135,10 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
+              
               <LoginPage />
+            
+              
             }
           </Route>
 
