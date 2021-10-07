@@ -1,23 +1,32 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 /*
     Handles when a goal is completed
 */
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-    // GET route code here
-});
+// Handles changing a goal from incomplete to complete
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    console.log("*Goal id*********", req.params.id);
+    const sqlText = `
+        UPDATE "goal"
+        SET "completed" = TRUE
+        WHERE "goal".id = $1;
+    `;
+    let sqlParams = [
+        req.params.id
+    ];
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error in PUT completed goal', error);
+        res.sendStatus(500);
+    })
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-    // POST route code here
-});
+})
 
 module.exports = router;

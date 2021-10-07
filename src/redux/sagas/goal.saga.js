@@ -62,10 +62,20 @@ function* postGoals(action) {
     }
 };
 
+function* updateGoal(action){
+    try {
+        yield axios.put(`/api/completed/${action.payload.id}`)
+    }
+    catch (error) {
+        console.error('PUT updateGoal has an error', error)
+    }
+}
+
 
 export default function* goalSaga(){
     yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
+    yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal)
 }

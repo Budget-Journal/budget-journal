@@ -114,6 +114,28 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         console.error("Creating Goal & Budget Failed", error);
         res.sendStatus(500);
     })
+
+//     // Handles changing a goal from incomplete to complete
+// router.put('/:id', rejectUnauthenticated, (req, res) => {
+//     console.log("*Goal id*********", req.params.id);
+//     const sqlText = `
+//         UPDATE "goal"
+//         SET "completed" = TRUE;
+//         WHERE "goal.id" = $1
+//     `;
+//     let sqlParams = [
+//         req.params.id
+//     ];
+//     pool.query(sqlText, sqlParams).then(result => {
+//         res.sendStatus(201);
+//     }).catch(error => {
+//         console.log('Error in PUT completed goal', error);
+//         res.sendStatus(500);
+//     })
+
+// }) 
+
+
 });
 
 module.exports = router;

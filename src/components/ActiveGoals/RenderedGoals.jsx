@@ -10,8 +10,11 @@ export default function RenderedGoals({goal, index}) {
     // Set hooks to variables
     const dispatch = useDispatch();
     const history = useHistory();
+    let goalId = {};
     
-    const handleViewGoal = (goal) => {
+    // Will store the goal details in a reducer and fetch all the journal posts related to the goal
+    // Dispatch data will be displayed in ViewActiveGoalDetails
+    const handleViewGoalDetails = (goal) => {
         console.log('Goal id', goal);
         dispatch({
             type: "SET_ACTIVE_GOAL_DETAILS",
@@ -25,12 +28,24 @@ export default function RenderedGoals({goal, index}) {
 
         history.push('/active_goal_details');
     }
+    
+    // Will change a goal from being uncompleted to completed
+    const handleCompleteGoal = (goal) => {
+        console.log('Goal id', goal.id);
+        goalId = {
+            id: goal.id
+        }
+        dispatch({
+            type: "UPDATE_GOAL_COMPLETED",
+            payload: goalId
+        })
+    }
 
     return(
         <Card key={index}>
             <h2>{goal.name}</h2>
-            <Button>Complete goal</Button>
-            <Button onClick={() => { handleViewGoal(goal) }}>View</Button>
+            <Button onClick={() => { handleCompleteGoal(goal) }}>Complete goal</Button>
+            <Button onClick={() => { handleViewGoalDetails(goal) }}>View</Button>
             <Button>Delete</Button>
         </Card>
     )
