@@ -26,7 +26,6 @@ const rootReducer = combineReducers({
   selectGoal,  // will hold the current active goals that will be shown on the dropdown on the journal post
   activePosts, // will hold all journal posts related to a specific goal that is active
   activeGoals, // will hold all goals that are set to false via db
-  goal, // will hold data relating goals
   details,
   selectGoal  // will gold the current active goals that will be shown on the dropdown on the journal post
 });
