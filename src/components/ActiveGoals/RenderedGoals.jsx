@@ -16,7 +16,13 @@ export default function RenderedGoals({goal, index}) {
         dispatch({
             type: "SET_ACTIVE_GOAL_DETAILS",
             payload: goal
+        });
+
+        dispatch({
+            type: "FETCH_GOAL_JOURNAL_POSTS",
+            payload: goal.id
         })
+
         history.push('/active_goal_details');
     }
 

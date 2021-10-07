@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card } from '@mui/material';
-import CompletedGoalsJournal from '../CompletedGoalsJournalPosts/CompletedGoalsJournalPosts';
+import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 
 
 function GoalCardView() {
@@ -26,7 +26,7 @@ function GoalCardView() {
                 </div>
             ))}
             <div> 
-                <CompletedGoalsJournal journal={journal}/> 
+                <JournalPosts journal={journal}/> 
             </div>
         </div>
     )

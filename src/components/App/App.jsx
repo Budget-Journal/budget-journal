@@ -21,7 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
 import CreateGoal from '../CreateGoal/CreateGoal';
-import CompletedGoalsJournalPosts from '../CompletedGoalsJournalPosts/CompletedGoalsJournalPosts';
+import CompletedGoalsJournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import Footer from '../Footer/Footer';
 import ViewActiveGoalDetails from '../ActiveGoals/ViewActiveGoalDetails';
 
