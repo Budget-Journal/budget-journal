@@ -2,7 +2,7 @@
   /* flex box layout */
   display: flex;
   justify-content: space-between;
-  text-align: center;
+  align-items: center;
   padding:10px;
   margin: 0 0 30px;
   background-color:#1F4364;
@@ -19,7 +19,7 @@
 .nav-title {
   
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   color: #152158;
   padding-left: 10px;
   margin: 0;
@@ -28,7 +28,7 @@
 
 .navLink {
   
-  display: inline-block;
+  /* display: inline-block; */
   color: #ffffff;
   background-color:#1F4364;
   text-align: center;
@@ -50,20 +50,22 @@
   border-radius: 24px 24px 24px 24px;
 }
 
-.nav__left{
-  text-align: center;
+.nav_left{
+  display:flex;
   
-  margin-left: 760px;
+  
+  
 
 }
 h1{
   font-size: 16px;
   padding-right: 20px;
-  color: white;
+  
   
 }
 .user{
   Font-Family: 'Work Sans', Sans-Serif;
 }
+
 
 

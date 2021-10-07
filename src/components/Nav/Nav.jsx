@@ -12,9 +12,15 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/activegoals">
+
       <div className="nav__left">
           {/* Had issues with image, commented it out */}
           {/* <img className="header__logo" src={Logo1.png} alt="" /> */}
+
+      <div className="nav_left">
+     
+        <img src={Logo1} alt="" />
+
       </div>
       </Link>
       <div>
