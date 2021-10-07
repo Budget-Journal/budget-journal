@@ -7,6 +7,7 @@ const {
 
 
 // Obtains all journal posts related to the user logged in
+// Displays all journal posts in the feed
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT

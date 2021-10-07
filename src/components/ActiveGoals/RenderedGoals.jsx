@@ -1,12 +1,30 @@
 import React, { useEffect } from "react";
 import { Grid, CardContent, Card, CardActions, Typography, Button } from "@mui/material";
+import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
-export default function RenderedGoals({goals}) {
+import ViewActiveGoalDetails from "./ViewActiveGoalDetails";
+
+export default function RenderedGoals({goal, index}) {
+
+    // Set hooks to variables
+    const dispatch = useDispatch();
+    const history = useHistory();
+    
+    const handleViewGoal = (goal) => {
+        console.log('Goal id', goal);
+        dispatch({
+            type: "SET_ACTIVE_GOAL_DETAILS",
+            payload: goal
+        })
+        history.push('/active_goal_details');
+    }
+
     return(
-        <Card>
-            <h2>{goals.name}</h2>
-            <Button>View</Button>
+        <Card key={index}>
+            <h2>{goal.name}</h2>
             <Button>Complete goal</Button>
+            <Button onClick={() => { handleViewGoal(goal) }}>View</Button>
             <Button>Delete</Button>
         </Card>
     )

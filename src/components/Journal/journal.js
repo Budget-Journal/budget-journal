@@ -73,7 +73,7 @@ export default function Journal () {
     
     // Handle refresh
     // window.location.reload();
-    //history.go(0)
+    history.go(0);
     
   }
 

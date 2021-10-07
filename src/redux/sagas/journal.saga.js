@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 export default function* journalSaga() {
     yield takeLatest("FETCH_ACTIVE_GOALS", fetchActiveGoals);
-    yield takeLatest("FETCH_COMPLETED_GOAL_POSTS", fetchCompletedGoalPosts);
+    yield takeLatest("FETCH_GOAL_JOURNAL_POSTS", fetchGoalJournalPosts);
     yield takeLatest("FETCH_JOURNAL_POSTS", fetchJournalPosts);
     yield takeLatest("ADD_JOURNAL_POST", addJournalPost);
     
@@ -22,13 +22,13 @@ export default function* journalSaga() {
     };
 
     // Fetch the journal posts related the goal card
-    function* fetchCompletedGoalPosts(action) {
+    function* fetchGoalJournalPosts(action) {
         try {
             const response = yield axios.get(`/api/journal/${action.payload}`);
             // IF ^ doesn't work, use the code below
             // const response = yield axios.get('/api/journal/', {params: {id: action.payload}});
             yield put({
-                type: 'SET_COMPLETED_GOAL_JOURNAL_POSTS',
+                type: 'SET_GOAL_JOURNAL_POSTS',
                 payload: response.data
             })
         } catch (error) {

@@ -9,7 +9,7 @@ function GoalCardView() {
     // Setting reducers to variables
     const details = useSelector(store => store.details);
     console.log("Goal details", details);
-    const journal = useSelector(store => store.activePosts);
+    const journal = useSelector(store => store.journalPosts);
     console.log("Journal Entries related to this goal", journal);
 
     
