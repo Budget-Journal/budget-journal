@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
 import { useDispatch } from "react-redux";
@@ -10,6 +11,8 @@ import { useDispatch } from "react-redux";
 
 
 export const Editor = () => {
+
+    const history = useHistory();
 
     const [state, setState] = React.useState({ value: null });
     const [goal, setGoal] = useState("");
@@ -28,9 +31,9 @@ export const Editor = () => {
             <>
             <div>
                 <tbody>
-                <td><TextField/></td>
-                <td><TextField/></td>
-                <td><TextField/></td>
+                    <td><TextField/></td>
+                    <td><TextField/></td>
+                    <td><TextField/></td>
                 </tbody>
             </div>
             </>
@@ -49,6 +52,8 @@ export const Editor = () => {
                 notes: notes
             },
         });
+        
+        history.push('/activegoals')
     };
 
        
@@ -57,14 +62,16 @@ export const Editor = () => {
 
         <div className="text-editor">
             <form name="frm" onSubmit={postGoals} >
-            <p>Goal:</p>  <TextField 
-            label="Goal Name"
-            size="small" 
-            value={goal}
-            onChange={(event) => setGoal(event.target.value)}/>
-            <br/>
-            <br/>
-            
+                <p>Goal:</p>  
+                    <TextField 
+                        label="Goal Name"
+                        size="small" 
+                        value={goal}
+                        onChange={(event) => setGoal(event.target.value)}
+                    />
+                <br/>
+                <br/>
+                
             
             <EditorToolbar />
             <ReactQuill className="quill"
@@ -77,9 +84,9 @@ export const Editor = () => {
                 modules={modules}
                 formats={formats}
             />
-            <br />
-            <br />
-            <br />
+                <br />
+                <br />
+                <br />
 
             <table>
                 <thead>
@@ -90,42 +97,43 @@ export const Editor = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <td><TextField 
-                    label="Specific" 
-                    size="small"
-                    value={expense}
-                    onChange={(event) => setExpense(event.target.value)}/></td>
+                    <td>
+                        <TextField 
+                            label="Specific" 
+                            size="small"
+                            value={expense}
+                            onChange={(event) => setExpense(event.target.value)}
+                        />
+                    </td>
 
-                    <td><TextField
-                    label="Price"
-                    size="small"
-                    value={price}
-                    onChange={(event) => setPrice(event.target.value)}/></td>
+                    <td>
+                        <TextField
+                            label="Price"
+                            size="small"
+                            value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                        />
+                    </td>
 
-                    <td><TextField 
-                    label="Notes"
-                    size="small"
-                    value={notes}
-                    onChange={(event) => setNotes(event.target.value)}/></td>
+                    <td>
+                        <TextField 
+                            label="Notes"
+                            size="small"
+                            value={notes}
+                            onChange={(event) => setNotes(event.target.value)}
+                        />
+                    </td>
                     
-                    <td><Button 
-                    onClick={handleAddRow}
-                    size="small" 
-                    variant="contained">Add Row</Button></td>
+                    <td>
+                        <Button 
+                            onClick={handleAddRow}
+                            size="small" 
+                            variant="contained">Add Row
+                        </Button>
+                    </td>
                 </tbody>
             </table>
-            <Button type="submit">Set Goal</Button>
-            <br />
-            <br />
-            <br />
-            {/* <Card>
-        <CardContent>
-            <Typography className="recentlistings" variant="h5" component="h3">Feed to Display Entries</Typography>
-        </CardContent>
-
-    </Card> */}
-
-
+            <Button type="submit">Add New Goal</Button>
             </form>
         </div>
     );

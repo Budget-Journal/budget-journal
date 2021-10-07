@@ -30,7 +30,7 @@ export default function Journal () {
   useEffect(() => {
     fetchActiveGoals();
     fetchJournalPosts();
-  }, [journal]);
+  }, []); //journal?
 
   // Responsible for fetching all the active goals related to the user
   const fetchActiveGoals = () => {

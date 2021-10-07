@@ -21,7 +21,7 @@ export default function ActiveGoals() {
     dispatch({
       type: "FETCH_ACTIVE_GOALS"
     })
-  }, []);
+  }, []); //activeGoals?
  
 
   return (

@@ -1,7 +1,11 @@
 import AddIcon from '@mui/icons-material/Add';
-
+import { useHistory } from "react-router-dom";
 
 export default function NoGoals() {
+    // Set hooks as variables 
+    const history = useHistory();
+
+
     return(
         <div className="home">
             <div className="border">
