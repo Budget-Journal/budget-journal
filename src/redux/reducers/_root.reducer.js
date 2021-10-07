@@ -11,6 +11,7 @@ import activeGoals from './activeGoals.reducer';
 
 
 
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -25,8 +26,7 @@ const rootReducer = combineReducers({
   details, // will hold goal and budget details based on a specific goal
   selectGoal,  // will hold the current active goals that will be shown on the dropdown on the journal post
   activePosts, // will hold all journal posts related to a specific goal that is active
-  activeGoals // will hold all goals that are set to false via db
-  goal, // will hold data relating goals
+  activeGoals, // will hold all goals that are set to false via db
   details,
   selectGoal  // will gold the current active goals that will be shown on the dropdown on the journal post
 });

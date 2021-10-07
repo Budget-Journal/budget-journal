@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Logo1 from "../../../public/images/Logo1.png";
+import Logo1 from '../Logo1.png'
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
@@ -10,17 +10,18 @@ function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
-    <div className="nav">
+    <div className="nav"> 
+    
       <Link to="/activegoals">
 
       <div className="nav__left">
-          {/* Had issues with image, commented it out */}
-          {/* <img className="header__logo" src={Logo1.png} alt="" /> */}
+         
+            {/* <img className="header__logo" src={Logo1} alt="" />  */}
 
       <div className="nav_left">
      
         <img src={Logo1} alt="" />
-
+    </div>
       </div>
       </Link>
       <div>
