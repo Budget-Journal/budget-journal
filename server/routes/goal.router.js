@@ -13,6 +13,34 @@ const {
     
 */
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('Goal id', req.params.id);
+    const sqlText = `
+        DELETE FROM "budget"
+        WHERE "budget".goal_id = $1
+    `;
+
+    const sqlParams = [
+        req.params.id
+    ]
+    pool.query(sqlText, sqlParams).then(result => {
+        const sqlText = `
+            DELETE FROM "goal"
+            WHERE "goal".id = $1
+        `;
+
+        const sqlParams = [
+            req.params.id
+        ]
+        pool.query(sqlText, sqlParams).then(result => {
+            res.sendStatus(200);
+        }).catch(error =>{
+            console.error('Failed to DELETE goal', error);
+            res.sendStatus(500);
+        })
+    })
+})
+
 router.get('/active', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const sqlText = `
@@ -71,7 +99,7 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
-
+// Creating a new goal and budget
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('Goal to POST:', req.body);
     
@@ -114,28 +142,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         console.error("Creating Goal & Budget Failed", error);
         res.sendStatus(500);
     })
-
-//     // Handles changing a goal from incomplete to complete
-// router.put('/:id', rejectUnauthenticated, (req, res) => {
-//     console.log("*Goal id*********", req.params.id);
-//     const sqlText = `
-//         UPDATE "goal"
-//         SET "completed" = TRUE;
-//         WHERE "goal.id" = $1
-//     `;
-//     let sqlParams = [
-//         req.params.id
-//     ];
-//     pool.query(sqlText, sqlParams).then(result => {
-//         res.sendStatus(201);
-//     }).catch(error => {
-//         console.log('Error in PUT completed goal', error);
-//         res.sendStatus(500);
-//     })
-
-// }) 
-
-
 });
+
+
+// router.delete('/delete/:id', rejectUnauthenticated, (req,res) => {
+//     console.log('Goal id', req.params.id)
+// })
+
+
 
 module.exports = router;

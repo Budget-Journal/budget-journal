@@ -41,12 +41,24 @@ export default function RenderedGoals({goal, index}) {
         })
     }
 
+    // Will delete a goal from the dom and database
+    const handleDeleteGoal = (goal) => {
+        console.log('Goal id', goal.id);
+        goalId = {
+            id: goal.id
+        }
+        dispatch({
+            type: "DELETE_ACTIVE_GOAL",
+            payload: goalId
+        })
+    }
+
     return(
         <Card key={index}>
             <h2>{goal.name}</h2>
             <Button onClick={() => { handleCompleteGoal(goal) }}>Complete goal</Button>
             <Button onClick={() => { handleViewGoalDetails(goal) }}>View</Button>
-            <Button>Delete</Button>
+            <Button onClick={() => { handleDeleteGoal(goal) }}>Delete</Button>
         </Card>
     )
 }
