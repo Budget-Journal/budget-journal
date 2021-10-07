@@ -39,6 +39,7 @@ export default function RenderedGoals({goal, index}) {
             type: "UPDATE_GOAL_COMPLETED",
             payload: goalId
         })
+        history.go(0);
     }
 
     // Will delete a goal from the dom and database
@@ -51,6 +52,7 @@ export default function RenderedGoals({goal, index}) {
             type: "DELETE_ACTIVE_GOAL",
             payload: goalId
         })
+        history.go(0);
     }
 
     return(

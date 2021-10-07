@@ -13,6 +13,7 @@ const {
     
 */
 
+
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log('Goal id', req.params.id);
     const sqlText = `
@@ -20,26 +21,33 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         WHERE "budget".goal_id = $1
     `;
 
-    const sqlParams = [
-        req.params.id
-    ]
+    const sqlParams = [req.params.id]
+
     pool.query(sqlText, sqlParams).then(result => {
         const sqlText = `
-            DELETE FROM "goal"
-            WHERE "goal".id = $1
+            DELETE FROM "journal_post"
+            WHERE "journal_post".goal_id = $1
         `;
 
-        const sqlParams = [
-            req.params.id
-        ]
+        const sqlParams = [req.params.id]
+
         pool.query(sqlText, sqlParams).then(result => {
-            res.sendStatus(200);
-        }).catch(error =>{
-            console.error('Failed to DELETE goal', error);
-            res.sendStatus(500);
+            const sqlText = `
+                DELETE FROM "goal"
+                WHERE "goal".id = $1
+            `;
+            
+            const sqlParams = [req.params.id]
+
+            pool.query(sqlText, sqlParams).then(result => {
+                res.sendStatus(200);
+            }).catch(error => {
+                console.error('Failed to DELETE goal', error);
+                res.sendStatus(500);
+            })
         })
     })
-})
+});
 
 router.get('/active', rejectUnauthenticated, (req, res) => {
     // GET route code here
