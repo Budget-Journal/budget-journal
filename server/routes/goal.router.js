@@ -10,9 +10,8 @@ const router = express.Router();
     
 */
 
-
-
 router.get('/', (req, res) => {
+
 
     // GET route code here
     const query = `SELECT * FROM "goal"

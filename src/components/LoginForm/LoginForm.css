@@ -1,0 +1,23 @@
+.loginPanel{
+    display:flex;
+    padding-bottom: 200px;
+}
+
+.children{
+    display:inline-block;
+    margin-left: 150px;
+    margin-top: 50px;
+    border-left: 1px solid rgb(216, 214, 214);
+    padding-left: 75px;
+    
+    
+}
+h1{
+    color:#1F4364 !important;
+}
+
+h5{
+    color:#1F4364;
+    
+}
+
