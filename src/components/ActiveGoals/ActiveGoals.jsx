@@ -13,7 +13,9 @@ export default function ActiveGoals() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const goals = useSelector(store => store.goals);
+  const activeGoals = useSelector(store => store.activeGoals);
+  const lengthOfActiveGoals = activeGoals.length
+  console.log('*******************', lengthOfActiveGoals);
 
   useEffect(() => {
     dispatch({
@@ -23,14 +25,18 @@ export default function ActiveGoals() {
  
 
   return (
-    <>
+    <div>
 
-      {goals.length > 0 ?
-        <RenderedGoals />
-      :
+      {lengthOfActiveGoals <= 0 ?
         <NoGoals />
+      :
+        <div>
+          {activeGoals.map((goal, index) => (
+            <RenderedGoals goals={goal} index={index} />
+          ))}
+        </div>
       }
 
-    </>
+    </div>
   );
 }

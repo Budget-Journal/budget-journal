@@ -6,6 +6,7 @@ import goal from './goal.reducer';
 import details from './cardDetails.reducer';
 import selectGoal from './journalSelectGoal.reducer';
 import activePosts from './activeJournalPosts.reducer';
+import activeGoals from './activeGoals.reducer';
 
 
 
@@ -22,8 +23,8 @@ const rootReducer = combineReducers({
   goal, // will hold data relating goals
   details, // will hold goal and budget details based on a specific goal
   selectGoal,  // will hold the current active goals that will be shown on the dropdown on the journal post
-  activePosts // will hold all journal posts related to a specific goal that is active
-
+  activePosts, // will hold all journal posts related to a specific goal that is active
+  activeGoals // will hold all goals that are set to false via db
 });
 
 export default rootReducer;

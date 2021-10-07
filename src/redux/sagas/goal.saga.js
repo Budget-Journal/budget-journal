@@ -10,11 +10,16 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchActiveGoals() {
     try{
-        const response = yield axios.get ("api/active/goal");
+        const response = yield axios.get ("api/goal/active");
+        console.log("Current active goals*****************", response.data);
+        yield put ({
+            type: 'SET_ACTIVE_GOALS',
+            payload: response.data
+        })
     } catch(error) {
         console.error('Failed to fetch active goals', error);
     }
-}
+};
 
 function* fetchGoals() {
     try{
