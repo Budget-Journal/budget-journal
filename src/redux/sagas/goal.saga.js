@@ -62,10 +62,22 @@ function* postGoals(action) {
     }
 };
 
+function* deleteGoal(action){
+    try{
+        yield axios.delete(`/api/goal/${action.payload}`);
+        yield put({
+            type: 'FETCH_COMPLETED_GOALS',
+        });
+    }
+    catch(error){
+        console.log('DELETE error')     
+}
+};
 
 export default function* goalSaga(){
     yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
+    yield takeLatest('DELETE_GOAL', deleteGoal);
 }

@@ -39,13 +39,14 @@ Button
   outline: 0;
   cursor: pointer;
   justify-content:baseline;
-  
+  min-height: 30px;
+  min-width: 80px;
 }
 
-.btn_sizeMin {
-  min-height: 50px;
-  min-width: 100px;
-}
+/* .btn_sizeMin {
+  min-height: 30px;
+  min-width: 80px;
+} */
 
 .btn_sizeSm {
   padding: 5px 10px;
@@ -103,7 +104,7 @@ Form Treatment
 
 .formPanel {
 
-  display: block;
+  display: inline-block;
   box-sizing: border-box;
   width: 375px;
   height:300px;
@@ -124,12 +125,11 @@ Form Treatment
 
 
 
-
-
-
 input {
   margin: 5px;
   margin-bottom: 10px;
+  
+
   
  
 }

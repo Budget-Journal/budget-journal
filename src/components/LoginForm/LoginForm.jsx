@@ -34,7 +34,7 @@ function LoginForm() {
   return (
     <body className="loginPanel">
       <form className="formPanel" onSubmit={login}>
-        <h2 className="p">Login</h2>
+        <h2 className="loginHead"> Budget Journal Login</h2>
         {errors.loginMessage && (
           <h3 className="alert" role="alert">
             {errors.loginMessage}
@@ -65,7 +65,7 @@ function LoginForm() {
           </label>
         </div>
         <div>
-          <input className="btn" type="submit" name="submit" value="Log In" />
+          <input className="btnReg" type="submit" name="submit" value="Log In" />
         </div>
         <div></div>
       </form>
