@@ -1,0 +1,38 @@
+.test{
+    margin-right: 50px;
+}
+
+::placeholder{
+    color:rgb(182, 179, 179);
+}
+
+.regForm{
+    color:white;
+}
+
+.btnReg {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-left: 100px;
+    border-color: #014041;
+    border-width: 1px 1px 3px;
+    border-radius: 4px;
+    background-color: #555757;
+    color: #f8f8f8;
+    font-size: 14px;
+    outline: 0;
+    cursor: pointer;
+    justify-content:baseline;
+    min-height: 30px;
+    min-width: 80px;
+    
+  }
+
+  .formPanel{
+      margin-bottom: 50px;
+  }
+
+  .bodyReg{
+
+    margin-left: 360px;
+  }
