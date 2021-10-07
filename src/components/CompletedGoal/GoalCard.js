@@ -45,6 +45,13 @@ export default function GoalCard() {
 
      history.push('/view')
    }
+
+   const handleDelete =(id) => {
+    dispatch({ 
+     type: "DELETE_GOAL",
+     payload: id,
+   });
+   };
   
     return (
     <Grid item xs={6} sm={3}>
@@ -62,7 +69,8 @@ export default function GoalCard() {
                 {/* {" "} */}
                 &nbsp; &nbsp; &nbsp;
                 <Button onClick={() => handleView(goal.id)}>View</Button>
-                <Button
+                <Button onClick={() => handleDelete(goal.id)}
+                  
                   color="secondary"
                 >
                   Delete

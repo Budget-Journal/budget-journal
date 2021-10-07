@@ -12,6 +12,17 @@ const {
     Handles deleting a goal
     
 */
+router.delete('/:id', rejectUnauthenticated, (req, res) =>{
+    const id= req.params.id;
+    const queryText =`DELETE FROM "goal" WHERE "goal"."id" = $1 RETURNING *;`;
+    pool.query(queryText, [id])
+    .then((result) => {
+      res.sendStatus(201)
+    }).catch((error)=> {
+      res.sendStatus(500);
+    })
+  
+  });
 
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
