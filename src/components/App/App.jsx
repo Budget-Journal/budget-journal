@@ -16,7 +16,7 @@ import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
 import GoalCard from '../CompletedGoal/GoalCard';
 import GoalCardView from '../CompletedGoal/GoalCardView';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import LandingPage from '../LandingPage/LandingPage';
+//import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
@@ -184,7 +184,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the Landing page
-              <LandingPage />
+              {/* <LandingPage /> */}
             }
           </Route>
 
