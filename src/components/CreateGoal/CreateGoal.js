@@ -23,6 +23,7 @@ export default function CreateGoal() {
     const [expense, setExpense] = useState("");
     const dispatch = useDispatch();
 
+    // Empty Data for goal form (expense, price, notes)
     let data = [{}];
     const [goalData, setGoalData] = useState(data);
     const [addFormData, setAddFormData] = useState({
@@ -34,29 +35,33 @@ export default function CreateGoal() {
     const handleAddFormChange = (event) => {
         event.preventDefault();
 
+        // Get the name attribute from TextField on handleAddSubmit form (expense, price, notes)
         const fieldName = event.target.getAttribute('name');
+        // Get the value the user enters into the TextField (expense, price, notes)
         const fieldValue = event.target.value;
-        console.log('*******', fieldName);
-        console.log('*****Value', fieldValue);
 
+        // Spread operator to copy existing form data
         const newFormData = { ...addFormData };
+        // Update the object with the new value the user inputs
         newFormData[fieldName] = fieldValue;
 
+        // Set newFormData to state
         setAddFormData(newFormData)
     }
 
     const handleAddFormSubmit = (event) => {
         event.preventDefault();
 
+        // Create new object from addFormData
         const newGoalData = {
             expense: addFormData.expense,
             price: addFormData.price,
             notes: addFormData.notes
         };
 
+        // Create new array to avoid mutating the state 
         const newGoalsData = [...goalData, newGoalData];
         setGoalData(newGoalsData);
-        console.log('***newGoalData', newGoalData);
     }
 
     const handleChange = (value) => {
