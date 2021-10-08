@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 // import "./ActiveGoals.css";
 import NoGoals from "./NoGoals";
 import RenderedGoals from "./RenderedGoals";
-
+import Grid from '@mui/material/Grid';
 export default function ActiveGoals() {
 
   // Set hooks as variables
@@ -26,17 +26,17 @@ export default function ActiveGoals() {
 
   return (
     <div>
-
       {lengthOfActiveGoals <= 0 ?
         <NoGoals />
       :
-        <div>
+        <Grid container spacing={4}>
           {activeGoals.map((goal, index) => (
-            <RenderedGoals goal={goal} index={index} />
+            <Grid item xs={12} sm={6} md={4}>
+              <RenderedGoals goal={goal} index={index} />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       }
-
     </div>
   );
 }

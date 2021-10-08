@@ -5,7 +5,6 @@ import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
 //Material UI Imports
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardHeader from '@mui/material/CardHeader';
@@ -21,12 +20,18 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 //End Material UI Imports
 
 
-
+const useStyles = makeStyles({
+  gridContainer: {
+    paddingLeft: "30px",
+    paddingRight: "10px"
+  }
+});
 
 
 export default function GoalCard() {
   // Set hooks as variables
    const dispatch = useDispatch();
+   const classes = useStyles();
    const history = useHistory();
    const completedGoals= useSelector(store => store.completedGoal);
 
@@ -63,12 +68,14 @@ export default function GoalCard() {
    };
   
     return (
-      <div>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-      {completedGoals.map(detail => (
-          <div>
-            
-              <Grid item xs={12} sm={6}>
+      
+        <Grid container 
+        className={classes.gridContainer} 
+        justify="center"
+        spacing={4}
+        >
+          {completedGoals.map(detail => (
+              <Grid item xs={12} sm={6} >
                <Card  sx={{width: '100%'}}>
                   <CardHeader
                       avatar={
@@ -107,15 +114,7 @@ export default function GoalCard() {
                   </CardActions>
                   </Card>
                   </Grid>
-                  
-          </div>
-          
       ))}
       </Grid>
-
-      
-
-      
-  </div>
   );
 }
