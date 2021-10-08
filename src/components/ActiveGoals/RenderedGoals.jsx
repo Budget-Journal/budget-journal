@@ -1,7 +1,24 @@
 import React, { useEffect } from "react";
-import { Grid, CardContent, Card, CardActions, Typography, Button } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
+//Material UI Imports
+import Button  from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+//End Material UI Imports
 
 import ViewActiveGoalDetails from "./ViewActiveGoalDetails";
 
@@ -56,12 +73,32 @@ export default function RenderedGoals({goal, index}) {
     }
 
     return(
-        <Card key={index}>
+        <div>
+            <Grid container>
+                <Grid item xs={12}>
+                    <Card  sx={{width: '100%'}}>
+                        <CardHeader
+                            avatar={
+                            <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
+                            } 
+                            title={goal.name}
+                            subheader="<Render date here???>"
+                        />
+                        <CardActions disableSpacing>
+                            <Button size="small" onClick={() => { handleCompleteGoal(goal) }}>Complete goal</Button>
+                            <Button size="small" onClick={() => { handleViewGoalDetails(goal) }}>View</Button>                          
+                            <Button size="small" onClick={() => { handleDeleteGoal(goal) }}>Delete</Button>                    
+                        </CardActions>
+                    </Card>
+                </Grid>
+            </Grid>           
+        </div>
+    )
+}
+
+{/* <Card key={index}>
             <h2>{goal.name}</h2>
             <Button onClick={() => { handleCompleteGoal(goal) }}>Complete goal</Button>
             <Button onClick={() => { handleViewGoalDetails(goal) }}>View</Button>
             <Button onClick={() => { handleDeleteGoal(goal) }}>Delete</Button>
-        </Card>
-    )
-}
-
+        </Card> */}

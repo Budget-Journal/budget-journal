@@ -12,11 +12,9 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import ShareIcon from '@mui/icons-material/Share';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -32,7 +30,7 @@ export default function GoalCard() {
    const history = useHistory();
    const completedGoals= useSelector(store => store.completedGoal);
 
-  useEffect((id) => {
+  useEffect(() => {
     dispatch({
       type: 'FETCH_COMPLETED_GOALS'
           });
@@ -43,12 +41,12 @@ export default function GoalCard() {
      dispatch({
        type: 'CARD_VIEW_DETAILS',
        payload: id
-     })
+     });
 
      dispatch({
        type: "FETCH_GOAL_JOURNAL_POSTS",
        payload: id
-     })
+     });
 
      history.push('/view')
    }
@@ -66,10 +64,11 @@ export default function GoalCard() {
   
     return (
       <div>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
       {completedGoals.map(detail => (
           <div>
-            <Grid container direction="column">
-              <Grid item xs={12}>
+            
+              <Grid item xs={12} sm={6}>
                <Card  sx={{width: '100%'}}>
                   <CardHeader
                       avatar={
@@ -77,7 +76,7 @@ export default function GoalCard() {
                       }
                       action={
                       <IconButton  aria-label="settings">
-                          <DeleteOutlineIcon onClick={handleDelete} />
+                          <DeleteOutlineIcon onClick={() => handleDelete(detail.id)} />
                       </IconButton>
                       }
                       title={detail.name}
@@ -108,9 +107,11 @@ export default function GoalCard() {
                   </CardActions>
                   </Card>
                   </Grid>
-                  </Grid>
+                  
           </div>
+          
       ))}
+      </Grid>
 
       
 

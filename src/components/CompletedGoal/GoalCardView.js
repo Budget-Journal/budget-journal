@@ -50,7 +50,7 @@ function GoalCardView() {
         <div>
             {details.map(detail => (
                 <div>
-                     <Card  sx={{width: '250%'}}>
+                     <Card  sx={{width: '200%'}}>
                         <CardHeader
                             avatar={
                             <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
