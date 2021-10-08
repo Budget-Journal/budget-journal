@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
-import "./ActiveGoals.css";
+// import "./ActiveGoals.css";
 import NoGoals from "./NoGoals";
 import RenderedGoals from "./RenderedGoals";
 
@@ -21,6 +21,7 @@ export default function ActiveGoals() {
       type: "FETCH_ACTIVE_GOALS"
     })
   }, []); //activeGoals?
+
  
 
   return (
@@ -31,7 +32,7 @@ export default function ActiveGoals() {
       :
         <div>
           {activeGoals.map((goal, index) => (
-            <RenderedGoals goals={goal} index={index} />
+            <RenderedGoals goal={goal} index={index} />
           ))}
         </div>
       }

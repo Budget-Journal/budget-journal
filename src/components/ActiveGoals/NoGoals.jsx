@@ -1,5 +1,6 @@
 import AddIcon from '@mui/icons-material/Add';
 import { useHistory } from "react-router-dom";
+import "./ActiveGoals.css";
 
 export default function NoGoals() {
     // Set hooks as variables 
@@ -8,7 +9,7 @@ export default function NoGoals() {
 
     return(
         <div className="home">
-            <div className="border">
+            <div className="borderHome">
                 <h2 className="home__title">Let's set a Goal</h2>
 
                 <AddIcon onClick={() => history.push("/creategoal")} className="home__Icon" />

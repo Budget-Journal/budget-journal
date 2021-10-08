@@ -39,12 +39,19 @@ export default function GoalCard() {
      })
 
      dispatch({
-       type: "FETCH_COMPLETED_GOAL_POSTS",
+       type: "FETCH_GOAL_JOURNAL_POSTS",
        payload: id
      })
 
      history.push('/view')
    }
+
+   const handleDelete =(id) => {
+    dispatch({ 
+     type: "DELETE_GOAL",
+     payload: id,
+   });
+   };
   
     return (
     <Grid item xs={6} sm={3}>
@@ -62,7 +69,8 @@ export default function GoalCard() {
                 {/* {" "} */}
                 &nbsp; &nbsp; &nbsp;
                 <Button onClick={() => handleView(goal.id)}>View</Button>
-                <Button
+                <Button onClick={() => handleDelete(goal.id)}
+                  
                   color="secondary"
                 >
                   Delete

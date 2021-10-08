@@ -16,13 +16,13 @@ import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
 import GoalCard from '../CompletedGoal/GoalCard';
 import GoalCardView from '../CompletedGoal/GoalCardView';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import LandingPage from '../LandingPage/LandingPage';
+//import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
 import CreateGoal from '../CreateGoal/CreateGoal';
 import Footer from '../Footer/Footer';
-
+import ViewActiveGoalDetails from '../ActiveGoals/ViewActiveGoalDetails';
 
 import './App.css';
 
@@ -56,6 +56,8 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+          
+          
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
@@ -63,10 +65,23 @@ function App() {
           >
             
             <div className ="app__page">
-            <SideBar />
-            <ActiveGoals />
+              <SideBar />
+              <ActiveGoals />
             </div>
             {/* Body of activegoals page component */}
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/active_goal_details"
+          >
+            
+            <div className ="app__page">
+              <SideBar />
+              <ViewActiveGoalDetails />
+            </div>
+              {/* Body of activegoals page component */}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -77,8 +92,8 @@ function App() {
           >
             
             <div className ="app__page">
-            <SideBar />
-            <CreateGoal />
+              <SideBar />
+              <CreateGoal />
 
             </div>
             {/* Body of create goal component */}
@@ -91,8 +106,8 @@ function App() {
           >
             
             <div className ="app__page">
-            <SideBar />
-            <Journal />
+              <SideBar />
+              <Journal />
             </div>
             {/* Body of journal component */}
           </ProtectedRoute>
@@ -166,7 +181,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the Landing page
-              <LandingPage />
+              {/* <LandingPage /> */}
             }
           </Route>
 

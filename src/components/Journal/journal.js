@@ -73,7 +73,7 @@ export default function Journal () {
     
     // Handle refresh
     // window.location.reload();
-    //history.go(0)
+    history.go(0);
     
   }
 
@@ -105,7 +105,9 @@ export default function Journal () {
             {selectGoal.map((goal, index) => (
               <MenuItem value={goal.id}>{goal.name}</MenuItem>
             ))}
-          </Select>
+            
+          </Select >
+          
         </FormControl>
         <FormHelperText>Optional: Select a Goal this post is related too</FormHelperText>
         <br />

@@ -35,7 +35,7 @@ export default function JournalEntries({entry, index}){
 
 
     return (
-        <Box sx={{ maxWidth: 700 }}>
+        <Box sx={{ maxWidth: 775 }}>
             <Card 
                 variant="outlined"
                 className="journal-posts"

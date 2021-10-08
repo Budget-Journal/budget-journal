@@ -2,7 +2,7 @@ import { PhotoSizeSelectActual } from '@mui/icons-material';
 import { TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import "./RegisterForm.css";
 function RegisterForm() {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('');
@@ -26,20 +26,22 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    <div className="bodyReg">
     <form className="formPanel" onSubmit={registerUser}>
-      <h2 className= "titlePanel">Budget Journal</h2>
+      <h2 className= "regForm">Budget Journal Registration</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
-
+      <div className="register">
       <div>
+        <div>
         <label htmlFor="name">
-
-          <TextField
-            placeholder="Name"
-
+          Name: 
+          <input className="test"
+            placeholder="Name" 
+            
             size="small"
             variant="filled"
             value={name}
@@ -47,12 +49,15 @@ function RegisterForm() {
             onChange={(event) => setName(event.target.value)}
           />
         </label>
+        </div>
       </div>
 
-      <div>
+      <div >
         <label htmlFor="username">
+          Username: 
           
-          <TextField
+          <input
+            
             placeholder="Username" 
             
             size="small"
@@ -65,10 +70,10 @@ function RegisterForm() {
       </div>
 
 
-      <div>
+      <div >
         <label htmlFor="email">
-
-          <TextField
+        Email: 
+          <input
             placeholder="Email"
 
             size="small"
@@ -80,10 +85,10 @@ function RegisterForm() {
         </label>
       </div>
 
-      <div>
+      <div >
         <label htmlFor="password">
-          
-          <TextField
+          Password: 
+          <input
             placeholder="Password"
             size="small"
             variant="filled"
@@ -95,10 +100,12 @@ function RegisterForm() {
           />
         </label>
       </div>
+      </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <input className="btnReg" type="submit" name="submit" value="Register" />
       </div>
     </form>
+    </div>
   );
 }
 
