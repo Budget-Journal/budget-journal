@@ -23,15 +23,7 @@ export default function CreateGoal() {
     const [expense, setExpense] = useState("");
     const dispatch = useDispatch();
 
-    let data = [
-        {
-            // "expense": "Buy Shoes",
-            // "price": 100.00,
-            // "notes": "Need them"
-        }
-    ]
-
-
+    let data = [{}];
     const [goalData, setGoalData] = useState(data);
     const [addFormData, setAddFormData] = useState({
         expense: '',
@@ -70,23 +62,6 @@ export default function CreateGoal() {
     const handleChange = (value) => {
         setState({ value });
     };
-
-
-    // const handleAddRow = () => {
-    //     console.log('Am i working')
-    //     return (
-    //         <>
-    //             <div>
-    //                 <tbody>
-    //                     <td><TextField /></td>
-    //                     <td><TextField /></td>
-    //                     <td><TextField /></td>
-    //                 </tbody>
-    //             </div>
-    //         </>
-
-    //     )
-    // }
 
     const postGoals = (event) => {
         dispatch({
@@ -136,53 +111,6 @@ export default function CreateGoal() {
                 <br />
                 <br />
                 <br />
-
-                {/* <table>
-                    <thead>
-                        <tr>
-                            <th>Expense</th>
-                            <th>Price</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td>
-                            <TextField
-                                label="Specific"
-                                size="small"
-                                value={expense}
-                                onChange={(event) => setExpense(event.target.value)}
-                            />
-                        </td>
-
-                        <td>
-                            <TextField
-                                label="Price"
-                                size="small"
-                                value={price}
-                                onChange={(event) => setPrice(event.target.value)}
-                            />
-                        </td>
-
-                        <td>
-                            <TextField
-                                label="Notes"
-                                size="small"
-                                value={notes}
-                                onChange={(event) => setNotes(event.target.value)}
-                            />
-                        </td>
-
-                        <td>
-                            <Button
-                                onClick={handleAddRow}
-                                size="small"
-                                variant="contained">Add Row
-                            </Button>
-                        </td>
-                    </tbody>
-                </table>
-                <Button type="submit">Add New Goal</Button> */}
             </form>
 
             <table>
