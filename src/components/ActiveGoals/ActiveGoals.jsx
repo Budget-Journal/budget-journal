@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
-import "./ActiveGoals.css";
+// import "./ActiveGoals.css";
 import NoGoals from "./NoGoals";
 import RenderedGoals from "./RenderedGoals";
 

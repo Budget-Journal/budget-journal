@@ -50,7 +50,7 @@ function Nav() {
             {/* <Link className="navLink" to="/accomplishedgoals">
               
             </Link> */}
-            <h1 className="user">{user ? <h2> {user.username}</h2> : <h3>No user logged-in</h3>}</h1>
+            <h1 className="user">{user ? <h2 className="userLog"> {user.username}</h2> : <h3>No user logged-in</h3>}</h1>
             <LogOutButton className="navLink" />
           </>
         )}
