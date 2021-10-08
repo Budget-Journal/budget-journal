@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
 import { useDispatch } from "react-redux";
+import "./styles.css";
 
 
 
@@ -61,6 +62,7 @@ export default function CreateGoal () {
 
     return (
 
+        
         <div className="text-editor">
             <form name="frm" onSubmit={postGoals} >
                 <p>Goal:</p>  
