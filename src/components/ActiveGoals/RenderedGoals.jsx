@@ -10,12 +10,12 @@ export default function RenderedGoals({goal, index}) {
     // Set hooks to variables
     const dispatch = useDispatch();
     const history = useHistory();
-    let goalId = {};
+    let goalId;
     
     // Will store the goal details in a reducer and fetch all the journal posts related to the goal
     // Dispatch data will be displayed in ViewActiveGoalDetails
     const handleViewGoalDetails = (goal) => {
-        console.log('Goal id', goal);
+        console.log('Goal id', goal.id);
         dispatch({
             type: "SET_ACTIVE_GOAL_DETAILS",
             payload: goal

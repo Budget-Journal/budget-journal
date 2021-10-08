@@ -81,13 +81,9 @@ function* deleteActiveGoal(action){
     }
 }
 
-
-function* deleteGoal(action){
+function* deleteCompletedGoal(action){
     try{
-        yield axios.delete(`/api/goal/${action.payload}`);
-        yield put({
-            type: 'FETCH_COMPLETED_GOALS',
-        });
+        yield axios.delete(`/api/goal/${action.payload.id}`);
     }
     catch(error){
         console.log('DELETE error')     
@@ -102,5 +98,5 @@ export default function* goalSaga(){
     yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
     yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal);
     yield takeLatest('DELETE_ACTIVE_GOAL', deleteActiveGoal)
-    yield takeLatest('DELETE_GOAL', deleteGoal);
+    yield takeLatest('DELETE_COMPLETED_GOAL', deleteCompletedGoal);
 }

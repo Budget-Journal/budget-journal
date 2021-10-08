@@ -22,6 +22,7 @@ export default function GoalCard() {
    const classes = useStyles();
    const dispatch = useDispatch();
    const history = useHistory();
+   let goalId;
 
    const completedGoals= useSelector(store => store.completedGoal);
 
@@ -30,27 +31,36 @@ export default function GoalCard() {
       type: 'FETCH_COMPLETED_GOALS'
           });
    }, []);
-  
-   const handleView = (id) => {
-    console.log('this goal id', id)
-     dispatch({
-       type: 'CARD_VIEW_DETAILS',
-       payload: id
-     })
 
-     dispatch({
-       type: "FETCH_GOAL_JOURNAL_POSTS",
-       payload: id
-     })
 
-     history.push('/view')
-   }
+    // Will store the goal details in a reducer and fetch all the journal posts related to the goal 
+    // Dispatch data will be displayed in ViewActiveGoalDetails
+  const handleView = (goal) => {
+    console.log('this goal id', goal.id);
+    dispatch({
+      type: 'CARD_VIEW_DETAILS',
+      payload: goal.id
+    })
 
-   const handleDelete =(id) => {
+    dispatch({
+      type: "FETCH_GOAL_JOURNAL_POSTS",
+      payload: goal.id
+    })
+
+    history.push('/view')
+  }
+
+   // Handles when a user deletes a completed goal
+   const handleDelete =(goal) => {
+    console.log("Goal id", goal.id)
+    goalId = {
+      id: goal.id
+    }
     dispatch({ 
-     type: "DELETE_GOAL",
-     payload: id,
-   });
+     type: "DELETE_COMPLETED_GOAL",
+     payload: goalId,
+    });
+    history.go(0);
    };
   
     return (
@@ -68,8 +78,8 @@ export default function GoalCard() {
               <CardActions>
                 {/* {" "} */}
                 &nbsp; &nbsp; &nbsp;
-                <Button onClick={() => handleView(goal.id)}>View</Button>
-                <Button onClick={() => handleDelete(goal.id)}
+                <Button onClick={() => handleView(goal)}>View</Button>
+                <Button onClick={() => handleDelete(goal)}
                   
                   color="secondary"
                 >
