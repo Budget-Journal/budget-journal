@@ -99,4 +99,5 @@ export default function* goalSaga(){
     yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal);
     yield takeLatest('DELETE_ACTIVE_GOAL', deleteActiveGoal)
     yield takeLatest('DELETE_COMPLETED_GOAL', deleteCompletedGoal);
+    // yield takeLatest('POST_EXPENSE', postNewExpense)
 }

@@ -125,37 +125,38 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     // First query makes the goal
     pool.query(sqlText, sqlParams).then(result => {
         console.log('Post results', result.rows);
-        
-        const goalId = result.rows[0].id;
-
-        const sqlText = `
-            INSERT INTO "budget" ("goal_id", "expense", "price", "notes")
-            VALUES ($1, $2, $3, $4)
-        `;
-
-        const sqlParams = [
-            goalId,             // $1
-            req.body.expense,   // $2
-            req.body.price,     // $3
-            req.body.notes      // $4
-        ]
-        console.log('*******', sqlParams);
-
-        // Second query creates the budget
-        pool.query(sqlText, sqlParams).then(result => {
-            res.sendStatus(201)
-        })
+        res.sendStatus(200);
     }).catch(error => {
         console.error("Creating Goal & Budget Failed", error);
         res.sendStatus(500);
     })
 });
 
+router.post('/budget', rejectUnauthenticated, (req,re) => {
+    console.log('Data to add too budget', row.body);
+    const goalId = result.rows[0].id;
 
-// router.delete('/delete/:id', rejectUnauthenticated, (req,res) => {
-//     console.log('Goal id', req.params.id)
-// })
+    const sqlText = `
+            INSERT INTO "budget" ("goal_id", "expense", "price", "notes")
+            VALUES ($1, $2, $3, $4)
+        `;
 
+    const sqlParams = [
+        goalId,             // $1
+        req.body.expense,   // $2
+        req.body.price,     // $3
+        req.body.notes      // $4
+    ]
+        console.log('*******', sqlParams);
+
+    // Second query creates the budget
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(201)
+    }).catch(error => {
+        console.error("Creating Budget Failed", error);
+        res.sendStatus(500);
+    })
+}); // Skadoosh dis stuf wurk; gg if you find this
 
 
 module.exports = router;
