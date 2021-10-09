@@ -16,7 +16,8 @@ export default function CreateGoal() {
 
     const history = useHistory();
 
-    const [state, setState] = React.useState({ value: null });
+    //const [state, setState] = React.useState({ value: null });
+    const [reasons, setReasons] = useState("");
     const [goal, setGoal] = useState("");
     const [notes, setNotes] = useState("");
     const [price, setPrice] = useState("");
@@ -32,7 +33,7 @@ export default function CreateGoal() {
     let goalReasonsObject = {
         goalReasons: []
     }
-    goalReasonsObject.goalReasons = [goal, state]
+    goalReasonsObject.goalReasons = [goal, reasons]
     //let obj = 
     const [goalData, setGoalData] = useState(data);
     const [addFormData, setAddFormData] = useState({
@@ -83,9 +84,9 @@ export default function CreateGoal() {
     }
     
 
-    const handleChange = (value) => {
-        setState({ value });
-    };
+    // const handleChange = (value) => {
+    //     setState({ value });
+    // };
 
     const postGoals = (event) => {
 
@@ -132,8 +133,9 @@ export default function CreateGoal() {
                     className="reasonsBox"
                     placeholder="What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
                     multiline
-                    rows={2}
-                    rowsMax={4}
+                    rows={4}
+                    value={reasons.value}
+                    onChange={(event) => setReasons(event.target.value)}
                 />
 
                 {/* <EditorToolbar />
