@@ -1,21 +1,18 @@
 import React from "react";
-import { makeStyles } from '@mui/styles';
 import { useSelector } from "react-redux";
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
 //Material UI Imports
 import Card from '@mui/material/Card';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-
 import VisibilityIcon from '@mui/icons-material/Visibility';
 //End Material UI Imports
 
@@ -83,7 +80,7 @@ export default function GoalCard() {
                       }
                       action={
                       <IconButton  aria-label="settings">
-                          <DeleteOutlineIcon onClick={() => handleDelete(detail.id)} />
+                          <DeleteOutlineIcon color="error" onClick={() => handleDelete(detail.id)} />
                       </IconButton>
                       }
                       title={detail.name}
@@ -107,7 +104,7 @@ export default function GoalCard() {
                       </IconButton> 
 
                       <IconButton aria-label="share">
-                      <VisibilityIcon onClick={() => handleView(detail.id)}> </VisibilityIcon>
+                      <VisibilityIcon color="secondary" onClick={() => handleView(detail.id)}> </VisibilityIcon>
                       
                       </IconButton>
  

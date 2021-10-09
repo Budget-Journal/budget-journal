@@ -76,7 +76,7 @@ export default function RenderedGoals({goal, index}) {
                         <CardActions>
                             <Button size="small" onClick={() => { handleCompleteGoal(goal) }}>Complete goal</Button>
                             <Button size="small" onClick={() => { handleViewGoalDetails(goal) }}>View</Button>                          
-                            <Button size="small" onClick={() => { handleDeleteGoal(goal) }}>Delete</Button>                    
+                            <Button color="error" size="small" onClick={() => { handleDeleteGoal(goal) }}>Delete</Button>                    
                         </CardActions>
                     </Card>
                 </div>

@@ -53,7 +53,7 @@ function* postGoals(action) {
         // Takes information retrieved from DB
         // Why do we have this?
         yield put({ 
-            type: 'SET_GOALS'
+            type: 'FETCH_ACTIVE_GOALS'
         })  
         // puts it in Fetch Goals Saga and is assigned fetchGoals Function
     }
