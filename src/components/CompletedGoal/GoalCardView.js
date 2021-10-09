@@ -5,6 +5,8 @@ import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 //Material UI Imports
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -17,10 +19,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 //End Material UI Imports
 
-
-
+const useStyles = makeStyles({
+    gridContainer: {
+      paddingLeft: "50px",
+      paddingRight: "50px"
+    }
+  });
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -34,7 +41,7 @@ const ExpandMore = styled((props) => {
 
 function GoalCardView() {
     const [expanded, setExpanded] = React.useState(false);
-
+    const classes = useStyles();
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
@@ -46,10 +53,10 @@ function GoalCardView() {
 
     
     return (
-        <div>
+        <Grid container className={classes.gridContainer}>
             {details.map(detail => (
-                <div>
-                     <Card  sx={{width: '250%'}}>
+                <Grid item xs={11.5}>
+                     <Card>
                         <CardHeader
                             avatar={
                             <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
@@ -104,13 +111,10 @@ function GoalCardView() {
                             </CardContent>
                         </Collapse>
                         </Card>
-                </div>
+                        </Grid>
+
             ))}
-
-            
-
-            
-        </div>
+            </Grid>
     )
 }
 

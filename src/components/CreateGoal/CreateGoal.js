@@ -43,6 +43,10 @@ export default function CreateGoal () {
     }
 
     const postGoals = (event) => {
+        if (goal == "" || state == "" || expense == "" || price == "" || notes == "") { 
+            alert('Please fill in all inputs');
+            return false;
+        };
         dispatch({
             type: "POST_GOALS",
             payload: {
@@ -55,7 +59,7 @@ export default function CreateGoal () {
         });
 
         history.push('/activegoals')
-        history.go(0);
+        
     };
 
        
@@ -113,6 +117,7 @@ export default function CreateGoal () {
                         <TextField
                             label="Price"
                             size="small"
+                            type="number"
                             value={price}
                             onChange={(event) => setPrice(event.target.value)}
                         />
