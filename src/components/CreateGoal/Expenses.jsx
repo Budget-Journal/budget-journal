@@ -7,6 +7,7 @@ export default function Expenses(){
 
     const lastGoal = useSelector(store => store.lastGoal);
     console.log('lastGoal is***', lastGoal)
+    // Extract goalId out of array so this work in payload
     let goalId = lastGoal[0];
     console.log('*****', goalId)
     
@@ -15,7 +16,6 @@ export default function Expenses(){
 
     const [goalData, setGoalData] = useState(data);
     const [addFormData, setAddFormData] = useState({
-        //lastGoal: '',
         expense: '',
         price: '',
         notes: ''
@@ -45,7 +45,6 @@ export default function Expenses(){
 
         // Create new object from addFormData
         const newGoalData = {
-            //goalId: lastGoal,
             expense: addFormData.expense,
             price: addFormData.price,
             notes: addFormData.notes

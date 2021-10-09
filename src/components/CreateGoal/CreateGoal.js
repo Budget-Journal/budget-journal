@@ -6,30 +6,28 @@ import { useHistory } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
-
-
 import Expenses from '../CreateGoal/Expenses';
 
-
-
-
 export default function CreateGoal() {
-
     const history = useHistory();
 
     //const [state, setState] = React.useState({ value: null });
     const [reasons, setReasons] = useState("");
     const [goal, setGoal] = useState("");
-
-    const [buttonClick, setButtonClick] = useState(true);
+    const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
   
     const dispatch = useDispatch();
 
+    const submitGoal = () => {
+        history.push('/activegoals');
+    }
+
+    // Toggle the Add Expenses Button (we need to make this untoggleable later)
     const addExpenses = () => {
-        setButtonClick(!buttonClick);
+        setAddExpensesButtonClick(!addExpensesButtonClick);
     }
     const submitExpenses = () => {
-        if (buttonClick) {
+        if (addExpensesButtonClick) {
             return;
         }
         else {
@@ -41,15 +39,20 @@ export default function CreateGoal() {
                     reasons: reasons,
                 }
             });
+            //Render the Expenses after ADD EXPENSES button is clicked
             return (
                 <div>
                     <Expenses />
+                    <Button 
+                        onClick={submitGoal}
+                        variant="contained"
+                    >
+                        Submit Goal
+                    </Button>
                 </div>
             )
         }
     }
-
-
 
     return (
         <div className="text-editor">
