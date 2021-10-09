@@ -52,16 +52,15 @@ function* postGoals(action) {
         yield axios.post('/api/goal', action.payload)
         // Takes information retrieved from DB
         // Why do we have this?
-        yield put({ 
-            type: 'SET_GOALS'
-        })  
+        // yield put({ 
+        //     type: 'SET_GOALS'
+        // })  
         // puts it in Fetch Goals Saga and is assigned fetchGoals Function
     }
     catch(error) {
         console.log('Post Goals has an error', error)
     }
 };
-
 
 function* updateGoal(action){
     try {
@@ -99,5 +98,4 @@ export default function* goalSaga(){
     yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal);
     yield takeLatest('DELETE_ACTIVE_GOAL', deleteActiveGoal)
     yield takeLatest('DELETE_COMPLETED_GOAL', deleteCompletedGoal);
-    // yield takeLatest('POST_EXPENSE', postNewExpense)
 }
