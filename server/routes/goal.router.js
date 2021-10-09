@@ -80,6 +80,22 @@ router.get('/completed', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/last_goal', (req, res) => {
+    // GET route code here
+    const sqlText = `
+        SELECT "goal"."id"
+        FROM "goal"
+            ORDER BY "id" DESC
+        LIMIT 1;
+    `;
+    pool.query(sqlText).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
+        console.log('GET budget Error', error)
+        res.sendStatus(500)
+    })
+});
+
 //GET Card Details
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     const sqlParams = [req.params.id];
@@ -134,15 +150,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/budget', rejectUnauthenticated, (req, res) => {
     console.log('Data to add too budget', req.body);
-    const goalId = result.rows[0].id;
+    //const goalId = result.rows[0].id;
 
     const sqlText = `
             INSERT INTO "budget" ("goal_id", "expense", "price", "notes")
             VALUES ($1, $2, $3, $4)
         `;
 
+    console.log(req.body.goalId.id);
     const sqlParams = [
-        goalId,             // $1
+        req.body.goalId.id,             // $1
         req.body.expense,   // $2
         req.body.price,     // $3
         req.body.notes      // $4

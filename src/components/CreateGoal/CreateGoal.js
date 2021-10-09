@@ -39,10 +39,8 @@ export default function CreateGoal() {
                 {
                     name: goal,
                     reasons: reasons,
-                },
+                }
             });
-            
-
             return (
                 <div>
                     <Expenses />

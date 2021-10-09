@@ -1,15 +1,21 @@
 import React, {useState} from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
 
 export default function Expenses(){
     const dispatch = useDispatch();
+
+    const lastGoal = useSelector(store => store.lastGoal);
+    console.log('lastGoal is***', lastGoal)
+    let goalId = lastGoal[0];
+    console.log('*****', goalId)
     
     // Empty Data for goal form (expense, price, notes)
     let data = [{}];
 
     const [goalData, setGoalData] = useState(data);
     const [addFormData, setAddFormData] = useState({
+        //lastGoal: '',
         expense: '',
         price: '',
         notes: ''
@@ -39,6 +45,7 @@ export default function Expenses(){
 
         // Create new object from addFormData
         const newGoalData = {
+            //goalId: lastGoal,
             expense: addFormData.expense,
             price: addFormData.price,
             notes: addFormData.notes
@@ -47,7 +54,9 @@ export default function Expenses(){
         // Create new array to avoid mutating the state 
         const newGoalsData = [...goalData, newGoalData];
         setGoalData(newGoalsData);
-
+        
+        newGoalData.goalId = goalId
+        console.log('******', newGoalData);
 
         dispatch({
             type: "POST_NEW_EXPENSE",
