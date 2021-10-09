@@ -5,12 +5,22 @@ import AddIcon from '@mui/icons-material/Add';
 // import "./ActiveGoals.css";
 import NoGoals from "./NoGoals";
 import RenderedGoals from "./RenderedGoals";
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  gridContainer: {
+    paddingLeft: "50px",
+    paddingRight: "10px"
+  }
+});
 
 export default function ActiveGoals() {
-
+  
   // Set hooks as variables
   const history = useHistory();
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const activeGoals = useSelector(store => store.activeGoals);
   const lengthOfActiveGoals = activeGoals.length
@@ -26,17 +36,17 @@ export default function ActiveGoals() {
 
   return (
     <div>
-
       {lengthOfActiveGoals <= 0 ?
         <NoGoals />
       :
-        <div>
+        <Grid container spacing={4} justify="center" className={classes.gridContainer}>
           {activeGoals.map((goal, index) => (
-            <RenderedGoals goal={goal} index={index} />
+            <Grid item xs={12} md={10}>
+              <RenderedGoals goal={goal} index={index} />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       }
-
     </div>
   );
 }
