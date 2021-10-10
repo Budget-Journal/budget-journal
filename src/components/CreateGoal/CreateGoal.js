@@ -22,6 +22,7 @@ export default function CreateGoal() {
         history.push('/activegoals');
     }
 
+
     // Toggle the Add Expenses Button (we need to make this untoggleable later)
     const addExpenses = () => {
         setAddExpensesButtonClick(!addExpensesButtonClick);
@@ -54,6 +55,29 @@ export default function CreateGoal() {
         }
     }
 
+    const postGoals = (event) => {
+        if (goal == "" || state == "" || expense == "" || price == "" || notes == "") { 
+            alert('Please fill in all inputs');
+            return false;
+        };
+        dispatch({
+            type: "POST_GOALS",
+            payload: {
+                name: goal,
+                reasons: state,
+                expense: expense,
+                price: price,
+                notes: notes
+            },
+        });
+
+        history.push('/activegoals')
+        
+    };
+
+       
+
+
     return (
         <div className="text-editor">
             <form name="frm" onSubmit={submitExpenses} >
@@ -66,6 +90,7 @@ export default function CreateGoal() {
                 />
                 <br />
                 <br />
+
 
 
                 <TextField
@@ -84,6 +109,17 @@ export default function CreateGoal() {
                 </Button>
                 {submitExpenses()}
                
+
+                    <td>
+                        <TextField
+                            label="Price"
+                            size="small"
+                            type="number"
+                            value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                        />
+                    </td>
+
 
                 {/* <EditorToolbar />
                 <ReactQuill className="quill"
