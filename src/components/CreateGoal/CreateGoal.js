@@ -51,7 +51,7 @@ export default function CreateGoal () {
             type: "POST_GOALS",
             payload: {
                 name: goal,
-                reasons: state,
+                reasons: state.value,
                 expense: expense,
                 price: price,
                 notes: notes
@@ -94,6 +94,7 @@ export default function CreateGoal () {
                 <br />
                 <br />
                 <br />
+            <button>Add Expenses</button>
 
             <table>
                 <thead>
