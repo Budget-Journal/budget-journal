@@ -27,7 +27,18 @@
     width:600px;
   }
 
+  .reasonsBox {
+    Font-Family: 'Open Sans', Sans-Serif;
+    width: 600px;
+  }
 
+  .expenseTable {
+    width: 600px;
+  }
+
+  .expenseTableData {
+    text-align: center;
+  }
 
   /* Font-Family: 'Work Sans', Sans-Serif;
 Font-Size: 45px;

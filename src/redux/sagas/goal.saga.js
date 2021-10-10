@@ -33,6 +33,20 @@ function* fetchCompletedGoals() {
         console.log('fetchGoals Error at goal.saga', error)
     }
 };
+
+function* fetchLastGoal(){
+    try {
+        const response = yield axios.get("api/goal/last_goal")
+        console.log("response data is:", response.data);
+        yield put({
+            type: 'SET_LAST_GOAL', 
+            payload: response.data
+        });
+    } catch (error) {
+        console.log('fetchLastGoal', error)
+    }
+}
+
 // Card View Details
 function* cardViewDetails(action) {
     try{
@@ -53,7 +67,8 @@ function* postGoals(action) {
         // Takes information retrieved from DB
         // Why do we have this?
         yield put({ 
-            type: 'FETCH_ACTIVE_GOALS'
+            type: 'FETCH_LAST_GOAL',
+            payload: action.payload
         })  
         // puts it in Fetch Goals Saga and is assigned fetchGoals Function
     }
@@ -61,7 +76,14 @@ function* postGoals(action) {
         console.log('Post Goals has an error', error)
     }
 };
-
+function* postNewExpense(action){
+    try {
+        yield axios.post('/api/goal/budget', action.payload)
+    }
+    catch (error) {
+        console.log('Post New Expense has an error', error)
+    }
+}
 
 function* updateGoal(action){
     try {
@@ -81,13 +103,9 @@ function* deleteActiveGoal(action){
     }
 }
 
-
-function* deleteGoal(action){
+function* deleteCompletedGoal(action){
     try{
-        yield axios.delete(`/api/goal/${action.payload}`);
-        yield put({
-            type: 'FETCH_COMPLETED_GOALS',
-        });
+        yield axios.delete(`/api/goal/${action.payload.id}`);
     }
     catch(error){
         console.log('DELETE error')     
@@ -98,9 +116,11 @@ function* deleteGoal(action){
 export default function* goalSaga(){
     yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
+    yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
     yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal);
     yield takeLatest('DELETE_ACTIVE_GOAL', deleteActiveGoal)
-    yield takeLatest('DELETE_GOAL', deleteGoal);
+    yield takeLatest('DELETE_COMPLETED_GOAL', deleteCompletedGoal);
+    yield takeLatest('POST_NEW_EXPENSE', postNewExpense);
 }

@@ -8,6 +8,7 @@ import selectGoal from './journalSelectGoal.reducer';
 import journalPosts from './journalPosts.reducer';
 import activeGoals from './activeGoals.reducer';
 import activeGoalDetails from './viewActiveGoalDetails.reducer';
+import lastGoal from './lastGoal.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   activeGoals, // will hold all goals that are set to false via db
   selectGoal,  // will gold the current active goals that will be shown on the dropdown on the journal post
   activeGoalDetails, // will hold information pertaining to an active goal
+  lastGoal //Will grab the most recent goal that was entered into the database for the budget page
 });
 
 export default rootReducer;

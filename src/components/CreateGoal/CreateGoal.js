@@ -1,45 +1,58 @@
-import React from "react";
+import React, {useState} from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
-import { useDispatch } from "react-redux";
-import "./styles.css";
+import { useSelector, useDispatch } from "react-redux";
+import Expenses from '../CreateGoal/Expenses';
 
-
-
-export default function CreateGoal () {
-
+export default function CreateGoal() {
     const history = useHistory();
 
-    const [state, setState] = React.useState({ value: null });
+    //const [state, setState] = React.useState({ value: null });
+    const [reasons, setReasons] = useState("");
     const [goal, setGoal] = useState("");
-    const [notes, setNotes] = useState("");
-    const [price, setPrice] = useState("");
-    const [expense, setExpense] = useState("");
+    const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
+  
     const dispatch = useDispatch();
 
-    const handleChange = (value) => {
-        setState({ value }); 
-    };
+    const submitGoal = () => {
+        history.push('/activegoals');
+    }
 
-    const handleAddRow =()=>{
-        console.log('Am i working')
-        return(
-            <>
-            <div>
-                <tbody>
-                    <td><TextField/></td>
-                    <td><TextField/></td>
-                    <td><TextField/></td>
-                </tbody>
-            </div>
-            </>
-            
-        )
+
+    // Toggle the Add Expenses Button (we need to make this untoggleable later)
+    const addExpenses = () => {
+        setAddExpensesButtonClick(!addExpensesButtonClick);
+    }
+    const submitExpenses = () => {
+        if (addExpensesButtonClick) {
+            return;
+        }
+        else {
+            dispatch({
+                type: "POST_GOALS",
+                payload:
+                {
+                    name: goal,
+                    reasons: reasons,
+                }
+            });
+            //Render the Expenses after ADD EXPENSES button is clicked
+            return (
+                <div>
+                    <Expenses />
+                    <Button 
+                        onClick={submitGoal}
+                        variant="contained"
+                    >
+                        Submit Goal
+                    </Button>
+                </div>
+            )
+        }
     }
 
     const postGoals = (event) => {
@@ -64,55 +77,39 @@ export default function CreateGoal () {
 
        
 
-    return (
 
-        
+    return (
         <div className="text-editor">
-            <form name="frm" onSubmit={postGoals} >
-                <p>Goal:</p>  
-                    <TextField 
-                        label="Goal Name"
-                        size="small" 
-                        value={goal}
-                        onChange={(event) => setGoal(event.target.value)}
-                    />
-                <br/>
-                <br/>
-                
-            
-            <EditorToolbar />
-            <ReactQuill className="quill"
-                theme="snow"
-                value={state.value}
-                onChange={handleChange}
-                placeholder={
-                    "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
-                }
-                modules={modules}
-                formats={formats}
-            />
-                <br />
+            <form name="frm" onSubmit={submitExpenses} >
+                <p>Goal:</p>
+                <TextField
+                    label="Goal Name"
+                    size="small"
+                    value={goal}
+                    onChange={(event) => setGoal(event.target.value)}
+                />
                 <br />
                 <br />
             <button>Add Expenses</button>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Expense</th>
-                        <th>Price</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <td>
-                        <TextField 
-                            label="Specific" 
-                            size="small"
-                            value={expense}
-                            onChange={(event) => setExpense(event.target.value)}
-                        />
-                    </td>
+
+
+                <TextField
+                    className="reasonsBox"
+                    placeholder="What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+                    multiline
+                    rows={4}
+                    value={reasons.value}
+                    onChange={(event) => setReasons(event.target.value)}
+                />
+                <Button
+                    variant="contained"
+                    onClick={addExpenses}
+                >
+                    Add Expenses
+                </Button>
+                {submitExpenses()}
+               
 
                     <td>
                         <TextField
@@ -124,28 +121,19 @@ export default function CreateGoal () {
                         />
                     </td>
 
-                    <td>
-                        <TextField 
-                            label="Notes"
-                            size="small"
-                            value={notes}
-                            onChange={(event) => setNotes(event.target.value)}
-                        />
-                    </td>
-                    
-                    <td>
-                        <Button 
-                            onClick={handleAddRow}
-                            size="small" 
-                            variant="contained">Add Row
-                        </Button>
-                    </td>
-                </tbody>
-            </table>
-            <Button type="submit">Add New Goal</Button>
+
+                {/* <EditorToolbar />
+                <ReactQuill className="quill"
+                    theme="snow"
+                    value={state.value}
+                    onChange={handleChange}
+                    placeholder={
+                        "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+                    }
+                    modules={modules}
+                    formats={formats}
+                /> */}
             </form>
         </div>
     );
-    
-    
 };

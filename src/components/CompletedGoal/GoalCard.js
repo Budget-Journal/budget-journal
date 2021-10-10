@@ -30,6 +30,9 @@ export default function GoalCard() {
    const dispatch = useDispatch();
    const classes = useStyles();
    const history = useHistory();
+
+   let goalId;
+
    const completedGoals= useSelector(store => store.completedGoal);
 
   useEffect(() => {
@@ -38,30 +41,40 @@ export default function GoalCard() {
           });
    }, []);
 
-   const handleView = (id) => {
-    console.log('this goal id', id)
-     dispatch({
-       type: 'CARD_VIEW_DETAILS',
-       payload: id
-     });
+    // Will store the goal details in a reducer and fetch all the journal posts related to the goal 
+    // Dispatch data will be displayed in ViewActiveGoalDetails
+  const handleView = (goal) => {
+    console.log('this goal id', goal.id);
+    dispatch({
+      type: 'CARD_VIEW_DETAILS',
+      payload: goal.id
+    })
 
-     dispatch({
-       type: "FETCH_GOAL_JOURNAL_POSTS",
-       payload: id
-     });
+    dispatch({
+      type: "FETCH_GOAL_JOURNAL_POSTS",
+      payload: goal.id
+    })
 
-     history.push('/view')
-   }
+    history.push('/view')
+  }
+
+   // Handles when a user deletes a completed goal
+   const handleDelete =(goal) => {
+    console.log("Goal id", goal.id)
+    goalId = {
+      id: goal.id
+    }
+
     
    
 
    const handleDelete =(id) => {
      confirm('Are you sure?');
-
     dispatch({ 
-     type: "DELETE_GOAL",
-     payload: id,
-   });
+     type: "DELETE_COMPLETED_GOAL",
+     payload: goalId,
+    });
+    history.go(0);
    };
   
     return (
@@ -103,15 +116,21 @@ export default function GoalCard() {
                       
                       </IconButton> 
 
-                      <IconButton aria-label="share">
-                      <VisibilityIcon color="secondary" onClick={() => handleView(detail.id)}> </VisibilityIcon>
-                      
-                      </IconButton>
- 
-                  </CardActions>
-                  </Card>
-                  </Grid>
-      ))}
-      </Grid>
+
+              </CardContent>
+              <CardActions>
+                {/* {" "} */}
+                &nbsp; &nbsp; &nbsp;
+                <Button onClick={() => handleView(goal)}>View</Button>
+                <Button onClick={() => handleDelete(goal)}
+                  
+                  color="secondary"
+                >
+                  Delete
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
   );
 }
