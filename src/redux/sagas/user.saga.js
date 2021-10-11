@@ -24,8 +24,25 @@ function* fetchUser() {
   }
 }
 
+function* postBudget(action){
+  try{
+    yield axios.put('/api/budget', action.payload);
+    console.log("Testing the Budget", action.payload);
+    
+  }catch{
+    console.log("put/Error");
+  }
+}
+
+ 
+    
+
+
+
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('POST_BUDGET', postBudget)
 }
 
 export default userSaga;
