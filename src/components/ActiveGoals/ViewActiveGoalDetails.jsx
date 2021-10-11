@@ -9,7 +9,7 @@ export default function ViewActiveGoalDetails() {
 
     // Obtaining data from reducers
     const goalDetails = useSelector(store => store.activeGoalDetails);
-    // const budgetDetails;
+    const budgetDetails = useSelector(store => store.activeGoalBudgetDetails);
     const journal = useSelector(store => store.journalPosts);
 
 
