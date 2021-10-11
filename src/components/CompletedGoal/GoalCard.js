@@ -44,26 +44,26 @@ export default function GoalCard() {
 
     // Will store the goal details in a reducer and fetch all the journal posts related to the goal 
     // Dispatch data will be displayed in ViewActiveGoalDetails
-  const handleView = (goal) => {
-    console.log('this goal id', goal.id);
+  const handleView = (detail) => {
+    console.log('this goal id', detail.id);
     dispatch({
       type: 'CARD_VIEW_DETAILS',
-      payload: goal.id
+      payload: detail.id
     })
 
     dispatch({
       type: "FETCH_GOAL_JOURNAL_POSTS",
-      payload: goal.id
+      payload: detail.id
     })
 
     history.push('/view')
   }
 
   // Handles when a user deletes a completed goal
-  const handleDelete =(goal) => {
-    console.log("Goal id", goal.id)
+  const handleDelete =(detail) => {
+    console.log("Goal id", detail.id)
     goalId = {
-      id: goal.id
+      id: detail.id
     }
     dispatch({
       type: "DELETE_COMPLETED_GOAL",

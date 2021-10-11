@@ -104,20 +104,26 @@ router.get('/last_goal', (req, res) => {
 
 //GET Card Details
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
+    // TO DO -- If statement to check if there is a budget or not
+    // If there is now budget data for a goal, the below query will fail
     const sqlText = `
         SELECT 
             "budget"."id",
             "budget"."expense",
             "budget"."price",
             "budget"."notes",
-            "goal"."name"
+            "goal"."name",
+            "goal"."user_id"
         FROM "budget"
         JOIN "goal"
             ON "budget"."goal_id" = "goal"."id" 
         WHERE "goal"."id" = $1 AND "user_id" = $2;
     `;
     
-    const sqlParams = [req.params.id, req.user.id];
+    const sqlParams = [
+        req.params.id, 
+        req.user.id
+    ];
     
         pool.query(sqlText, sqlParams).then(result => {
             console.log('result', result.rows)
