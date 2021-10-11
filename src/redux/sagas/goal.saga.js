@@ -51,7 +51,7 @@ function* fetchLastGoal(){
 function* cardViewDetails(action) {
     try{
         const cardDetails = yield axios.get(`/api/goal/details/${action.payload}`)
-        console.log('WHERES MY STUFF*******', cardDetails)
+        console.log('Card Details', cardDetails)
         yield put ({ 
             type: 'SET_CARD_DETAILS', 
             payload: cardDetails.data})
@@ -65,7 +65,6 @@ function* postGoals(action) {
     try{
         yield axios.post('/api/goal', action.payload)
         // Takes information retrieved from DB
-        // Why do we have this?
         yield put({ 
             type: 'FETCH_LAST_GOAL',
             payload: action.payload

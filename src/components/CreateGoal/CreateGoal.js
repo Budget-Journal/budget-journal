@@ -54,27 +54,6 @@ export default function CreateGoal() {
             )
         }
     }
-
-    const postGoals = (event) => {
-        if (goal == "" || state == "" || expense == "" || price == "" || notes == "") { 
-            alert('Please fill in all inputs');
-            return false;
-        };
-        dispatch({
-            type: "POST_GOALS",
-            payload: {
-                name: goal,
-                reasons: state.value,
-                expense: expense,
-                price: price,
-                notes: notes
-            },
-        });
-
-        history.push('/activegoals')
-        
-    };
-
        
 
 
@@ -90,9 +69,6 @@ export default function CreateGoal() {
                 />
                 <br />
                 <br />
-            <button>Add Expenses</button>
-
-
 
                 <TextField
                     className="reasonsBox"
@@ -111,7 +87,7 @@ export default function CreateGoal() {
                 {submitExpenses()}
                
 
-                    <td>
+                    {/* <td>
                         <TextField
                             label="Price"
                             size="small"
@@ -119,7 +95,7 @@ export default function CreateGoal() {
                             value={price}
                             onChange={(event) => setPrice(event.target.value)}
                         />
-                    </td>
+                    </td> */}
 
 
                 {/* <EditorToolbar />

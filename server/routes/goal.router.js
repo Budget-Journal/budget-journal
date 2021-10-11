@@ -52,14 +52,17 @@ router.get('/active', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const sqlText = `
         SELECT * FROM "goal"
-        JOIN "budget" 
-            ON "goal".id = "budget".goal_id
-        WHERE "completed" = FALSE
+        WHERE "completed" = FALSE AND "user_id" = $1;
     `;
-    pool.query(sqlText).then(result => {
+
+    const sqlParams = [
+        req.user.id
+    ]
+
+    pool.query(sqlText, sqlParams).then(result => {
         res.send(result.rows);
     }).catch(error => {
-        console.log('GET budget Error', error)
+        console.log('GET active goals Error', error)
         res.sendStatus(500)
     })
 });
@@ -68,11 +71,14 @@ router.get('/completed', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const sqlText = `
         SELECT * FROM "goal"
-        JOIN "budget" 
-            ON "goal".id = "budget".goal_id
-        WHERE "completed" = TRUE
+        WHERE "completed" = TRUE AND "user_id" = $1;
     `;
-    pool.query(sqlText).then(result => {
+
+    const sqlParams = [
+        req.user.id
+    ]
+
+    pool.query(sqlText, sqlParams).then(result => {
         res.send(result.rows);
     }).catch(error => {
         console.log('GET budget Error', error)
@@ -98,8 +104,6 @@ router.get('/last_goal', (req, res) => {
 
 //GET Card Details
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
-    const sqlParams = [req.params.id];
-    console.log("Goal id", sqlParams)
     const sqlText = `
         SELECT 
             "budget"."id",
@@ -110,8 +114,10 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
         FROM "budget"
         JOIN "goal"
             ON "budget"."goal_id" = "goal"."id" 
-        WHERE "goal"."id" = $1;
-        `;
+        WHERE "goal"."id" = $1 AND "user_id" = $2;
+    `;
+    
+    const sqlParams = [req.params.id, req.user.id];
     
         pool.query(sqlText, sqlParams).then(result => {
             console.log('result', result.rows)
@@ -173,7 +179,8 @@ router.post('/budget', rejectUnauthenticated, (req, res) => {
         console.error("Creating Budget Failed", error);
         res.sendStatus(500);
     })
-}); // Skadoosh dis stuf wurk; gg if you find this
+}); // Skadoosh dis stuf wurk; gg if you find this // update: it did'nt work
 
 
 module.exports = router;
+
