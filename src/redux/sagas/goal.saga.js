@@ -108,7 +108,7 @@ function* deleteCompletedGoal(action){
     }
     catch(error){
         console.log('DELETE error')     
-}
+    }
 };
 
 

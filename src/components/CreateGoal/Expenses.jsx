@@ -1,16 +1,20 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
 
-export default function Expenses(){
+
+//Array to hold each expense price
+//This needs to be outside the function to work
+let totalExpenseCost = [];
+
+export default function Expenses() {
     const dispatch = useDispatch();
 
     const lastGoal = useSelector(store => store.lastGoal);
-    console.log('lastGoal is***', lastGoal)
+
     // Extract goalId out of array so this work in payload
     let goalId = lastGoal[0];
-    console.log('*****', goalId)
-    
+
     // Empty Data for goal form (expense, price, notes)
     let data = [{}];
 
@@ -53,14 +57,30 @@ export default function Expenses(){
         // Create new array to avoid mutating the state 
         const newGoalsData = [...goalData, newGoalData];
         setGoalData(newGoalsData);
-        
+
         newGoalData.goalId = goalId
-        console.log('******', newGoalData);
+
+        // Push price into totalExpenseCost array as a number
+        totalExpenseCost.push(parseInt(newGoalData.price))
 
         dispatch({
             type: "POST_NEW_EXPENSE",
             payload: newGoalData
         });
+    }
+
+    // function to add each price to the total cost array
+    function addExpenses(array){
+        let sum = 0;
+        for (let i = 0; i < array.length; i++){
+            sum = sum + array[i]
+        }
+        return sum;
+    }
+
+    // Delete expense for the expense table
+    function deleteExpense(id){
+        console.log('DELETE BUTTON WORKS');
     }
 
     return (
@@ -74,15 +94,28 @@ export default function Expenses(){
                     </tr>
                 </thead>
                 <tbody>
-                    {goalData.map((data) => (
-                        <tr>
+                    {goalData.map((data, i) => (
+                        <tr key={i}>
                             <td className="expenseTableData">{data.expense}</td>
                             <td className="expenseTableData">{data.price}</td>
                             <td className="expenseTableData">{data.notes}</td>
+                            <td>
+                                <Button
+                                    onClick={() => deleteExpense(i)}
+                                    variant="contained"
+                                    color="secondary"
+                                >
+                                    DELETE
+                                </Button>
+                            </td>
                         </tr>
                     ))}
+                    <tr>
+                        <td>Total Expense Cost:</td>
+                        <td>{addExpenses(totalExpenseCost)}</td>
+                    </tr>
                 </tbody>
-                
+
             </table>
             <div>
                 <TextField
