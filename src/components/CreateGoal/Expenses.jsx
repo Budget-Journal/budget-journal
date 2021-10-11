@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
 
@@ -78,6 +78,11 @@ export default function Expenses() {
         return sum;
     }
 
+    // Delete expense for the expense table
+    function deleteExpense(id){
+        console.log('DELETE BUTTON WORKS');
+    }
+
     return (
         <div>
             <table class="expenseTable">
@@ -89,11 +94,20 @@ export default function Expenses() {
                     </tr>
                 </thead>
                 <tbody>
-                    {goalData.map((data) => (
-                        <tr>
+                    {goalData.map((data, i) => (
+                        <tr key={i}>
                             <td className="expenseTableData">{data.expense}</td>
                             <td className="expenseTableData">{data.price}</td>
                             <td className="expenseTableData">{data.notes}</td>
+                            <td>
+                                <Button
+                                    onClick={() => deleteExpense(i)}
+                                    variant="contained"
+                                    color="secondary"
+                                >
+                                    DELETE
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                     <tr>
