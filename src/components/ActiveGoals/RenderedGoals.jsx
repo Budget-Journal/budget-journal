@@ -30,6 +30,11 @@ export default function RenderedGoals({goal, index}) {
         });
 
         dispatch({
+            type: "FETCH_ACTIVE_BUDGET_DETAILS",
+            payload: goal.id
+        })
+
+        dispatch({
             type: "FETCH_GOAL_JOURNAL_POSTS",
             payload: goal.id
         })
