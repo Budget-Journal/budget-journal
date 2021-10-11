@@ -5,6 +5,8 @@ import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 //Material UI Imports
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -20,8 +22,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 //End Material UI Imports
 
-
-
+const useStyles = makeStyles({
+    gridContainer: {
+      paddingLeft: "50px",
+      paddingRight: "50px"
+    }
+  });
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -33,86 +39,84 @@ const ExpandMore = styled((props) => {
     }),
   }));
 
-function GoalCardView() {
-    const [expanded, setExpanded] = React.useState(false);
 
+  
+export default function GoalCardView() {
+    const [expanded, setExpanded] = React.useState(false);
+    const classes = useStyles();
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
     // Setting reducers to variables
     const details = useSelector(store => store.details);
     console.log("Goal details", details);
+    console.log("Goal name", details[0].name);
     const journal = useSelector(store => store.journalPosts);
     console.log("Journal Entries related to this goal", journal);
 
     
     return (
-        <div>
-            {details.map(detail => (
-                <div>
-                     <Card  sx={{width: '250%'}}>
-                        <CardHeader
-                            avatar={
-                            <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
-                            }
-                            action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon />
-                            </IconButton>
-                            }
-                            title={detail.name}
-                            subheader="Completed Goal"
-                        />
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"
-                            alt="Paella dish"
-                        />
-                        <CardContent>
-                            <Typography variant="body2" color="text.secondary">
-                            Expense: {detail.expense}
-                            <br />
-                            Price: ${detail.price}
-                            <br />
-                            Notes: {detail.notes}
-                            </Typography>
-                        </CardContent>
-                        <CardActions disableSpacing>
+      <Grid container className={classes.gridContainer}>
+        <Grid item xs={11.5}>
+          <Card>
+              <CardHeader
+                  avatar={
+                  <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
+                  }
+                  action={
+                  <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                  </IconButton>
+                  }
+                  title={details[0].name}
+                  subheader="Completed Goal"
+              />
+              <CardMedia
+                  component="img"
+                  height="194"
+                  image="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"
+                  alt="Paella dish"
+              />
+              <CardContent>
+                {details.map(detail => (
+                    <Typography variant="body2" color="text.secondary">
+                      Expense: {detail.expense}
+                      <br />
+                      Price: ${detail.price}
+                      <br />
+                      Notes: {detail.notes}
+                    </Typography>
+                ))}
+              </CardContent>
+              <CardActions disableSpacing>
 
-                            <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
-                            </IconButton>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
 
-                            <IconButton aria-label="share">
-                            <ShareIcon />
-                            </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
 
-                            <ExpandMore
-                            expand={expanded}
-                            onClick={handleExpandClick}
-                            aria-expanded={expanded}
-                            aria-label="show more"
-                            >
-                            <ExpandMoreIcon />
-                            </ExpandMore>
-                        </CardActions>
-                        <Collapse in={expanded} timeout="auto" unmountOnExit>
-                            <CardContent>
-                            <Typography paragraph>
-                               <JournalPosts journal = {journal}/>
-                            </Typography>
-                            </CardContent>
-                        </Collapse>
-                        </Card>
-                </div>
-            ))}
-
-            
-
-            
-        </div>
+                <ExpandMore
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </ExpandMore>
+              </CardActions>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                <Typography paragraph>
+                    <JournalPosts journal = {journal}/>
+                </Typography>
+                </CardContent>
+              </Collapse>
+            </Card>
+        </Grid>
+      </Grid>
     )
 }
 
-export default GoalCardView;
