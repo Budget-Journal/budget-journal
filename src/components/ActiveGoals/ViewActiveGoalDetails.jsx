@@ -4,7 +4,7 @@ import { Card, CardContent, Typography, TextField, Button } from "@mui/material"
 
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
-import { AddRoadTwoTone, IndeterminateCheckBoxTwoTone } from "@mui/icons-material";
+
 
 
 export default function ViewActiveGoalDetails() {
@@ -12,7 +12,7 @@ export default function ViewActiveGoalDetails() {
 
     // Obtaining data from reducers
     const goalDetails = useSelector(store => store.activeGoalDetails);
-    const budgetDetails = useSelector(store => store.activeGoalBudgetDetails);
+    const budgetDetails = useSelector(store => store.activeGoalBudgetReducer);
     const journal = useSelector(store => store.journalPosts);
     console.log('Budget Detail Reducer', budgetDetails);
 

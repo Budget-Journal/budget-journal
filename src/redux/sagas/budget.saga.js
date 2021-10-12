@@ -19,7 +19,6 @@ export default function* budgetSaga() {
     }
 
     function* newBudget(action) {
-        console.log('My super sweeeeeet budget', action.payload);
         yield axios.put(`/api/budget/${action.payload.id}`, action.payload);
     }
 

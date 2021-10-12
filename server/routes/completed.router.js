@@ -11,7 +11,6 @@ const {
 
 // Handles changing a goal from incomplete to complete
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-    console.log("*Goal id*********", req.params.id);
     const sqlText = `
         UPDATE "goal"
         SET "completed" = TRUE
