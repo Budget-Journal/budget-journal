@@ -1,20 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, {useState} from "react";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
 
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
-import { IndeterminateCheckBoxTwoTone } from "@mui/icons-material";
+import { AddRoadTwoTone, IndeterminateCheckBoxTwoTone } from "@mui/icons-material";
 
 
 export default function ViewActiveGoalDetails() {
+    const dispatch = useDispatch();
 
     // Obtaining data from reducers
     const goalDetails = useSelector(store => store.activeGoalDetails);
     const budgetDetails = useSelector(store => store.activeGoalBudgetDetails);
     const journal = useSelector(store => store.journalPosts);
-    console.log("Budget details", budgetDetails);
-
+    console.log('Budget Detail Reducer', budgetDetails);
 
     // Local state to handle any edits a user makes to their goals
     // State begins as their previous information
@@ -35,15 +35,11 @@ export default function ViewActiveGoalDetails() {
     }
 
 
-    const handleExpenseChange = (e, index) => {
-        console.log("STUFF ************************", e, index);
-        budgetDetails[index]
-
-
-        // dispatch({
-        //     type: "UPDATE_EXPENSE_WOOT",
-        //     payload: [...expense, [e.target.name]: e.target.value]
-        // })
+    const addExpenseRow = () => {
+        console.log('Add Expense Row')
+        dispatch({
+            type: "ADD_EXPENSE"
+        })
     }
 
     return(
@@ -80,20 +76,12 @@ export default function ViewActiveGoalDetails() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><TextField value={budgetDetails} /></td>
-                        </tr>
-                        {budgetDetails.map((detail, index) => (
-                            <BudgetTable goalEdits={goalEdits} goal={goalDetails} detail={detail} index={index} />
-                            // <tr key={index}>
-                            //     <td><TextField value={detail.expense} onChange={(e) => handleExpenseChange(e, index)}/></td>
-                            //     <td><TextField value={detail.price} /></td>
-                            //     <td><TextField value={detail.notes} /></td>
-                            // </tr>
+                        {budgetDetails.map(detail => (
+                            <BudgetTable goal={goalDetails} detail={detail} />
                         ))}
                     </tbody>
                 </table>
-                <Button>New Expense</Button> 
+                <Button onClick={(() => addExpenseRow())}>New Expense</Button> 
                 <br />
                 <Button type="submit">Submit Changes</Button>
        

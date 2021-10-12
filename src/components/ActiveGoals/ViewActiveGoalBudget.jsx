@@ -1,56 +1,47 @@
-import React, {useState} from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
+import React from 'react';
+import { useDispatch } from "react-redux";
+import { TextField, Button } from "@mui/material";
 
 export default function ViewActiveGoalBudget (props) {
     const dispatch = useDispatch();
 
-    const [budget, setBudget] = useState({
-        expense: props.detail.expense,
-        price: props.detail.price,
-        notes: props.detail.notes
-    })
-
     const handleBudgetEdits = (e) => {
-        
-        setBudget({
-            ...budget, [e.target.name]: e.target.value
-        })
-
         dispatch({
-            type: "NEW_BUDGET",
+            type: "UPDATE_BUDGET",
             payload: {
-                id: props.detail.id,
-                goal: props.goalDetails,
-                expense: budget
+              ...props.detail, [e.target.name]: e.target.value
             }
         })
     }
 
+    const deleteExpense = (id) => {
+        console.log('Expense to delete', id);
+    }
+
     return (
-            <tr key={props.index}>
+            <tr key={props.detail.id}>
                 <td>
                     <TextField
                         name="expense"
-                        value={budget.expense}
-                        onChange={handleBudgetEdits}
+                        value={props.detail.expense}
+                        onChange={(e) => handleBudgetEdits(e)}
                     />
                 </td>
                 <td>
                     <TextField
                         name="price"
-                        value={budget.price}
+                        value={props.detail.price}
                         onChange={handleBudgetEdits}
                     />
                 </td>
                 <td>
                     <TextField
                         name="notes"
-                        value={budget.notes}
+                        value={props.detail.notes}
                         onChange={handleBudgetEdits}
                     />
                 </td>
-                <td><Button>Delete</Button></td>
+                <td><Button onClick={() => deleteExpense(props.detail.id)}>Delete</Button></td>
             </tr>
     )
 }
