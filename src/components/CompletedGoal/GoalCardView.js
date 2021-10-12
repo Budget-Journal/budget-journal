@@ -50,7 +50,6 @@ export default function GoalCardView() {
     // Setting reducers to variables
     const details = useSelector(store => store.details);
     console.log("Goal details", details);
-    console.log("Goal name", details[0].name);
     const journal = useSelector(store => store.journalPosts);
     console.log("Journal Entries related to this goal", journal);
 
@@ -68,7 +67,7 @@ export default function GoalCardView() {
                       <MoreVertIcon />
                   </IconButton>
                   }
-                  title={details[0].name}
+                  title={details.name}
                   subheader="Completed Goal"
               />
               <CardMedia

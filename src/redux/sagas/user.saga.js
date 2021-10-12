@@ -19,6 +19,7 @@ function* fetchUser() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
+    console.log('SET USER ******', response.data);
   } catch (error) {
     console.log('User get request failed', error);
   }
@@ -28,6 +29,7 @@ function* postBudget(action){
   try{
     yield axios.put('/api/budget', action.payload);
     console.log("Testing the Budget", action.payload);
+    yield put({type: 'FETCH_USER'})
     
   }catch{
     console.log("put/Error");

@@ -15,7 +15,6 @@ export default function CreateGoal() {
     const [reasons, setReasons] = useState("");
     const [goal, setGoal] = useState("");
     const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
-  
     const dispatch = useDispatch();
 
     const submitGoal = () => {
@@ -26,6 +25,7 @@ export default function CreateGoal() {
     // Toggle the Add Expenses Button (we need to make this untoggleable later)
     const addExpenses = () => {
         setAddExpensesButtonClick(!addExpensesButtonClick);
+
     }
     const submitExpenses = () => {
         if (addExpensesButtonClick) {
