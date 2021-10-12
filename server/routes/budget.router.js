@@ -14,10 +14,10 @@ const {
  */
 
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
-    console.log('/budget/details Goal id', req.params.id);
 
     const sqlText = `
         SELECT
+            "budget"."id",
             "budget"."expense",
             "budget"."price",
             "budget"."notes"
@@ -33,12 +33,15 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     ]
 
     pool.query(sqlText, sqlParams).then(result => {
-        console.log('Budget details', result.rows);
         res.send(result.rows);
     }).catch(error => {
         console.error('GET Error fetching budget details', error);
         res.sendStatus(500);
     })
+})
+
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('Expense to be changed', req.body);
 })
 
 

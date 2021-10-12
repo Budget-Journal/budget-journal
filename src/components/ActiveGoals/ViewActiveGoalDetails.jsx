@@ -4,6 +4,7 @@ import { Card, CardContent, Typography, TextField, Button } from "@mui/material"
 
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
+import { IndeterminateCheckBoxTwoTone } from "@mui/icons-material";
 
 
 export default function ViewActiveGoalDetails() {
@@ -12,8 +13,7 @@ export default function ViewActiveGoalDetails() {
     const goalDetails = useSelector(store => store.activeGoalDetails);
     const budgetDetails = useSelector(store => store.activeGoalBudgetDetails);
     const journal = useSelector(store => store.journalPosts);
-
-
+    console.log("Budget details", budgetDetails);
 
 
     // Local state to handle any edits a user makes to their goals
@@ -23,28 +23,28 @@ export default function ViewActiveGoalDetails() {
         reasons: goalDetails.reasons 
     })
 
-    const [budgetEdits, setBudgetEdits] = useState({});
-    console.log("budget", budgetEdits)
-
     const handleGoalEdits = (e) => {
         setGoalEdits({
             ...goalEdits, [e.target.name]: e.target.value
         })
     }
 
-    // const handleBudgetEdits = (e) => {
-    //     setBudgetEdits({
-    //         ...budgetEdits, [e.target.name]: e.target.value
-    //     })
-    // }
-
     const submitChanges = (e) => {
         e.preventDefault(e);
         console.log('Goal edits', goalEdits);
-        console.log('Budget edits', budgetEdits);
     }
 
 
+    const handleExpenseChange = (e, index) => {
+        console.log("STUFF ************************", e, index);
+        budgetDetails[index]
+
+
+        // dispatch({
+        //     type: "UPDATE_EXPENSE_WOOT",
+        //     payload: [...expense, [e.target.name]: e.target.value]
+        // })
+    }
 
     return(
         <div>
@@ -80,13 +80,23 @@ export default function ViewActiveGoalDetails() {
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td><TextField value={budgetDetails} /></td>
+                        </tr>
                         {budgetDetails.map((detail, index) => (
-                            <BudgetTable goal={goalDetails} detail={detail} index={index} />
-                           
+                            <BudgetTable goalEdits={goalEdits} goal={goalDetails} detail={detail} index={index} />
+                            // <tr key={index}>
+                            //     <td><TextField value={detail.expense} onChange={(e) => handleExpenseChange(e, index)}/></td>
+                            //     <td><TextField value={detail.price} /></td>
+                            //     <td><TextField value={detail.notes} /></td>
+                            // </tr>
                         ))}
                     </tbody>
                 </table>
+                <Button>New Expense</Button> 
+                <br />
                 <Button type="submit">Submit Changes</Button>
+       
             </form>
             <div> 
                 <JournalPosts journal={journal}/> 

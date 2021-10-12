@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
 
 export default function ViewActiveGoalBudget (props) {
+    const dispatch = useDispatch();
+
     const [budget, setBudget] = useState({
         expense: props.detail.expense,
         price: props.detail.price,
@@ -9,13 +12,20 @@ export default function ViewActiveGoalBudget (props) {
     })
 
     const handleBudgetEdits = (e) => {
+        
         setBudget({
             ...budget, [e.target.name]: e.target.value
         })
-    }
 
-    console.log("Goal", props.goal.name)
-    console.log("Budget", budget)
+        dispatch({
+            type: "NEW_BUDGET",
+            payload: {
+                id: props.detail.id,
+                goal: props.goalDetails,
+                expense: budget
+            }
+        })
+    }
 
     return (
             <tr key={props.index}>
@@ -40,6 +50,7 @@ export default function ViewActiveGoalBudget (props) {
                         onChange={handleBudgetEdits}
                     />
                 </td>
+                <td><Button>Delete</Button></td>
             </tr>
     )
 }

@@ -3,6 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 export default function* budgetSaga() {
     yield takeLatest("FETCH_ACTIVE_BUDGET_DETAILS", fetchActiveBudgetDetails);
+    yield takeLatest("NEW_BUDGET", newBudget)
 
     function* fetchActiveBudgetDetails(action) {
         try {
@@ -15,6 +16,11 @@ export default function* budgetSaga() {
         } catch (error) {
             console.error('Failed to fetch budget details', error)
         }
+    }
+
+    function* newBudget(action) {
+        console.log('My super sweeeeeet budget', action.payload);
+        yield axios.put(`/api/budget/${action.payload.id}`, action.payload);
     }
 
 
