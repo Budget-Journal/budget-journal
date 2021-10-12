@@ -18,7 +18,9 @@ export default function NoGoals() {
                total_budget: budget 
             },
         });
+        setBudget("");
     }
+    
 
     const handleBudget = (event) =>{
         setBudget(event.target.value);
