@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 function Nav() {
   const user = useSelector((store) => store.user);
-
+  
   return (
     <div className="nav"> 
     
@@ -21,6 +21,7 @@ function Nav() {
       <div className="nav_left">
      
         <img src={Logo1} alt="" />
+        
     </div>
       </div>
       </Link>
@@ -50,7 +51,8 @@ function Nav() {
             {/* <Link className="navLink" to="/accomplishedgoals">
               
             </Link> */}
-            <h1 className="user">{user ? <h2 className="userLog"> {user.username}</h2> : <h3>No user logged-in</h3>}</h1>
+            <h1 className="user">{user ? <h2 className="userLog"> {user.username} <br/><br/>$ {user.total_budget}</h2> : <h3>No user logged-in</h3>}</h1>
+           
             <LogOutButton className="navLink" />
           </>
         )}

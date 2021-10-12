@@ -87,7 +87,7 @@ export default function GoalCard() {
               }
               action={
                 <IconButton aria-label="settings">
-                  <DeleteOutlineIcon color="error" onClick={() => handleDelete(detail.id)} />
+                  <DeleteOutlineIcon color="error" onClick={() => handleDelete(detail)} />
                 </IconButton>
               }
               title={detail.name}
@@ -116,7 +116,7 @@ export default function GoalCard() {
               {/* {" "} */}
               &nbsp; &nbsp; &nbsp;
               <Button onClick={() => handleView(detail)}>View</Button>
-              <Button onClick={() => handleDelete(detail)} color="secondary">Delete</Button>
+              {/* <Button onClick={() => handleDelete(detail)} color="secondary">Delete</Button> */}
             </CardActions>
           </Card>
         </Grid>

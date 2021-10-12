@@ -105,6 +105,7 @@ function* deleteActiveGoal(action){
 function* deleteCompletedGoal(action){
     try{
         yield axios.delete(`/api/goal/${action.payload.id}`);
+        yield put({ type: 'FETCH_COMPLETED_GOALS'})
     }
     catch(error){
         console.log('DELETE error')     

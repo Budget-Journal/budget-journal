@@ -2,11 +2,36 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
+
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 /*
     Handle the creation of a new budget
     Handle editing an existing budget
 */
 
+
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('TESTING ******', req.body);
+    const queryText = `
+    UPDATE "user" 
+    SET "total_budget" = $1
+    WHERE "user".id=$2
+    `;
+    let queryParams= [
+        req.body.total_budget, 
+        req.user.id
+    ];
+    pool.query(queryText, queryParams).then(result =>{
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error in Put BUDGET AMT', error);
+        res.sendStatus(500);
+    })
+  })
 /**
  * GET route template
  */
