@@ -7,11 +7,12 @@ export default function ViewActiveGoalBudget (props) {
 
     const handleBudgetEdits = (e) => {
         dispatch({
-            type: "UPDATE_BUDGET",
+            type: "UPDATE_EXPENSE",
             payload: 
             {
                 id: props.detail.id,
-                update: { ...props.detail, [e.target.name]: e.target.value}
+                update: { ...props.detail, [e.target.name]: e.target.value},
+                goal_id: props.goal.id
             }
         })
     }

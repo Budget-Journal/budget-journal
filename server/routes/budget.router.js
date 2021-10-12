@@ -42,17 +42,49 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     console.log('Expense to be changed', req.body);
+
+    const sqlText = `
+        UPDATE "budget"
+        SET "expense", "price", "notes" = $1, $2, $3
+        WHERE "id" = $4
+    `;
+
+    const sqlParams = [
+        req.body.update.expense,        // $1
+        req.body.update.price,          // $2
+        req.body.update.notes,          // $3
+        req.body.update.id              // $4
+    ]
+    
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error UPDATING expenses', error);
+        res.sendStatus(500);
+    })
 })
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log('payload', req.body);
 
-/**
- * POST route template
- */
-// router.post('/', (req, res) => {
-//     // POST route code here
-//     let query = `INSERT INTO "budget" ("expense", "price", "notes")
-//                  VALUE($1, $2, $3)`;
-//     pool.query(query, [])
-// });
+    const sqlText = `
+        INSERT INTO "budget" ("goal_id", "expense", "price", "notes")
+        VALUES ($1, $2, $3, $4)
+    `;
+
+    const sqlParams = [
+        req.body.goal_id,
+        req.body.update.expense,
+        req.body.update.price,
+        req.body.update.notes
+    ]
+
+    pool.query(sqlText, sqlParams).then(res => {
+        res.send(201);
+    }).catch(error => {
+        console.error('Error creating new expense', error);
+        res.send(500);
+    })
+});
 
 module.exports = router;

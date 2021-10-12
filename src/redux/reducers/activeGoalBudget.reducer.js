@@ -1,11 +1,9 @@
-
-
 const activeGoalBudgetReducer = (state=[], action) => {
     switch (action.type) {
         case "SET_ACTIVE_BUDGET_DETAILS":
             return action.payload;
 
-        case "UPDATE_BUDGET":
+        case "UPDATE_EXPENSE":
             return state.map(item => {
                 if (item.id === action.payload.id) {
                     return {
@@ -21,8 +19,8 @@ const activeGoalBudgetReducer = (state=[], action) => {
                 ...state, 
                 {
                     expense: "",
-                    notes: "",
-                    price: ""
+                    price: Number(""),
+                    notes: ""
                 }
             ];
 

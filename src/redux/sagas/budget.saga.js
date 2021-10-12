@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 export default function* budgetSaga() {
     yield takeLatest("FETCH_ACTIVE_BUDGET_DETAILS", fetchActiveBudgetDetails);
-    yield takeLatest("NEW_BUDGET", newBudget)
+    yield takeLatest("UPDATE_EXPENSE", updateExpense);
 
     function* fetchActiveBudgetDetails(action) {
         try {
@@ -18,8 +18,12 @@ export default function* budgetSaga() {
         }
     }
 
-    function* newBudget(action) {
-        yield axios.put(`/api/budget/${action.payload.id}`, action.payload);
+    function* updateExpense(action) {
+        if (action.payload.id === undefined) {
+           yield axios.post('/api/budget', action.payload);
+        } else {
+            yield axios.put(`/api/budget/${action.payload.id}`, action.payload);
+        }
     }
 
 
