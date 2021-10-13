@@ -10,6 +10,7 @@ const {
     Handle editing an existing budget
 */
 
+
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
 
     const sqlText = `
@@ -79,5 +80,26 @@ router.post('/new_expense', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 });
+
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('TESTING ******', req.body);
+    const queryText = `
+    UPDATE "user" 
+    SET "total_budget" = $1
+    WHERE "user".id=$2
+    `;
+    let queryParams= [
+        req.body.total_budget, 
+        req.user.id
+    ];
+    pool.query(queryText, queryParams).then(result =>{
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error in Put BUDGET AMT', error);
+        res.sendStatus(500);
+    })
+  })
+
 
 module.exports = router;

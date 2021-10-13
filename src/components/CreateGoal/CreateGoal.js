@@ -11,25 +11,16 @@ import Expenses from '../CreateGoal/Expenses';
 export default function CreateGoal() {
     const history = useHistory();
 
-    const [state, setState] = React.useState({ value: null });
+    // const [state, setState] = React.useState({ value: null });
     const [reasons, setReasons] = useState("");
     const [goal, setGoal] = useState("");
     const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
-  
     const dispatch = useDispatch();
-
-    const submitGoal = () => {
-        history.push('/activegoals');
-    }
-
-    const handleChange = (e) => {
-        console.log('Change')
-    }
-
 
     // Toggle the Add Expenses Button (we need to make this untoggleable later)
     const addExpenses = () => {
         setAddExpensesButtonClick(!addExpensesButtonClick);
+
     }
     const submitExpenses = () => {
         if (addExpensesButtonClick) {
@@ -48,12 +39,6 @@ export default function CreateGoal() {
             return (
                 <div>
                     <Expenses />
-                    <Button 
-                        onClick={submitGoal}
-                        variant="contained"
-                    >
-                        Submit Goal
-                    </Button>
                 </div>
             )
         }
@@ -102,7 +87,7 @@ export default function CreateGoal() {
                     </td> */}
 
 
-                <EditorToolbar />
+                {/* <EditorToolbar />
                 <ReactQuill className="quill"
                     theme="snow"
                     value={state.value}
@@ -112,7 +97,7 @@ export default function CreateGoal() {
                     }
                     modules={modules}
                     formats={formats}
-                />
+                /> */}
             </form>
         </div>
     );
