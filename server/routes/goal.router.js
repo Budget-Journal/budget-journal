@@ -191,13 +191,6 @@ router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
     console.log('Data to add to total goal cost', req.body);
     const goalId = req.body.goalId.id
 
-    // const sqlText = `
-    //         INSERT INTO "goal" ("total_goal_cost")
-    //         VALUES ($1)
-    //         WHERE "goal".id = $2 AND "user_id" = $3
-    //         RETURNING id;
-    //     `;
-
     const sqlText = `
             UPDATE "goal"
             SET "total_goal_cost" = $1

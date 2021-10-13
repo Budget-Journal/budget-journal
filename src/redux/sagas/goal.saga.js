@@ -86,7 +86,7 @@ function* postNewExpense(action){
 
 function* putTotalGoalCost(action) {
     try {
-        yield axios.put('/api/goal/total_goal_cost', action.payload)
+        yield axios.put('/api/goal/total_goal_cost', action.payload);
     }
     catch (error) {
         console.log('Post total goal cost has an error', error)
