@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 //Material UI Imports
 import Button  from '@mui/material/Button';
@@ -16,6 +16,8 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 import ViewActiveGoalDetails from "./ViewActiveGoalDetails";
 
 export default function RenderedGoals({goal, index}) {
+
+    console.log('***goal is', goal.total_goal_cost);
 
     // Set hooks to variables
     const dispatch = useDispatch();
@@ -81,7 +83,8 @@ export default function RenderedGoals({goal, index}) {
                             <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
                             } 
                             title={goal.name}
-                            subheader="<Render date here???>"
+                            subheader={goal.total_goal_cost}
+                            
                         />
                         <CardActions>
                             <Button 

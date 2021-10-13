@@ -17,10 +17,6 @@ export default function CreateGoal() {
     const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
     const dispatch = useDispatch();
 
-    const submitGoal = () => {
-        history.push('/activegoals');
-    }
-
 
     // Toggle the Add Expenses Button (we need to make this untoggleable later)
     const addExpenses = () => {
@@ -44,12 +40,6 @@ export default function CreateGoal() {
             return (
                 <div>
                     <Expenses />
-                    <Button 
-                        onClick={submitGoal}
-                        variant="contained"
-                    >
-                        Submit Goal
-                    </Button>
                 </div>
             )
         }

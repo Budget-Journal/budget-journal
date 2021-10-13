@@ -161,7 +161,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/budget', rejectUnauthenticated, (req, res) => {
-    console.log('Data to add too budget', req.body);
+    //console.log('Data to add too budget', req.body);
     //const goalId = result.rows[0].id;
 
     const sqlText = `
@@ -176,7 +176,7 @@ router.post('/budget', rejectUnauthenticated, (req, res) => {
         req.body.price,     // $3
         req.body.notes      // $4
     ]
-        console.log('*******', sqlParams);
+        //console.log('*******', sqlParams);
 
     // Second query creates the budget
     pool.query(sqlText, sqlParams).then(result => {
@@ -186,6 +186,32 @@ router.post('/budget', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 }); // Skadoosh dis stuf wurk; gg if you find this // update: it did'nt work
+
+router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
+    console.log('Data to add to total goal cost', req.body);
+    const goalId = req.body.goalId.id
+
+    const sqlText = `
+            UPDATE "goal"
+            SET "total_goal_cost" = $1
+            WHERE "goal".id = $2 AND "user_id" = $3
+        `;
+
+    console.log('goal id is:',goalId);
+    const sqlParams = [
+        req.body.totalGoalCost,
+        goalId,
+        req.user.id
+    ]
+    console.log('******* SqlParams is:', sqlParams);
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(201)
+    }).catch(error => {
+        console.error("Creating Total Goal Cost Failed", error);
+        res.sendStatus(500);
+    })
+});
 
 
 module.exports = router;

@@ -77,11 +77,21 @@ export default function Expenses() {
         }
         return sum;
     }
+    let totalGoalCost = addExpenses(totalExpenseCost);
+
+    const submitTotalGoalCost = () => {
+        dispatch({
+            type: "PUT_TOTAL_GOAL_COST",
+            payload: { goalId, totalGoalCost }
+        })
+    }
 
     // Delete expense for the expense table
     function deleteExpense(id){
         console.log('DELETE BUTTON WORKS');
     }
+    
+    console.log(totalGoalCost);
 
     return (
         <div>
@@ -134,6 +144,13 @@ export default function Expenses() {
                     onChange={handleAddFormChange}
                 />
                 <Button onClick={handleBudgetSubmit} type="submit" variant="contained">Add Expense</Button>
+                <br />
+                <Button
+                    onClick={submitTotalGoalCost}
+                    variant="contained"
+                >
+                    Submit Goal
+                </Button>
             </div>
         </div>
     )
