@@ -10,9 +10,28 @@ const {
     Handle editing an existing budget
 */
 
+// Update the total budget based on user inputs
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('TESTING ******', req.body);
+    const queryText = `
+        UPDATE "user" 
+        SET "total_budget" = $1
+        WHERE "user".id=$2
+    `;
+    let queryParams = [
+        req.body.total_budget,
+        req.user.id
+    ];
+    pool.query(queryText, queryParams).then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error in Put BUDGET AMT', error);
+        res.sendStatus(500);
+    })
+})
 
+// Fetch all expenses based on goal id
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
-
     const sqlText = `
         SELECT
             "budget"."id",
@@ -39,9 +58,8 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// Update an existing expense based on id 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('Expense to be changed', req.body);
-
     const sqlText = `
         UPDATE "budget"
         SET "expense" = $1, "price" = $2, "notes" = $3
@@ -63,6 +81,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
+// Create a new expense row in the database
 router.post('/new_expense', rejectUnauthenticated, (req, res) => {
     console.log('req.body', req.body);
     const sqlText = `
@@ -81,25 +100,24 @@ router.post('/new_expense', rejectUnauthenticated, (req, res) => {
     })
 });
 
-
-router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('TESTING ******', req.body);
-    const queryText = `
-    UPDATE "user" 
-    SET "total_budget" = $1
-    WHERE "user".id=$2
+// Delete an expense based on id
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        DELETE FROM "budget"
+        WHERE "id" = $1
     `;
-    let queryParams= [
-        req.body.total_budget, 
-        req.user.id
-    ];
-    pool.query(queryText, queryParams).then(result =>{
-        res.sendStatus(201);
+    
+    const sqlParams = [
+        req.params.id,
+    ]
+    
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(200);
     }).catch(error => {
-        console.log('Error in Put BUDGET AMT', error);
+        console.error('Error deleting expense', error);
         res.sendStatus(500);
     })
-  })
+});
 
 
 module.exports = router;
