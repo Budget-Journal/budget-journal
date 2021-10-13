@@ -78,6 +78,10 @@ export default function Expenses() {
         return sum;
     }
 
+    const submitGoal = () => {
+        //
+    }
+
     // Delete expense for the expense table
     function deleteExpense(id){
         console.log('DELETE BUTTON WORKS');
@@ -134,6 +138,13 @@ export default function Expenses() {
                     onChange={handleAddFormChange}
                 />
                 <Button onClick={handleBudgetSubmit} type="submit" variant="contained">Add Expense</Button>
+                <br />
+                <Button
+                    onClick={submitGoal}
+                    variant="contained"
+                >
+                    Submit Goal
+                </Button>
             </div>
         </div>
     )
