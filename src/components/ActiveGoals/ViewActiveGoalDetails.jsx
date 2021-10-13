@@ -56,15 +56,14 @@ export default function ViewActiveGoalDetails() {
 
     return(
         <div>
-
-//             <Card>
-//                 <CardContent>
-//                     <p>{goalDetails.name}</p>
-//                     <p>{goalDetails.price}</p>
-//                     <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
-//                     <p>{goalDetails.notes}</p>
-//                 </CardContent>
-//             </Card>
+             {/* <Card>
+                <CardContent>
+                     <p>{goalDetails.name}</p>
+                    <p>{goalDetails.price}</p>
+                     <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
+                    <p>{goalDetails.notes}</p>
+                 </CardContent>
+            </Card> */}
 
             <form onSubmit={submitChanges}>
                 <TextField
