@@ -19,6 +19,10 @@ export default function ViewActiveGoalBudget (props) {
 
     const deleteExpense = (id) => {
         console.log('Expense to delete', id);
+        dispatch({
+            type: "DELETE_EXPENSE",
+            payload: id
+        })
     };
 
     return (

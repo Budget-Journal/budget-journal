@@ -4,6 +4,7 @@ const router = express.Router();
 const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+
 /*
     Handle the creation of a new budget
     Handle editing an existing budget
@@ -58,30 +59,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     }).catch(error => {
         console.log('Error UPDATING expenses', error);
         res.sendStatus(500);
-    })
-})
-
-router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('payload', req.body);
-
-    const sqlText = `
-        INSERT INTO "budget" ("goal_id", "expense", "price", "notes")
-        VALUES ($1, $2, $3, $4)
-    `;
-
-    const sqlParams = [
-        req.body.goal_id,
-        req.body.update.expense,
-        req.body.update.price,
-        req.body.update.notes
-    ]
-
-    pool.query(sqlText, sqlParams).then(res => {
-        res.sendStatus(201);
-    }).catch(error => {
-        console.error('Error creating new expense', error);
-        res.send(500);
-    })
+    });
 });
 
 router.post('/new_expense', rejectUnauthenticated, (req, res) => {
