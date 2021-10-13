@@ -16,7 +16,7 @@ export default function ViewActiveGoalDetails() {
                 <CardContent>
                     <p>{goalDetails.name}</p>
                     <p>{goalDetails.price}</p>
-                    <p>{goalDetails.reasons}</p>
+                    <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
                     <p>{goalDetails.notes}</p>
                 </CardContent>
             </Card>
