@@ -9,7 +9,9 @@ import journalPosts from './journalPosts.reducer';
 import activeGoals from './activeGoals.reducer';
 import activeGoalDetails from './viewActiveGoalDetails.reducer';
 import lastGoal from './lastGoal.reducer';
+import activeGoalBudgetReducer from './activeGoalBudget.reducer';
 import totalGoalCost from './totalGoalCost.reducer';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -28,8 +30,10 @@ const rootReducer = combineReducers({
   activeGoals, // will hold all goals that are set to false via db
   selectGoal,  // will gold the current active goals that will be shown on the dropdown on the journal post
   activeGoalDetails, // will hold information pertaining to an active goal
+  activeGoalBudgetReducer, // will hold a goals budget table that is displayed when viewed is clicked on RenderedCards
   lastGoal, //Will grab the most recent goal that was entered into the database for the budget page
   totalGoalCost // Will get the total cost of a goal
+
 });
 
 export default rootReducer;

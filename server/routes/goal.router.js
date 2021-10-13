@@ -14,7 +14,6 @@ const {
 */
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('Goal id', req.params.id);
     const sqlText = `
         DELETE FROM "budget"
         WHERE "budget".goal_id = $1
