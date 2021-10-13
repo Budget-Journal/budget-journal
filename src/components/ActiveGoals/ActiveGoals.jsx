@@ -24,7 +24,7 @@ export default function ActiveGoals() {
 
   const activeGoals = useSelector(store => store.activeGoals);
   const lengthOfActiveGoals = activeGoals.length
-  console.log('*******************', lengthOfActiveGoals);
+  console.log('*******************', activeGoals);
 
   useEffect(() => {
     dispatch({
@@ -38,6 +38,7 @@ export default function ActiveGoals() {
     <div>
       {lengthOfActiveGoals <= 0 ?
         <NoGoals />
+        
       :
         <Grid container spacing={4} justify="center" className={classes.gridContainer}>
           {activeGoals.map((goal, index) => (

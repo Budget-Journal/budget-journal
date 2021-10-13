@@ -1,13 +1,25 @@
 import React from "react";
 import "./Sidebar.css";
-import SideBarRow from "./SideBarRow";
 import { useHistory } from "react-router-dom";
-import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+
+//Bottom Navigation
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CelebrationIcon from '@mui/icons-material/Celebration';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import Paper from '@mui/material/Paper';
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import HomeIcon from '@mui/icons-material/Home';
+//End Bottom Navigation
+
 
 function SideBar() {
+  const [value, setValue] = React.useState(0);
+  const ref = React.useRef(null);
+
   const history = useHistory();
 
   const goToActiveGoals = () => {
@@ -26,31 +38,38 @@ function SideBar() {
   };
 
   return (
-    <div className="sidebar">
-      <SideBarRow 
-      Icon={PlaylistAddCheckIcon} 
-      title="Active Goals" 
-      link={goToActiveGoals} />
-      
-      <SideBarRow
-        Icon={AddCircleIcon}
-        title="Create Goal"
-        link={createGoal}
-      />
-      
-      <SideBarRow
-        Icon={MenuBookIcon}
-        title="Journal"
-        link={journal}
-      />
-      <SideBarRow
-        Icon={CelebrationIcon}
-        title=" Accomplished Goals"
-        link={accomplishedGoals}
-      />
-      
-      <hr />
-    </div>
+    <Box sx={{ pb: 7 }} ref={ref}>
+      <CssBaseline />
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction 
+          onClick={goToActiveGoals}
+          label="Active Goals" 
+          icon={<HomeIcon />} />
+
+          <BottomNavigationAction 
+          onClick={createGoal}
+          label="Create a Goal" 
+          icon={<AddToPhotosIcon />} />
+
+          <BottomNavigationAction 
+          onClick={journal}
+          label="Journal" 
+          icon={<MenuBookIcon />} />
+
+          <BottomNavigationAction 
+          onClick={accomplishedGoals}
+          label="Accomplished Goals" 
+          icon={<AssignmentTurnedInIcon />} />
+        </BottomNavigation>
+      </Paper>
+    </Box>
   );
 }
 
