@@ -11,7 +11,7 @@ import Expenses from '../CreateGoal/Expenses';
 export default function CreateGoal() {
     const history = useHistory();
 
-    const [state, setState] = React.useState({ value: null });
+    // const [state, setState] = React.useState({ value: null });
     const [reasons, setReasons] = useState("");
     const [goal, setGoal] = useState("");
     const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
@@ -87,7 +87,7 @@ export default function CreateGoal() {
                     </td> */}
 
 
-                <EditorToolbar />
+                {/* <EditorToolbar />
                 <ReactQuill className="quill"
                     theme="snow"
                     value={state.value}
@@ -97,7 +97,7 @@ export default function CreateGoal() {
                     }
                     modules={modules}
                     formats={formats}
-                />
+                /> */}
             </form>
         </div>
     );
