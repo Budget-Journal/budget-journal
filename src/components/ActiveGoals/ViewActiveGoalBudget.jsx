@@ -15,11 +15,11 @@ export default function ViewActiveGoalBudget (props) {
                 goal_id: props.goal.id
             }
         })
-    }
+    };
 
     const deleteExpense = (id) => {
         console.log('Expense to delete', id);
-    }
+    };
 
     return (
             <tr key={props.detail.id}>

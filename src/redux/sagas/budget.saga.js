@@ -2,13 +2,28 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 export default function* budgetSaga() {
+    yield takeLatest("ADD_EXPENSE", addExpense)
     yield takeLatest("FETCH_ACTIVE_BUDGET_DETAILS", fetchActiveBudgetDetails);
     yield takeLatest("UPDATE_EXPENSE", updateExpense);
 
+    // Creates a new expense row for the user
+    function* addExpense(action) {
+        try {
+            yield axios.post('/api/budget/new_expense', action.payload);
+            const response = yield axios.get(`/api/budget/details/${action.payload}`);
+            yield put({
+                type: "SET_ACTIVE_BUDGET_DETAILS",
+                payload: response.data
+            })
+        } catch {
+            console.error('Failed to create new expense')
+        }
+    }
+
+    // Fetches the expenses pertaining to a specific goal
     function* fetchActiveBudgetDetails(action) {
         try {
             const response = yield axios.get(`/api/budget/details/${action.payload}`);
-            console.log(`Budget Details for goal ${action.payload}`, response.data);
             yield put ({
                 type: "SET_ACTIVE_BUDGET_DETAILS",
                 payload: response.data
@@ -18,11 +33,12 @@ export default function* budgetSaga() {
         }
     }
 
+    // Handles updating a specific expense as the user makes changes
     function* updateExpense(action) {
-        if (action.payload.id === undefined) {
-           yield axios.post('/api/budget', action.payload);
-        } else {
+        try {
             yield axios.put(`/api/budget/${action.payload.id}`, action.payload);
+        } catch (error) {
+            console.error('Failed to update expense');
         }
     }
 

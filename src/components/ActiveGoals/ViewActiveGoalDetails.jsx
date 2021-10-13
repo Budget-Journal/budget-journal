@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, {useState} from "react";
-import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 
+// Import other components
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
 
@@ -10,37 +11,48 @@ import BudgetTable from './ViewActiveGoalBudget';
 export default function ViewActiveGoalDetails() {
     const dispatch = useDispatch();
 
+    React.useEffect(() => {
+
+    }, [budgetDetails]);
+
     // Obtaining data from reducers
     const goalDetails = useSelector(store => store.activeGoalDetails);
     const budgetDetails = useSelector(store => store.activeGoalBudgetReducer);
     const journal = useSelector(store => store.journalPosts);
-    console.log('Budget Detail Reducer', budgetDetails);
+    console.log("Goal details", goalDetails);
 
     // Local state to handle any edits a user makes to their goals
     // State begins as their previous information
     const [goalEdits, setGoalEdits] = useState({
         name: goalDetails.name,
         reasons: goalDetails.reasons 
-    })
+    });
 
     const handleGoalEdits = (e) => {
         setGoalEdits({
             ...goalEdits, [e.target.name]: e.target.value
-        })
-    }
+        });
+    };
 
     const submitChanges = (e) => {
         e.preventDefault(e);
-        console.log('Goal edits', goalEdits);
-    }
-
+        dispatch({
+            type: "UPDATE_GOAL",
+            payload: goalEdits
+        });
+    };
 
     const addExpenseRow = () => {
-        console.log('Add Expense Row')
+        console.log('Add Expense Row');
         dispatch({
-            type: "ADD_EXPENSE"
+            type: "ADD_EXPENSE",
+            payload: {id: goalDetails.id}
+        });
+        dispatch({
+            type: "FETCH_ACTIVE_BUDGET_DETAILS",
+            payload: goalDetails.id
         })
-    }
+    };
 
     return(
         <div>

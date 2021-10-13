@@ -9,10 +9,6 @@ const {
     Handle editing an existing budget
 */
 
-/**
- * GET route template
- */
-
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
 
     const sqlText = `
@@ -24,7 +20,8 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
         FROM "budget"
         JOIN "goal"
             ON "budget"."goal_id" = "goal"."id"
-        WHERE "goal_id" = $1 AND "user_id" = $2; 
+        WHERE "goal_id" = $1 AND "user_id" = $2
+        ORDER BY "id" ASC; 
     `;
 
     const sqlParams = [
@@ -45,8 +42,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
     const sqlText = `
         UPDATE "budget"
-        SET "expense", "price", "notes" = $1, $2, $3
-        WHERE "id" = $4
+        SET "expense" = $1, "price" = $2, "notes" = $3
+        WHERE "id" = $4;
     `;
 
     const sqlParams = [
@@ -80,10 +77,28 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     ]
 
     pool.query(sqlText, sqlParams).then(res => {
-        res.send(201);
+        res.sendStatus(201);
     }).catch(error => {
         console.error('Error creating new expense', error);
         res.send(500);
+    })
+});
+
+router.post('/new_expense', rejectUnauthenticated, (req, res) => {
+    console.log('req.body', req.body);
+    const sqlText = `
+        INSERT INTO "budget" ("goal_id")
+        VALUES ($1)
+    `;
+    const sqlParams = [
+        req.body.id
+    ]
+
+    pool.query(sqlText, sqlParams).then(res => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.error('Error creating new expense', error);
+        res.sendStatus(500);
     })
 });
 

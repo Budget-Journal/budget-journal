@@ -14,15 +14,15 @@ const activeGoalBudgetReducer = (state=[], action) => {
                 return item;
             })
 
-        case "ADD_EXPENSE":
-            return [
-                ...state, 
-                {
-                    expense: "",
-                    price: Number(""),
-                    notes: ""
-                }
-            ];
+        // case "ADD_EXPENSE":
+        //     return [
+        //         ...state, 
+        //         {
+        //             expense: "",
+        //             price: Number(""),
+        //             notes: ""
+        //         }
+        //     ];
 
         default:
             return state;
