@@ -5,11 +5,6 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-
-
-const {
-    rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
 /*
     Handle the creation of a new budget
     Handle editing an existing budget
