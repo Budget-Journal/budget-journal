@@ -37,7 +37,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // Used to select the journal posts related to a specific goal (based on id)
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('Goal id', req.params.id)
     const sqlText = `
         SELECT * FROM "journal_post"
         WHERE "goal_id" = $1;

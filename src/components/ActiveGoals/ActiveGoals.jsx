@@ -24,7 +24,7 @@ export default function ActiveGoals() {
 
   const activeGoals = useSelector(store => store.activeGoals);
   const lengthOfActiveGoals = activeGoals.length
-  console.log('*******************', lengthOfActiveGoals);
+  console.log('*******************', activeGoals);
 
   useEffect(() => {
     dispatch({

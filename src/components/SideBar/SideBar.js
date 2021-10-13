@@ -12,6 +12,7 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import Paper from '@mui/material/Paper';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import HomeIcon from '@mui/icons-material/Home';
 //End Bottom Navigation
 
 
@@ -50,7 +51,7 @@ function SideBar() {
           <BottomNavigationAction 
           onClick={goToActiveGoals}
           label="Active Goals" 
-          icon={<RestoreIcon />} />
+          icon={<HomeIcon />} />
 
           <BottomNavigationAction 
           onClick={createGoal}

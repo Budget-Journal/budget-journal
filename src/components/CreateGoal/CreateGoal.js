@@ -11,11 +11,16 @@ import Expenses from '../CreateGoal/Expenses';
 export default function CreateGoal() {
     const history = useHistory();
 
+
     const [state, setState] = React.useState('');
     // const [reasons, setReasons] = useState("");
+
+
+
     const [goal, setGoal] = useState("");
     const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
     const dispatch = useDispatch();
+
 
     const submitGoal = () => {
         history.push('/activegoals');
@@ -26,6 +31,8 @@ export default function CreateGoal() {
         setState(value);
     }
 console.log(state);
+
+
 
     // Toggle the Add Expenses Button (we need to make this untoggleable later)
     const addExpenses = () => {
@@ -49,12 +56,6 @@ console.log(state);
             return (
                 <div>
                     <Expenses />
-                    <Button 
-                        onClick={submitGoal}
-                        variant="contained"
-                    >
-                        Submit Goal
-                    </Button>
                 </div>
             )
         }
