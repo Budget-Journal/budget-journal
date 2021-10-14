@@ -123,16 +123,12 @@ Form Treatment
   text-align: center;
 }
 
-
-
 input {
   margin: 5px;
   margin-bottom: 10px;
-  
-
-  
- 
 }
+
+
 .app__page {
   display: flex;
   

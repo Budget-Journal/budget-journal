@@ -12,6 +12,7 @@ export default function Expenses() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // Grab the last goal from the redux store
     const lastGoal = useSelector(store => store.lastGoal);
 
     // Extract goalId out of array so this work in payload
@@ -20,6 +21,7 @@ export default function Expenses() {
     // Empty Data for goal form (expense, price, notes)
     let data = [{}];
 
+    //Set state for goal data and form data
     const [goalData, setGoalData] = useState(data);
     const [addFormData, setAddFormData] = useState({
         expense: '',
@@ -60,6 +62,7 @@ export default function Expenses() {
         const newGoalsData = [...goalData, newGoalData];
         setGoalData(newGoalsData);
 
+        //Set goal id 
         newGoalData.goalId = goalId
 
         // Push price into totalExpenseCost array as a number
