@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
 import NoGoals from "./NoGoals";
@@ -6,6 +6,7 @@ import RenderedGoals from "./RenderedGoals";
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import Card from '@mui/material/Card';
+import { Button, TextField } from "@mui/material";
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -23,13 +24,38 @@ export default function ActiveGoals() {
 
   // Get activeGoals from the Redux store.
   const activeGoals = useSelector(store => store.activeGoals);
-  const lengthOfActiveGoals = activeGoals.length
+  const lengthOfActiveGoals = activeGoals.length;
+  const user = useSelector((store) => store.user);
+  //console.log('user data*****', user.total_budget);
+  const userTotalBudget = user.total_budget;
+  console.log('user total budget*****', userTotalBudget)
+  
+  const userId = user.id;
+  console.log('*****USERID', userId)
+
+  const [addToBudget, setAddToBudget] = useState('');
+  const [subtractFromBudget, setSubtractFromBudget] = useState(0);
 
   useEffect(() => {
     dispatch({
       type: "FETCH_ACTIVE_GOALS"
     })
   }, []); //activeGoals?
+
+
+  function handleAddToBudget(){
+    console.log('ADD TO BUDGET WORKS', addToBudget);
+    let sum = parseInt(userTotalBudget) + parseInt(addToBudget)
+    dispatch({
+      type: 'UPDATE_ADD_TO_USER_BUDGET',
+      payload: { userId, sum }
+    })
+    history.go(0);
+  }
+
+  function handleSubtractFromBudget(){
+    console.log('SUBTRACT FROM BUDGET');
+  }
 
   return (
     <div>
@@ -44,7 +70,32 @@ export default function ActiveGoals() {
         >
             <div>
               <center>
-                <h1>ADD/SUBTRACT FUNDS HERE</h1>
+                
+                <TextField
+                  value={addToBudget}
+                  onChange={(e) => setAddToBudget(e.target.value)}
+                >
+
+                </TextField>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  
+                  onClick={handleAddToBudget}
+                >
+                  Add to Budget
+                </Button>
+                <br />
+                <TextField></TextField>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  value={subtractFromBudget}
+                  onChange={setSubtractFromBudget}
+                  onClick={handleSubtractFromBudget}
+                >
+                  Subtract from Budget
+                </Button>
               </center>
             </div>
         </Card>

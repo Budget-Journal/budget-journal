@@ -36,6 +36,13 @@ function* postBudget(action){
   }
 }
 
+function* updateAddToBudget(action){
+  try {
+    yield axios.put('/api/budget/add_to_budget', action.payload);
+  } catch {
+    console.log("put/Error");
+  }
+}
  
     
 
@@ -44,7 +51,8 @@ function* postBudget(action){
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
-  yield takeLatest('POST_BUDGET', postBudget)
+  yield takeLatest('POST_BUDGET', postBudget);
+  yield takeLatest('UPDATE_ADD_TO_USER_BUDGET', updateAddToBudget);
 }
 
 export default userSaga;
