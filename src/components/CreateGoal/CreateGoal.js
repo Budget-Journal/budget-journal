@@ -8,6 +8,7 @@ import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import Expenses from '../CreateGoal/Expenses';
 
+
 export default function CreateGoal() {
 
     const [state, setState] = React.useState('');
