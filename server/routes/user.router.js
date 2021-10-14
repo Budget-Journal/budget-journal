@@ -52,6 +52,19 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
   res.sendStatus(200);
 });
 
+// router.put('/totalbudget', userStrategy.authenticate('local'), (req, res)=>{
+//   const queryText = `UPDATE "user" (total_budget) VALUES ($1) WHERE "user".id=$2`;
+//   const queryParams= [req.body, req.user.id]
+//   pool  
+  
+//   .query(queryText, queryParams)
+//   .then(()=> res.sendStatus(201))
+//   .catch((err)=> {
+//     console.log("PUT BUDGET failed", err);
+//     res.sendStatus(500);
+//   })
+// })
+
 // clear all server session information about this user
 router.post('/logout', (req, res) => {
   // Use passport's built-in method to log out the user

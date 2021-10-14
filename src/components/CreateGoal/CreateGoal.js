@@ -1,119 +1,86 @@
-import React from "react";
+import React, {useState} from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
-import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
-import { useState } from "react";
+import { Card, Container, CardContent, Typography, TextField, Button } from "@mui/material";
+
 import { useHistory } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
-import { useDispatch } from "react-redux";
-import "./styles.css";
+import { useSelector, useDispatch } from "react-redux";
+import Expenses from '../CreateGoal/Expenses';
 
 
+export default function CreateGoal() {
 
-export default function CreateGoal () {
-
-    const history = useHistory();
-
-    const [state, setState] = React.useState({ value: null });
+    const [state, setState] = React.useState('');
     const [goal, setGoal] = useState("");
-    const [notes, setNotes] = useState("");
-    const [price, setPrice] = useState("");
-    const [expense, setExpense] = useState("");
+    const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
     const dispatch = useDispatch();
-
-    const handleChange = (value) => {
-        setState({ value }); 
-    };
-
-    const handleAddRow =()=>{
-        console.log('Am i working')
-        return(
-            <>
-            <div>
-                <tbody>
-                    <td><TextField/></td>
-                    <td><TextField/></td>
-                    <td><TextField/></td>
-                </tbody>
-            </div>
-            </>
-            
-        )
+    
+    const handleChange = value =>{
+        console.log('Change', value);
+        setState(value);
     }
+    console.log(state);
 
-    const postGoals = (event) => {
-        if (goal == "" || state == "" || expense == "" || price == "" || notes == "") { 
-            alert('Please fill in all inputs');
-            return false;
-        };
-        dispatch({
-            type: "POST_GOALS",
-            payload: {
-                name: goal,
-                reasons: state,
-                expense: expense,
-                price: price,
-                notes: notes
-            },
-        });
-
-        history.push('/activegoals')
-        
-    };
-
-       
-
-    return (
-
-        
-        <div className="text-editor">
-            <form name="frm" onSubmit={postGoals} >
-                <p>Goal:</p>  
-                    <TextField 
-                        label="Goal Name"
-                        size="small" 
-                        value={goal}
-                        onChange={(event) => setGoal(event.target.value)}
-                    />
-                <br/>
-                <br/>
-                
-            
-            <EditorToolbar />
-            <ReactQuill className="quill"
-                theme="snow"
-                value={state.value}
-                onChange={handleChange}
-                placeholder={
-                    "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+    // Toggle the Add Expenses Button (we need to make this untoggleable later)
+    const addExpenses = () => {
+        setAddExpensesButtonClick(!addExpensesButtonClick);
+    }
+    const submitExpenses = () => {
+        if (addExpensesButtonClick) {
+            return;
+        }
+        else {
+            dispatch({
+                type: "POST_GOALS",
+                payload:
+                {
+                    name: goal,
+                    reasons: state,
                 }
-                modules={modules}
-                formats={formats}
-            />
-                <br />
+            });
+            //Render the Expenses after ADD EXPENSES button is clicked
+            return (
+                <div>
+                    <Expenses />
+                </div>
+            )
+        }
+    }
+    return (
+        <Container>
+            <form name="frm" onSubmit={submitExpenses} >
+                <p>Goal:</p>
+                <TextField
+                    label="Goal Name"
+                    size="small"
+                    value={goal}
+                    onChange={(event) => setGoal(event.target.value)}
+                />
                 <br />
                 <br />
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Expense</th>
-                        <th>Price</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <td>
-                        <TextField 
-                            label="Specific" 
-                            size="small"
-                            value={expense}
-                            onChange={(event) => setExpense(event.target.value)}
-                        />
-                    </td>
 
-                    <td>
+                <TextField
+                    className="reasonsBox"
+                    placeholder="What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+                    multiline
+                    rows={4}
+                    value={reasons.value}
+                    onChange={(event) => setReasons(event.target.value)}
+                />
+                <br />
+                <Button
+                    variant="contained"
+                    onClick={addExpenses}
+                >
+                    Add Expenses
+                </Button>
+                {submitExpenses()}
+               
+
+                    {/* <td>
                         <TextField
                             label="Price"
                             size="small"
@@ -121,30 +88,42 @@ export default function CreateGoal () {
                             value={price}
                             onChange={(event) => setPrice(event.target.value)}
                         />
-                    </td>
+                    </td> */}
 
-                    <td>
-                        <TextField 
-                            label="Notes"
-                            size="small"
-                            value={notes}
-                            onChange={(event) => setNotes(event.target.value)}
-                        />
-                    </td>
-                    
-                    <td>
-                        <Button 
-                            onClick={handleAddRow}
-                            size="small" 
-                            variant="contained">Add Row
-                        </Button>
-                    </td>
-                </tbody>
-            </table>
-            <Button type="submit">Add New Goal</Button>
+                 <EditorToolbar />
+
+                <ReactQuill className="quill"
+                    theme="snow"
+                    value={state}
+                    onChange={handleChange}
+                    placeholder={
+                        "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+                    }
+                    modules={modules}
+                    formats={formats}
+                />
+                 <Button
+                    variant="contained"
+                    onClick={addExpenses}
+                >
+                    Add Expenses
+                </Button>
+                {submitExpenses()} 
             </form>
-        </div>
+        </Container>
     );
-    
-    
 };
+
+{/* <TextField
+                    className="reasonsBox"
+                    placeholder="What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+                    multiline
+                    rows={4}
+                    value={reasons.value}
+                    onChange={(event) => setReasons(event.target.value)}
+                /> */}
+
+
+
+                       
+

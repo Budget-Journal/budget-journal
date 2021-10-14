@@ -1,4 +1,4 @@
-.home {
+/* .home {
   flex: 0.65;
   padding-left: 150px;
   margin: 60px 140px;
@@ -17,22 +17,16 @@
   border-radius: 24px 24px 24px 24px;
   width: 650px;
   
-}
+}*/
 
-.home__Icon {
-  transform: scale(4);
-  /* object-fit: contain; */
-  /* position: fixed; */
+/* .home__Icon {
+  font-size: 40px;
+} */
 
-  /* margin-left: 570px;
-  margin-top: 45px; */
-  color: #1F4364;
-}
-
-.home__title {
+/* .home__title {
   /* align-items: center;
   padding-left: 430px; */
-  padding-top: 45px;
+  /* padding-top: 45px;
   padding-bottom: 10px;
   Font-Family: 'Work Sans', Sans-Serif;
 
@@ -44,22 +38,26 @@
 }
 .home__subtitle {
   /* padding-left: 460px; */
-  padding-top: 45px;
+  /* padding-top: 45px;
   padding-bottom: 60px;
   Font-Family: 'Open Sans', Sans-Serif;
   
-}
+} */ 
 /* .home__foot{
   padding-bottom: 135px;
   padding-left: 200px;
 } */
-.home__body {
-  padding-top: 45px;
+/* .home__body {
+  padding-top: 45px; */
   /* box-sizing: border-box;
   border: 1px solid #ccc;
   text-align: center;
   display:flex; */
-}
+/* } */ 
+
+/* .totalGoalCostCard{
+  margin-left: 30px;
+} */
 
 /* .plane {
   transform: scale(0.25);
@@ -71,3 +69,6 @@
 Font-Size: 45px;
 Font-Family: 'Open Sans', Sans-Serif;
 Font-Size: 15px; */
+.noGoal{
+  background-image: url('https://www.emeraldgrouppublishing.com/sites/default/files/2019-12/SER1.1.1%20-%20FW%20-%20Stack%20of%20Journals.jpg')
+}

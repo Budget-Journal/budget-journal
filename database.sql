@@ -16,7 +16,8 @@ CREATE TABLE "goal" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user" NOT NULL,
 	"name" VARCHAR(1000),
-	"reasons" VARCHAR(65000),
+	"reasons" TEXT,
+	"total_goal_cost" DECIMAL(38,2),
 	"completed" BOOLEAN DEFAULT FALSE
 );
 
@@ -35,17 +36,3 @@ CREATE TABLE "journal_post" (
 	"post_text" VARCHAR(1000),
 	"date_posted" TIMESTAMP DEFAULT NOW() NOT NULL
 );
-
-
-
-INSERT INTO "user"("id", "name", "username", "email", "password", "total_budget")
-VALUES(1, 'Sarah', 'Sarah123', 'sarah@email.com', '123', 10000);
-
-INSERT INTO "goal"("id", "user_id", "name", "reasons")
-VALUES(1, 1, 'Run a 5k', 'To get in shape');
-
-INSERT INTO "budget"("id", "goal_id", "expense", "price", "notes")
-VALUES(1, 1, 'Buy new shoes', 100, 'I need running shoes');
-
-INSERT INTO "journal_post" ("post_text")
-VALUES ('No coffee');

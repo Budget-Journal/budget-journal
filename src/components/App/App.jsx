@@ -11,21 +11,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Imported Components
 import Nav from '../Nav/Nav';
-import SideBar from "../SideBar/SideBar";
+import BottomNavBar from '../BottomNavBar/BottomNavBar';;
 import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
-import GoalCard from '../CompletedGoal/GoalCard';
-import GoalCardView from '../CompletedGoal/GoalCardView';
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-//import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
-import CreateGoal from '../CreateGoal/CreateGoal';
-import CompletedGoalsJournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
+// import CreateGoal from '../CreateGoal/CreateGoal';
+import CreateNewGoal from '../CreateGoal/CreateNewGoal';
 import Footer from '../Footer/Footer';
 import ViewActiveGoalDetails from '../ActiveGoals/ViewActiveGoalDetails';
 
-
+import CompletedGoal from '../CompletedGoal/CompletedGoals';
+import CompletedGoalCardView from '../CompletedGoal/CompletedGoalCardView';
 
 import './App.css';
 
@@ -68,7 +67,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <ActiveGoals />
             </div>
             {/* Body of activegoals page component */}
@@ -81,8 +80,9 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <ViewActiveGoalDetails />
+
             </div>
               {/* Body of activegoals page component */}
           </ProtectedRoute>
@@ -95,9 +95,9 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
-              <CreateGoal />
 
+              <BottomNavBar />
+              <CreateNewGoal />
             </div>
             {/* Body of create goal component */}
           </ProtectedRoute>
@@ -109,7 +109,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <Journal />
             </div>
             {/* Body of journal component */}
@@ -122,9 +122,9 @@ function App() {
           >
             
             <div className ="app__page">
-            <SideBar />
-            <GoalCard />
 
+            <BottomNavBar />
+            <CompletedGoal />
             </div>
             {/* Body of accomplished goals component */}
           </ProtectedRoute>
@@ -135,11 +135,12 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
-              <GoalCardView />
+
+              <BottomNavBar />
+              <CompletedGoalCardView />
             
             
-            </div>
+           </div>
             
           </ProtectedRoute>
 

@@ -11,22 +11,21 @@ const {
 
 // Handles changing a goal from incomplete to complete
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-    console.log("*Goal id*********", req.params.id);
     const sqlText = `
         UPDATE "goal"
         SET "completed" = TRUE
-        WHERE "goal".id = $1;
+        WHERE "goal".id = $1 AND "user_id" = $2;
     `;
     let sqlParams = [
-        req.params.id
+        req.params.id,
+        req.user.id
     ];
     pool.query(sqlText, sqlParams).then(result => {
         res.sendStatus(201);
     }).catch(error => {
-        console.log('Error in PUT completed goal', error);
+        console.log('Error UPDATING goal', error);
         res.sendStatus(500);
     })
-
 })
 
 module.exports = router;

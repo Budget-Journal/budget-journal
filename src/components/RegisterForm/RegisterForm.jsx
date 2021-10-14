@@ -1,8 +1,26 @@
-import { PhotoSizeSelectActual } from '@mui/icons-material';
-import { TextField } from '@mui/material';
+// import { PhotoSizeSelectActual } from '@mui/icons-material';
+// import { TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import "./RegisterForm.css";
+import { useHistory } from 'react-router-dom';
+
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+
+const Item = styled(Grid)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(6),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 function RegisterForm() {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('');
@@ -10,6 +28,8 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
+
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -26,7 +46,11 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <div className="bodyReg">
+    <>
+        <Grid container spacing={0} columns={13}>
+        <Grid item xs={6}>
+      <Item>
+      <Card style={{background: "#7eadc4"}}>
     <form className="formPanel" onSubmit={registerUser}>
       <h2 className= "regForm">Budget Journal Registration</h2>
       {errors.registrationMessage && (
@@ -38,12 +62,10 @@ function RegisterForm() {
       <div>
         <div>
         <label htmlFor="name">
-          Name: 
-          <input className="test"
+          <TextField 
+            label="Name"
             placeholder="Name" 
-            
             size="small"
-            variant="filled"
             value={name}
             required
             onChange={(event) => setName(event.target.value)}
@@ -51,47 +73,39 @@ function RegisterForm() {
         </label>
         </div>
       </div>
-
+      <br/>
       <div >
-        <label htmlFor="username">
-          Username: 
-          
-          <input
-            
+        <label htmlFor="username"> 
+          <TextField
+            label="Username"
             placeholder="Username" 
-            
             size="small"
-            variant="filled"
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
           />
         </label>
       </div>
-
-
+      <br/>
       <div >
         <label htmlFor="email">
-        Email: 
-          <input
+          <TextField
+            label="E-mail"
             placeholder="Email"
-
             size="small"
-            variant="filled"
             value={email}
             required
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
       </div>
-
+      <br/>
       <div >
         <label htmlFor="password">
-          Password: 
-          <input
+          <TextField
+            label="Password"
             placeholder="Password"
             size="small"
-            variant="filled"
             type="password"
             name="password"
             value={password}
@@ -101,11 +115,48 @@ function RegisterForm() {
         </label>
       </div>
       </div>
+      <br/>
       <div>
-        <input className="btnReg" type="submit" name="submit" value="Register" />
+        <Button variant="outlined" size="small" type="submit" name="submit" value="Register">
+        Create Account
+        </Button>
+        <br/>
+        Already have an Account?
+         <Button
+          size="small"
+          variant="text"
+          color="secondary"
+          type="button"
+          className="btn btn_asLink"
+          onClick={() => {
+            history.push('/login');
+          }}
+        >
+          Login
+        </Button>
       </div>
     </form>
-    </div>
+    </Card>
+    </Item>
+      </Grid>
+       <Divider orientation="vertical" flexItem />
+      <Grid item xs={6}>
+        <br />
+        <br />
+        <h1> &nbsp; Clarify your Goals</h1>
+        <h5> &nbsp; Spend time to think. Clarify those ideas.</h5>
+        <h5> &nbsp; Focus on your ideas and plan.</h5>
+        <br />
+        <h1> &nbsp; Keep Goal Associated with Costs in Mind</h1>
+        <h5> &nbsp; Once your goals are set you'll be able to track them all.</h5>
+        <h5> &nbsp; Think about your budget and the cost associated with your goal</h5>
+        <br />
+        <h1> &nbsp; Keep Journal Entries of your Progress</h1>
+        <h5> &nbsp; Keep track of your thoughts and the progress towards a goal.</h5>
+        <h5> &nbsp; Journals are a key component to reflecting</h5>
+        </Grid>
+    </Grid>
+    </>
   );
 }
 
