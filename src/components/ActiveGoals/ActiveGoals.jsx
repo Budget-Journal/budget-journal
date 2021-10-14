@@ -7,12 +7,24 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import Card from '@mui/material/Card';
 import { Button, TextField } from "@mui/material";
+import './ActiveGoals.css'
 
 const useStyles = makeStyles({
   gridContainer: {
     paddingLeft: "50px",
     paddingRight: "10px"
-  }
+  },
+  subtractBudgetBtn: {
+    margin: 5,
+    paddingTop: 12,
+    paddingBottom: 8
+  },
+  addBudgetBtn: {
+    margin: 5,
+    paddingTop: 12,
+    paddingBottom: 8,
+    paddingRight: 88,
+  },
 });
 
 export default function ActiveGoals() {
@@ -81,11 +93,13 @@ export default function ActiveGoals() {
             <div>
               <center>
                 <TextField
+                  className={classes.addInput}
                   value={addToBudget}
                   onChange={(e) => setAddToBudget(e.target.value)}
                 >
                 </TextField>
                 <Button
+                  className={classes.addBudgetBtn}
                   variant="contained"
                   color="primary"
                   onClick={handleAddToBudget}
@@ -98,6 +112,7 @@ export default function ActiveGoals() {
                   onChange={(e) => setSubtractFromBudget(e.target.value)}
                 ></TextField>
                 <Button
+                  className={classes.subtractBudgetBtn}
                   variant="contained"
                   color="secondary"
                   onClick={handleSubtractFromBudget}
