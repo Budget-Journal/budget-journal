@@ -47,7 +47,7 @@ export default function GoalCard() {
   const handleView = (detail) => {
     console.log('this goal id', detail.id);
     dispatch({
-      type: 'CARD_VIEW_DETAILS',
+      type: 'COMPLETED_GOAL_DETAILS',
       payload: detail.id
     })
 

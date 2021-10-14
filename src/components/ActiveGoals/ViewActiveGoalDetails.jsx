@@ -16,8 +16,8 @@ export default function ViewActiveGoalDetails() {
     }, [budgetDetails]);
 
     // Obtaining data from reducers
-    const goalDetails = useSelector(store => store.activeGoalDetails);
-    const budgetDetails = useSelector(store => store.activeGoalBudgetReducer);
+    const goalDetails = useSelector(store => store.viewGoalDetails);
+    const budgetDetails = useSelector(store => store.budgetTableReducer);
     const journal = useSelector(store => store.journalPosts);
     console.log("Goal details", goalDetails);
 
