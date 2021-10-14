@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 //Material UI Imports
 import Button  from '@mui/material/Button';
@@ -17,6 +17,8 @@ import ViewActiveGoalDetails from "./ViewActiveGoalDetails";
 
 export default function RenderedGoals({goal, index}) {
 
+    console.log('***goal is', goal.total_goal_cost);
+
     // Set hooks to variables
     const dispatch = useDispatch();
     const history = useHistory();
@@ -30,6 +32,11 @@ export default function RenderedGoals({goal, index}) {
             type: "SET_ACTIVE_GOAL_DETAILS",
             payload: goal
         });
+
+        dispatch({
+            type: "FETCH_ACTIVE_BUDGET_DETAILS",
+            payload: goal.id
+        })
 
         dispatch({
             type: "FETCH_GOAL_JOURNAL_POSTS",
@@ -74,36 +81,37 @@ export default function RenderedGoals({goal, index}) {
     }
 
     return(
-                <div>
-                    <Card  sx={{width: '100%'}}>
-                        <CardHeader
-                            avatar={
-                            <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
-                            } 
-                            title={goal.name}
-                            subheader="<Render date here???>"
-                        />
-                        <CardActions>
-                            <Button 
-                            size="small" 
-                            onClick={() => { handleCompleteGoal(goal)}}>
-                            <Checkbox {...label} default color="success" />
-                            </Button>
+        <div>
+            <Card  sx={{width: '100%'}}>
+                <CardHeader
+                    avatar={
+                    <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
+                    } 
+                    title={goal.name}
+                    subheader={goal.total_goal_cost}
+                    
+                />
+                <CardActions>
+                    <Button 
+                        size="small" 
+                        onClick={() => { handleCompleteGoal(goal)}}>
+                    <Checkbox {...label} default color="success" />
+                    </Button>
 
-                            <Button 
-                            size="small" 
-                            onClick={() => { handleViewGoalDetails(goal)}}>
-                            View
-                            </Button>
+                    <Button 
+                        size="small" 
+                        onClick={() => { handleViewGoalDetails(goal)}}>
+                    View
+                    </Button>
 
-                            <Button 
-                            color="error" 
-                            size="small" 
-                            onClick={() => { handleDeleteGoal(goal)}}>
-                            Delete
-                            </Button>                   
-                        </CardActions>
-                    </Card>
-                </div>
+                    <Button 
+                        color="error" 
+                        size="small" 
+                        onClick={() => { handleDeleteGoal(goal)}}>
+                    Delete
+                    </Button>                   
+                </CardActions>
+            </Card>
+        </div>
     )
 };

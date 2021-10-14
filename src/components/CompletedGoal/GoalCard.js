@@ -62,7 +62,7 @@ export default function GoalCard() {
   const handleView = (detail) => {
     console.log('this goal id', detail.id);
     dispatch({
-      type: 'CARD_VIEW_DETAILS',
+      type: 'COMPLETED_GOAL_DETAILS',
       payload: detail.id
     })
 
@@ -142,18 +142,14 @@ export default function GoalCard() {
           </Button>
         </DialogActions>
       </Dialog>
+
             {/* <CardContent>
                   <Typography variant="body2" color="text.secondary">
-                
                   </Typography>
               </CardContent> */}
             <CardActions disableSpacing>
-
               <IconButton aria-label="add to favorites">
-
               </IconButton>
-
-
             </CardActions>
             <CardActions>
               &nbsp; 

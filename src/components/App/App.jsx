@@ -13,15 +13,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Nav from '../Nav/Nav';
 import BottomNavBar from '../BottomNavBar/BottomNavBar';;
 import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
-import GoalCard from '../CompletedGoal/GoalCard';
-import GoalCardView from '../CompletedGoal/GoalCardView';
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
-import CreateGoal from '../CreateGoal/CreateGoal';
+// import CreateGoal from '../CreateGoal/CreateGoal';
+import CreateNewGoal from '../CreateGoal/CreateNewGoal';
 import Footer from '../Footer/Footer';
 import ViewActiveGoalDetails from '../ActiveGoals/ViewActiveGoalDetails';
+
+import CompletedGoal from '../CompletedGoal/CompletedGoals';
+import CompletedGoalCardView from '../CompletedGoal/CompletedGoalCardView';
 
 import './App.css';
 
@@ -79,6 +82,7 @@ function App() {
             <div className ="app__page">
               <BottomNavBar />
               <ViewActiveGoalDetails />
+
             </div>
               {/* Body of activegoals page component */}
           </ProtectedRoute>
@@ -91,8 +95,10 @@ function App() {
           >
             
             <div className ="app__page">
+
               <BottomNavBar />
               <CreateGoal />
+
 
             </div>
             {/* Body of create goal component */}
@@ -118,9 +124,9 @@ function App() {
           >
             
             <div className ="app__page">
+
             <BottomNavBar />
             <GoalCard />
-
             </div>
             {/* Body of accomplished goals component */}
           </ProtectedRoute>
@@ -131,11 +137,12 @@ function App() {
           >
             
             <div className ="app__page">
+
               <BottomNavBar />
               <GoalCardView />
             
             
-            </div>
+           </div>
             
           </ProtectedRoute>
 

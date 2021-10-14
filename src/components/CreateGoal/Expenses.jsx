@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 
 //Array to hold each expense price
@@ -9,6 +10,7 @@ let totalExpenseCost = [];
 
 export default function Expenses() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const lastGoal = useSelector(store => store.lastGoal);
 
@@ -77,11 +79,24 @@ export default function Expenses() {
         }
         return sum;
     }
+    let totalGoalCost = addExpenses(totalExpenseCost);
+    console.log('goalId***',goalId);
+
+    // Adds Total cos of a goal to the database on submit
+    const submitTotalGoalCost = () => {
+        dispatch({
+            type: "PUT_TOTAL_GOAL_COST",
+            payload: { goalId, totalGoalCost }
+        })
+        history.push('/activegoals');
+    }
 
     // Delete expense for the expense table
     function deleteExpense(id){
         console.log('DELETE BUTTON WORKS');
     }
+    
+    console.log(totalGoalCost);
 
     return (
         <div>
@@ -134,6 +149,13 @@ export default function Expenses() {
                     onChange={handleAddFormChange}
                 />
                 <Button onClick={handleBudgetSubmit} type="submit" variant="contained">Add Expense</Button>
+                <br />
+                <Button
+                    onClick={submitTotalGoalCost}
+                    variant="contained"
+                >
+                    Submit Goal
+                </Button>
             </div>
         </div>
     )

@@ -51,7 +51,6 @@ function* fetchLastGoal(){
 function* cardViewDetails(action) {
     try{
         const cardDetails = yield axios.get(`/api/goal/details/${action.payload}`)
-        console.log('Card Details', cardDetails)
         yield put ({ 
             type: 'SET_CARD_DETAILS', 
             payload: cardDetails.data})
@@ -81,6 +80,24 @@ function* postNewExpense(action){
     }
     catch (error) {
         console.log('Post New Expense has an error', error)
+    }
+}
+
+function* putTotalGoalCost(action) {
+    try {
+        yield axios.put('/api/goal/total_goal_cost', action.payload);
+    }
+    catch (error) {
+        console.log('Post total goal cost has an error', error)
+    }
+}
+
+function* updateTotalGoalCost(action){
+    try {
+        yield axios.put('/api/goal/update_goal_cost', action.payload);
+    }
+    catch (error) {
+        console.log('Post total goal cost has an error', error)
     }
 }
 
@@ -118,9 +135,11 @@ export default function* goalSaga(){
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
     yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
     yield takeLatest('POST_GOALS', postGoals);
-    yield takeLatest('CARD_VIEW_DETAILS', cardViewDetails);
+    yield takeLatest('COMPLETED_GOAL_DETAILS', cardViewDetails);
     yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal);
     yield takeLatest('DELETE_ACTIVE_GOAL', deleteActiveGoal)
     yield takeLatest('DELETE_COMPLETED_GOAL', deleteCompletedGoal);
     yield takeLatest('POST_NEW_EXPENSE', postNewExpense);
-}
+    yield takeLatest('PUT_TOTAL_GOAL_COST', putTotalGoalCost);
+    yield takeLatest('UPDATE_TOTAL_GOAL_COST', updateTotalGoalCost);
+}``

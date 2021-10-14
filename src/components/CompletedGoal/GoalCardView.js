@@ -53,6 +53,11 @@ export default function GoalCardView() {
     const journal = useSelector(store => store.journalPosts);
     console.log("Journal Entries related to this goal", journal);
 
+   
+    const completedGoals= useSelector(store => store.completedGoal);
+    console.log('GOALS***', completedGoals);
+
+
     
     return (
       <Grid container className={classes.gridContainer}>
@@ -84,8 +89,11 @@ export default function GoalCardView() {
                       Price: ${detail.price}
                       <br />
                       Notes: {detail.notes}
+
                     </Typography>
                 ))}
+                 
+                
               </CardContent>
               <CardActions disableSpacing>
 
@@ -108,9 +116,12 @@ export default function GoalCardView() {
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                <Typography paragraph>
-                    <JournalPosts journal = {journal}/>
-                </Typography>
+                  <Typography paragraph>
+                      <JournalPosts journal = {journal}/>
+                  </Typography>
+                  <Typography paragraph>
+                    <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
+                  </Typography>
                 </CardContent>
               </Collapse>
             </Card>
