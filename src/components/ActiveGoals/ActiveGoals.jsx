@@ -123,7 +123,7 @@ export default function ActiveGoals() {
             </div>
         </Card>
           {activeGoals.map((goal, index) => (
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} sm={6} md={4}>
               <RenderedGoals goal={goal} index={index} />
             </Grid>
           ))}

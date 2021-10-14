@@ -1,5 +1,4 @@
 import React from "react";
-import "./Sidebar.css";
 import { useHistory } from "react-router-dom";
 
 //Bottom Navigation
@@ -26,8 +25,9 @@ function SideBar() {
     history.push("/activegoals");
   };
   
-  const createGoal = () => {
-    history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
+  const createGoal = (value) => {
+    setValue(false)
+     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
   };
   
   const journal = () => {
@@ -55,6 +55,7 @@ function SideBar() {
 
           <BottomNavigationAction 
           onClick={createGoal}
+          value= {value}
           label="Create a Goal" 
           icon={<AddToPhotosIcon />} />
 

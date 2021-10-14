@@ -11,11 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Imported Components
 import Nav from '../Nav/Nav';
-import SideBar from "../SideBar/SideBar";
+import BottomNavBar from '../BottomNavBar/BottomNavBar';;
 import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-//import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
@@ -68,7 +67,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <ActiveGoals />
             </div>
             {/* Body of activegoals page component */}
@@ -81,7 +80,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <ViewActiveGoalDetails />
 
             </div>
@@ -96,9 +95,9 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
-              <CreateNewGoal />
 
+              <BottomNavBar />
+              <CreateNewGoal />
             </div>
             {/* Body of create goal component */}
           </ProtectedRoute>
@@ -110,7 +109,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <Journal />
             </div>
             {/* Body of journal component */}
@@ -123,10 +122,9 @@ function App() {
           >
             
             <div className ="app__page">
-            <SideBar />
-            {/* <GoalCard /> */}
-            <CompletedGoal />
 
+            <BottomNavBar />
+            <CompletedGoal />
             </div>
             {/* Body of accomplished goals component */}
           </ProtectedRoute>
@@ -137,12 +135,12 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
-              {/* <GoalCardView /> */}
+
+              <BottomNavBar />
               <CompletedGoalCardView />
-
-
-            </div>
+            
+            
+           </div>
             
           </ProtectedRoute>
 

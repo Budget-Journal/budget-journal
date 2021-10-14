@@ -4,6 +4,7 @@ import { FormHelperText, TextField, Container, Select, Button,  Grid, InputLabel
 import "./styles.css";
 import JournalEntries from "./journalEntries";
 import userReducer from "../../redux/reducers/user.reducer";
+import Tooltip from '@mui/material/Tooltip';
 
 
 
@@ -95,7 +96,9 @@ export default function Journal () {
         <FormControl className="dropdown-menu">
           <InputLabel id="current-active-goals">Select Goal</InputLabel>
           <Select
+            style={{width: "135%"}}
             labelId="current-active-goals"
+            variant="outlined"
             id="demo-simple-select"
             label="Select Goal"
             name="goal"
@@ -110,13 +113,17 @@ export default function Journal () {
           
         </FormControl>
         <FormHelperText>Optional: Select a Goal this post is related too</FormHelperText>
+         <Tooltip>
+            <Button
+              size="small"
+              variant="outlined"
+              type="submit"
+              >
+              Post
+            </Button>
+        </Tooltip>
         <br />
-        <Button
-          variant="outlined"
-          type="submit"
-        >
-          Post
-        </Button>
+        
       </form>
 
     <div>
