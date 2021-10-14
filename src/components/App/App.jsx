@@ -13,14 +13,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Nav from '../Nav/Nav';
 import SideBar from "../SideBar/SideBar";
 import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
-import GoalCard from '../CompletedGoal/GoalCard';
-import GoalCardView from '../CompletedGoal/GoalCardView';
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 //import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
-import CreateGoal from '../CreateGoal/CreateGoal';
+// import CreateGoal from '../CreateGoal/CreateGoal';
+import CreateNewGoal from '../CreateGoal/CreateNewGoal';
 import Footer from '../Footer/Footer';
 import ViewActiveGoalDetails from '../ActiveGoals/ViewActiveGoalDetails';
 
@@ -97,7 +97,7 @@ function App() {
             
             <div className ="app__page">
               <SideBar />
-              <CreateGoal />
+              <CreateNewGoal />
 
             </div>
             {/* Body of create goal component */}
