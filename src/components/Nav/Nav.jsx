@@ -38,8 +38,6 @@ function Nav() {
 
         <div className="nav__left">
 
-          {/* <img className="header__logo" src={Logo1} alt="" />  */}
-
           <div className="nav_left">
 
             <img src={Logo1} alt="" />
@@ -59,29 +57,12 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            {/* <Link className="navLink" to="/activegoals">
-             
-            </Link>
-            <Link className="navLink" to="/creategoal">
-             
-            </Link> */}
-
-            {/* <Link className="navLink" to="/journal">
-              
-            </Link> */}
-            {/* <Link className="navLink" to="/accomplishedgoals">
-              
-            </Link> */}
             <h1 className="user">{user ? <h2 className="userLog"> Username: {user.username} <br /><br />Total Budget: $ {user.total_budget}</h2> : <h3>No user logged-in</h3>}</h1>
             <h2>Total Goal Cost: {totalGoalCostSum.toFixed(2)}</h2>
             <h2>Remaining Balance: {remainingBalance.toFixed(2)}</h2>
             <LogOutButton className="navLink" />
           </>
         )}
-
-        {/* <Link className="navLink" to="/about">
-          
-        </Link> */}
       </div>
     </div>
   );

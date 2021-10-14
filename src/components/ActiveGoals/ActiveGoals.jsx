@@ -26,13 +26,12 @@ export default function ActiveGoals() {
   const activeGoals = useSelector(store => store.activeGoals);
   const lengthOfActiveGoals = activeGoals.length;
   const user = useSelector((store) => store.user);
-  //console.log('user data*****', user.total_budget);
-  const userTotalBudget = user.total_budget;
-  console.log('user total budget*****', userTotalBudget)
-  
-  const userId = user.id;
-  console.log('*****USERID', userId)
 
+  // Set variable to user redux store data
+  const userTotalBudget = user.total_budget;
+  const userId = user.id;
+
+  // State for adding to budget and subtracting from budget
   const [addToBudget, setAddToBudget] = useState('');
   const [subtractFromBudget, setSubtractFromBudget] = useState('');
 
@@ -40,26 +39,31 @@ export default function ActiveGoals() {
     dispatch({
       type: "FETCH_ACTIVE_GOALS"
     })
-  }, []); //activeGoals?
+  }, []);
 
-
+  // Function to funds to the budget when ADD TO BUDGET is clicked
   function handleAddToBudget(){
-    console.log('ADD TO BUDGET WORKS', addToBudget);
+    // Sum of the users budget and the budget they enter in
     let sum = parseInt(userTotalBudget) + parseInt(addToBudget)
+    // Dispatch the the user saga
     dispatch({
       type: 'UPDATE_ADD_TO_USER_BUDGET',
       payload: { userId, sum }
     })
+    // Refresh the page when the ADD TO BUDGET button is clicked
     history.go(0);
   }
 
+  // Function to funds to the budget when SUBTRACT FROM BUDGET is clicked
   function handleSubtractFromBudget(){
-    console.log('SUBTRACT FROM BUDGET');
-    let difference = parseInt(userTotalBudget) - parseInt(subtractFromBudget)
+    // Difference of the users budget and the budget the enter in
+    let difference = parseInt(userTotalBudget) - parseInt(subtractFromBudget);
+    // Dispatch to the user saga
     dispatch({
       type: 'UPDATE_SUBTRACT_TO_USER_BUDGET',
       payload: { userId, difference }
     })
+    // Refresh the page when the SUBTRACT FROM BUDGET button is clicked
     history.go(0);
   }
 
@@ -76,17 +80,14 @@ export default function ActiveGoals() {
         >
             <div>
               <center>
-                
                 <TextField
                   value={addToBudget}
                   onChange={(e) => setAddToBudget(e.target.value)}
                 >
-
                 </TextField>
                 <Button
                   variant="contained"
                   color="primary"
-                  
                   onClick={handleAddToBudget}
                 >
                   Add to Budget

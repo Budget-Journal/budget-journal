@@ -25,6 +25,7 @@ function* fetchUser() {
   }
 }
 
+//Post the initial user budget
 function* postBudget(action){
   try{
     yield axios.put('/api/budget', action.payload);
@@ -36,6 +37,7 @@ function* postBudget(action){
   }
 }
 
+// Add to the user budget
 function* updateAddToBudget(action){
   try {
     yield axios.put('/api/budget/add_to_budget', action.payload);
@@ -44,6 +46,7 @@ function* updateAddToBudget(action){
   }
 }
 
+// Subtract from user budget
 function* updateSubtractFromBudget(action) {
   try {
     yield axios.put('/api/budget/subtract_from_budget', action.payload);
@@ -52,16 +55,11 @@ function* updateSubtractFromBudget(action) {
   }
 }
  
-    
-
-
-
-
 function* userSaga() {
-  yield takeLatest('FETCH_USER', fetchUser);
-  yield takeLatest('POST_BUDGET', postBudget);
-  yield takeLatest('UPDATE_ADD_TO_USER_BUDGET', updateAddToBudget);
-  yield takeLatest('UPDATE_SUBTRACT_TO_USER_BUDGET', updateSubtractFromBudget);
+  yield takeLatest('FETCH_USER', fetchUser); // Fetch user info
+  yield takeLatest('POST_BUDGET', postBudget); //Post the initial user budget
+  yield takeLatest('UPDATE_ADD_TO_USER_BUDGET', updateAddToBudget); // Add to the user budget
+  yield takeLatest('UPDATE_SUBTRACT_TO_USER_BUDGET', updateSubtractFromBudget); // Subtract from user budget
 }
 
 export default userSaga;
