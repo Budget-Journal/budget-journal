@@ -212,6 +212,32 @@ router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.put('/update_goal_cost', rejectUnauthenticated, (req, res) => {
+    console.log('Data to add to total goal cost', req.body);
+    const goalId = req.body.goalId
+
+    const sqlText = `
+            UPDATE "goal"
+            SET "total_goal_cost" = $1
+            WHERE "goal".id = $2 AND "user_id" = $3
+        `;
+
+    console.log('goal id is:', goalId);
+    const sqlParams = [
+        req.body.totalGoalCost,
+        goalId,
+        req.user.id
+    ]
+    console.log('******* SqlParams is:', sqlParams);
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(201)
+    }).catch(error => {
+        console.error("Creating Total Goal Cost Failed", error);
+        res.sendStatus(500);
+    })
+});
+
 
 module.exports = router;
 

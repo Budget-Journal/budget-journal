@@ -92,6 +92,15 @@ function* putTotalGoalCost(action) {
     }
 }
 
+function* updateTotalGoalCost(action){
+    try {
+        yield axios.put('/api/goal/update_goal_cost', action.payload);
+    }
+    catch (error) {
+        console.log('Post total goal cost has an error', error)
+    }
+}
+
 function* updateGoal(action){
     try {
         yield axios.put(`/api/completed/${action.payload.id}`)
@@ -132,4 +141,5 @@ export default function* goalSaga(){
     yield takeLatest('DELETE_COMPLETED_GOAL', deleteCompletedGoal);
     yield takeLatest('POST_NEW_EXPENSE', postNewExpense);
     yield takeLatest('PUT_TOTAL_GOAL_COST', putTotalGoalCost);
+    yield takeLatest('UPDATE_TOTAL_GOAL_COST', updateTotalGoalCost);
 }``

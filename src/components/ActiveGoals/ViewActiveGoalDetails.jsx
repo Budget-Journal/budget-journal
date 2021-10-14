@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, {useState} from "react";
 import { TextField, Button } from "@mui/material";
+import { useHistory } from "react-router-dom";
+
 
 // import ReactQuill from "react-quill";
 // import EditorToolbar, { modules, formats } from "./EditorToolbar";
@@ -10,10 +12,9 @@ import { TextField, Button } from "@mui/material";
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
 
-
-
 export default function ViewActiveGoalDetails() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     React.useEffect(() => {
 
@@ -26,7 +27,26 @@ export default function ViewActiveGoalDetails() {
     const goalDetails = useSelector(store => store.viewGoalDetails);
     const budgetDetails = useSelector(store => store.budgetTableReducer);
     const journal = useSelector(store => store.journalPosts);
-    console.log("Goal details", goalDetails);
+    // console.log("Goal details", goalDetails);
+    // console.log("budgetDetails", budgetDetails);
+    // console.log("budgetDetails", budgetDetails.length);
+    console.log("Goal details", goalDetails.id);
+    let goalId = goalDetails.id
+
+    let totalExpenseCost = [];
+
+    for (let i = 0; i < budgetDetails.length; i++){
+        totalExpenseCost.push(parseInt(budgetDetails[i].price));
+        console.log(totalExpenseCost);
+    }
+    function addExpenses(array) {
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+            sum = sum + array[i]
+        }
+        return sum;
+    }
+    let totalGoalCost = addExpenses(totalExpenseCost)
 
     // Local state to handle any edits a user makes to their goals
     // State begins as their previous information
@@ -43,10 +63,16 @@ export default function ViewActiveGoalDetails() {
 
     const submitChanges = (e) => {
         e.preventDefault(e);
+        console.log('ADD EXPENSE', totalGoalCost);
         dispatch({
-            type: "UPDATE_GOAL",
-            payload: goalEdits
+            type: "UPDATE_TOTAL_GOAL_COST",
+            payload: { goalId, totalGoalCost }
         });
+        history.push('/activegoals');
+        // dispatch({
+        //     type: "UPDATE_GOAL",
+        //     payload: goalEdits
+        // });
     };
 
     const addExpenseRow = () => {
