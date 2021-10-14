@@ -35,6 +35,7 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT
             "budget"."id",
+            "budget"."goal_id",
             "budget"."expense",
             "budget"."price",
             "budget"."notes"

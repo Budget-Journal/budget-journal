@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { useHistory } from 'react-router';
 import { TextField, Button } from "@mui/material";
 
 export default function ViewActiveGoalBudget (props) {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const handleBudgetEdits = (e) => {
         dispatch({
@@ -20,11 +18,14 @@ export default function ViewActiveGoalBudget (props) {
     };
 
     // Delete an expense
-    const deleteExpense = (id) => {
-        console.log('Expense to delete', id);
+    const deleteExpense = (detail) => {
+        console.log(`Expense to delete ${detail.id} from Goal ${detail.goal_id}`);
         dispatch({
             type: "DELETE_EXPENSE",
-            payload: id
+            payload: {
+                id: detail.id,
+                goal_id: detail.goal_id
+            }
         })
     };
 
@@ -52,7 +53,7 @@ export default function ViewActiveGoalBudget (props) {
                     />
                 </td>
                 <td>
-                    <Button onClick={() => deleteExpense(props.detail.id)}>Delete</Button>
+                    <Button onClick={() => deleteExpense(props.detail)}>Delete</Button>
                 </td>
             </tr>
     )

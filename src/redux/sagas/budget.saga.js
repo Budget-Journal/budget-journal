@@ -24,7 +24,12 @@ export default function* budgetSaga() {
     // Delete an expense based on it's id
     function* deleteExpense(action) {
         try {
-            yield axios.delete(`/api/budget/${action.payload}`);
+            yield axios.delete(`/api/budget/${action.payload.id}`);
+            const response = yield axios.get(`/api/budget/details/${action.payload.goal_id}`);
+            yield put({
+                type: "SET_ACTIVE_BUDGET_DETAILS",
+                payload: response.data
+            })
         } catch (error) {
             console.error('Failed to delete expense', error)
         }

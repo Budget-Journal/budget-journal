@@ -93,21 +93,21 @@ export default function RenderedGoals({goal, index}) {
                         />
                         <CardActions>
                             <Button 
-                            size="small" 
-                            onClick={() => { handleCompleteGoal(goal)}}>
+                                size="small" 
+                                onClick={() => { handleCompleteGoal(goal)}}>
                             <Checkbox {...label} default color="success" />
                             </Button>
 
                             <Button 
-                            size="small" 
-                            onClick={() => { handleViewGoalDetails(goal)}}>
+                                size="small" 
+                                onClick={() => { handleViewGoalDetails(goal)}}>
                             View
                             </Button>
 
                             <Button 
-                            color="error" 
-                            size="small" 
-                            onClick={() => { handleDeleteGoal(goal)}}>
+                                color="error" 
+                                size="small" 
+                                onClick={() => { handleDeleteGoal(goal)}}>
                             Delete
                             </Button>                   
                         </CardActions>
