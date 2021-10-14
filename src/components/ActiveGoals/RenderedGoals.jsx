@@ -47,7 +47,7 @@ export default function RenderedGoals({goal, index}) {
                 history.push('/activeGoals')
             }
             else{
-                return false;
+                 return false;
             }
         console.log('Goal id', goal.id);
         goalId = {

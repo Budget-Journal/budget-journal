@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
-import { Card, CardContent, Typography, TextField, Button } from "@mui/material";
+import { Card, Container, CardContent, Typography, TextField, Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
@@ -58,7 +58,7 @@ export default function CreateGoal() {
 
 
     return (
-        <div className="text-editor">
+        <Container>
             <form name="frm" onSubmit={submitExpenses} >
                 <p>Goal:</p>
                 <TextField
@@ -78,6 +78,7 @@ export default function CreateGoal() {
                     value={reasons.value}
                     onChange={(event) => setReasons(event.target.value)}
                 />
+                <br />
                 <Button
                     variant="contained"
                     onClick={addExpenses}
@@ -110,6 +111,6 @@ export default function CreateGoal() {
                     formats={formats}
                 /> */}
             </form>
-        </div>
+        </Container>
     );
 };

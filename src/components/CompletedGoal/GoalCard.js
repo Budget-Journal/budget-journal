@@ -15,6 +15,12 @@ import IconButton from '@mui/material/IconButton';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 //End Material UI Imports
 
 
@@ -28,6 +34,15 @@ const useStyles = makeStyles({
 
 export default function GoalCard() {
   // Set hooks as variables
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
    const dispatch = useDispatch();
    const classes = useStyles();
    const history = useHistory();
@@ -61,6 +76,13 @@ export default function GoalCard() {
 
   // Handles when a user deletes a completed goal
   const handleDelete =(detail) => {
+    // let isConfirm = confirm('Are you sure you want to remove this goal?')
+    //   if (isConfirm) {
+    //     history.push('/accomplishedGoals')
+    //   }
+    //   else{
+    //     return false;
+    //   }
     console.log("Goal id", detail.id)
     goalId = {
       id: detail.id
@@ -87,7 +109,7 @@ export default function GoalCard() {
               }
               action={
                 <IconButton aria-label="settings">
-                  <DeleteOutlineIcon color="error" onClick={() => handleDelete(detail)} />
+                  <DeleteOutlineIcon color="error" onClick={handleClickOpen} /> 
                 </IconButton>
               }
               title={detail.name}
@@ -99,6 +121,27 @@ export default function GoalCard() {
               image="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"
               alt="Paella dish"
             />
+             <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure about deleting this goal?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You wont be able to undo this goal once it is deleted. Are you sure?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={() => handleDelete(detail)} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
             {/* <CardContent>
                   <Typography variant="body2" color="text.secondary">
                 
@@ -113,9 +156,8 @@ export default function GoalCard() {
 
             </CardActions>
             <CardActions>
-              {/* {" "} */}
-              &nbsp; &nbsp; &nbsp;
-              <Button onClick={() => handleView(detail)}>View</Button>
+              &nbsp; 
+              <Button onClick={() => handleView(detail)}><VisibilityIcon /></Button>
               {/* <Button onClick={() => handleDelete(detail)} color="secondary">Delete</Button> */}
             </CardActions>
           </Card>
@@ -124,4 +166,6 @@ export default function GoalCard() {
     </Grid>
   )
     
-}
+};
+
+

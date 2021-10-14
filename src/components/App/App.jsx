@@ -11,12 +11,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Imported Components
 import Nav from '../Nav/Nav';
-import SideBar from "../SideBar/SideBar";
+import BottomNavBar from '../BottomNavBar/BottomNavBar';;
 import ActiveGoals from '../ActiveGoals/ActiveGoals.jsx';
 import GoalCard from '../CompletedGoal/GoalCard';
 import GoalCardView from '../CompletedGoal/GoalCardView';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-//import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Journal from '../Journal/journal';
@@ -65,7 +64,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <ActiveGoals />
             </div>
             {/* Body of activegoals page component */}
@@ -78,7 +77,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <ViewActiveGoalDetails />
             </div>
               {/* Body of activegoals page component */}
@@ -92,7 +91,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <CreateGoal />
 
             </div>
@@ -106,7 +105,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <Journal />
             </div>
             {/* Body of journal component */}
@@ -119,7 +118,7 @@ function App() {
           >
             
             <div className ="app__page">
-            <SideBar />
+            <BottomNavBar />
             <GoalCard />
 
             </div>
@@ -132,7 +131,7 @@ function App() {
           >
             
             <div className ="app__page">
-              <SideBar />
+              <BottomNavBar />
               <GoalCardView />
             
             

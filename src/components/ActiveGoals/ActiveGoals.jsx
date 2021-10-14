@@ -42,7 +42,7 @@ export default function ActiveGoals() {
       :
         <Grid container spacing={4} justify="center" className={classes.gridContainer}>
           {activeGoals.map((goal, index) => (
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} sm={6} md={4}>
               <RenderedGoals goal={goal} index={index} />
             </Grid>
           ))}
