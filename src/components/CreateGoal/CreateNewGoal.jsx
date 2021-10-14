@@ -8,15 +8,18 @@ import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 
+// Component Imports
+import CreateNewExpense from './CreateNewExpense';
+
 
 export default function CreateNewGoal() {
 
-    const [state, setState] = React.useState('');
+    const [quill, setQuill] = React.useState('');
     const [goal, setGoal] = React.useState("");
 
-    const handleChange = value => {
-        console.log('Change', value);
-        setState(value);
+    const handleQuillChange = value => {
+        // console.log('Change', value);
+        setQuill(value);
     }
 
     const addExpenseRow = () => {
@@ -36,8 +39,8 @@ export default function CreateNewGoal() {
             <EditorToolbar />
             <ReactQuill className="quill"
                 theme="snow"
-                value={state}
-                onChange={handleChange}
+                value={quill}
+                onChange={handleQuillChange}
                 placeholder={
                     "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
                 }
@@ -51,14 +54,11 @@ export default function CreateNewGoal() {
                     <th>Notes</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Expense</td>
-                        <td>Price</td>
-                        <td>Notes</td>
-                    </tr>
+                    <CreateNewExpense />
                 </tbody>
             </table>
             <Button onClick={() => addExpenseRow()}>Add Expense</Button>
+            <Button>Create Goal</Button>
         </div>
     )
 } // end CreateNewGoal
