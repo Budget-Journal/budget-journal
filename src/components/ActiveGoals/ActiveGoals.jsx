@@ -28,17 +28,17 @@ export default function ActiveGoals() {
   const lengthOfActiveGoals = activeGoals.length
   console.log('*******************', activeGoals);
 
-  let totalGoalCost = [];
-  for (let i = 0; i < activeGoals.length; i++){
-    totalGoalCost.push(parseInt(activeGoals[i].total_goal_cost));
-    console.log(totalGoalCost);
-  }
-  let totalGoalCostSum = 0;
-  for (let i = 0; i < activeGoals.length; i++){
-    totalGoalCostSum = totalGoalCostSum + totalGoalCost[i];
-    totalGoalCostSum.toFixed(2)
-  }
-  console.log('*****totalGoalCostSum', totalGoalCostSum.toFixed(2))
+  // let totalGoalCost = [];
+  // for (let i = 0; i < activeGoals.length; i++){
+  //   totalGoalCost.push(parseInt(activeGoals[i].total_goal_cost));
+  //   console.log(totalGoalCost);
+  // }
+  // let totalGoalCostSum = 0;
+  // for (let i = 0; i < activeGoals.length; i++){
+  //   totalGoalCostSum = totalGoalCostSum + totalGoalCost[i];
+  //   totalGoalCostSum.toFixed(2)
+  // }
+  // console.log('*****totalGoalCostSum', totalGoalCostSum.toFixed(2))
   
 
 
@@ -64,7 +64,7 @@ export default function ActiveGoals() {
         >
             <div>
               <center>
-                <h1>Total Goal Cost: {totalGoalCostSum.toFixed(2)}</h1>
+                {/* <h1>Total Goal Cost: {totalGoalCostSum.toFixed(2)}</h1> */}
               </center>
             </div>
         </Card>
