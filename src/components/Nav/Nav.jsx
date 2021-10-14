@@ -73,7 +73,7 @@ function Nav() {
               
             </Link> */}
             <h1 className="user">{user ? <h2 className="userLog"> Username: {user.username} <br /><br />Total Budget: $ {user.total_budget}</h2> : <h3>No user logged-in</h3>}</h1>
-            <h2>Total Goal Cost: -{totalGoalCostSum.toFixed(2)}</h2>
+            <h2>Total Goal Cost: {totalGoalCostSum.toFixed(2)}</h2>
             <h2>Remaining Balance: {remainingBalance.toFixed(2)}</h2>
             <LogOutButton className="navLink" />
           </>

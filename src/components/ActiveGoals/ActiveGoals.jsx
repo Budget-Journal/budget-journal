@@ -34,7 +34,7 @@ export default function ActiveGoals() {
   console.log('*****USERID', userId)
 
   const [addToBudget, setAddToBudget] = useState('');
-  const [subtractFromBudget, setSubtractFromBudget] = useState(0);
+  const [subtractFromBudget, setSubtractFromBudget] = useState('');
 
   useEffect(() => {
     dispatch({
@@ -55,6 +55,12 @@ export default function ActiveGoals() {
 
   function handleSubtractFromBudget(){
     console.log('SUBTRACT FROM BUDGET');
+    let difference = parseInt(userTotalBudget) - parseInt(subtractFromBudget)
+    dispatch({
+      type: 'UPDATE_SUBTRACT_TO_USER_BUDGET',
+      payload: { userId, difference }
+    })
+    history.go(0);
   }
 
   return (
@@ -86,12 +92,13 @@ export default function ActiveGoals() {
                   Add to Budget
                 </Button>
                 <br />
-                <TextField></TextField>
+                <TextField
+                  value={subtractFromBudget}
+                  onChange={(e) => setSubtractFromBudget(e.target.value)}
+                ></TextField>
                 <Button
                   variant="contained"
                   color="secondary"
-                  value={subtractFromBudget}
-                  onChange={setSubtractFromBudget}
                   onClick={handleSubtractFromBudget}
                 >
                   Subtract from Budget
