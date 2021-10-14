@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import React, {useState} from "react";
 import { TextField, Button } from "@mui/material";
 
+// import ReactQuill from "react-quill";
+// import EditorToolbar, { modules, formats } from "./EditorToolbar";
+// import "react-quill/dist/quill.snow.css";
+
 // Import other components
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
@@ -15,9 +19,12 @@ export default function ViewActiveGoalDetails() {
 
     }, [budgetDetails]);
 
+    // // Quill local state
+    // const [state, setState] = React.useState('');
+
     // Obtaining data from reducers
-    const goalDetails = useSelector(store => store.activeGoalDetails);
-    const budgetDetails = useSelector(store => store.activeGoalBudgetReducer);
+    const goalDetails = useSelector(store => store.viewGoalDetails);
+    const budgetDetails = useSelector(store => store.budgetTableReducer);
     const journal = useSelector(store => store.journalPosts);
     console.log("Goal details", goalDetails);
 
@@ -56,6 +63,15 @@ export default function ViewActiveGoalDetails() {
 
     return(
         <div>
+             {/* <Card>
+                <CardContent>
+                     <p>{goalDetails.name}</p>
+                    <p>{goalDetails.price}</p>
+                     <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
+                    <p>{goalDetails.notes}</p>
+                 </CardContent>
+            </Card> */}
+
             <form onSubmit={submitChanges}>
                 <TextField
                     label="Goal Name"
@@ -98,6 +114,7 @@ export default function ViewActiveGoalDetails() {
                 <Button type="submit">Submit Changes</Button>
        
             </form>
+
             <div> 
                 <JournalPosts journal={journal}/> 
             </div>

@@ -50,6 +50,11 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
+//Temp
+const Block = Quill.import('blots/block');
+Block.tagName = 'div';
+Quill.register(Block);
+
 // Modules object for setting up the Quill editor
 export const modules = {
   toolbar: {

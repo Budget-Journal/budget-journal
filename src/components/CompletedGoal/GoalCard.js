@@ -47,7 +47,7 @@ export default function GoalCard() {
   const handleView = (detail) => {
     console.log('this goal id', detail.id);
     dispatch({
-      type: 'CARD_VIEW_DETAILS',
+      type: 'COMPLETED_GOAL_DETAILS',
       payload: detail.id
     })
 
@@ -93,12 +93,8 @@ export default function GoalCard() {
               title={detail.name}
               subheader="Completed Goal"
             />
-            <CardMedia
-              component="img"
-              height="194"
-              image="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"
-              alt="Paella dish"
-            />
+            
+            
             {/* <CardContent>
                   <Typography variant="body2" color="text.secondary">
                 
