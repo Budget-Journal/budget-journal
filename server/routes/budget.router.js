@@ -59,6 +59,11 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// Create a new expense table based on id
+router.post('/creating/:id', rejectUnauthenticated, (req, res) => {
+    console.log('Goal ID to add expense table too:', req.params.id);
+})
+
 // Update an existing expense based on id 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
@@ -83,7 +88,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // Create a new expense row in the database
-router.post('/new_expense', rejectUnauthenticated, (req, res) => {
+router.post('/editing/new_expense', rejectUnauthenticated, (req, res) => {
     console.log('req.body', req.body);
     const sqlText = `
         INSERT INTO "budget" ("goal_id")

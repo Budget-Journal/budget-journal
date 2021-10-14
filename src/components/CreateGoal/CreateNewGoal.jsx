@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Material UI Imports
 import { TextField, Button } from "@mui/material";
@@ -14,25 +14,45 @@ import CreateNewExpense from './CreateNewExpense';
 
 
 export default function CreateNewGoal() {
+    const dispatch = useDispatch();
 
+    const lastGoal = useSelector(store => store.lastGoal);
     const expenses = useSelector(store => store.newExpense);
 
     const [quill, setQuill] = React.useState('');
-    const [goal, setGoal] = React.useState("");
+    const [goal, setGoal] = React.useState('');
 
     const handleQuillChange = value => {
         // console.log('Change', value);
         setQuill(value);
-    }
+    };
 
     const cancelCreateGoal = () => {
         console.log('Cancel Creating New Goal');
         // Will dispatch to delete the created goal
-    }
+    };
 
     const addExpenseRow = () => {
         console.log('Add Expense Row');
-    }
+        dispatch({
+            type: "CREATE_NEW_EXPENSE_TABLE",
+            payload: {
+                id: lastGoal[0].id
+            }
+        })
+    };
+
+    const createGoal = () => {
+        console.log('Create new goal')
+        dispatch({
+            type: "UPDATE_LATEST_GOAL_CREATED",
+            payload: {
+                id: lastGoal[0].id,
+                name: goal,
+                reasons: quill
+            }
+        })
+    };
 
     return (
         <div>
@@ -69,7 +89,7 @@ export default function CreateNewGoal() {
             </table>
             <Button onClick={() => addExpenseRow()}>Add Expense</Button>
             <Button onClick={() => cancelCreateGoal()}>Cancel</Button>
-            <Button>Create Goal</Button>
+            <Button onClick={() => createGoal()}>Create Goal</Button>
         </div>
     )
 } // end CreateNewGoal

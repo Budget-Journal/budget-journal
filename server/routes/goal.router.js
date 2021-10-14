@@ -144,13 +144,30 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
     const sqlText = `
         INSERT INTO "goal" ("user_id")
-        VALUES ($1);
+        VALUES ($1)
+        RETURNING "id"
     `;
 
     const sqlParams = [req.user.id];
 
-    pool.query(sqlText, sqlParams).then(res => {
+    pool.query(sqlText, sqlParams).then(result => {
         res.sendStatus(201);
+        console.log('New Goal ID', result.rows[0].id);
+
+        const sqlText = `
+            INSERT INTO "budget" ("goal_id")
+            VALUES ($1)
+        `;
+
+        const sqlParams = [result.rows[0].id];
+
+        pool.query(sqlText, sqlParams).then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.error('Failed to create budget table', error);
+            res.sendStatus(500);
+        })
+
     }).catch(error => {
         console.error('Failed to create new goal', error);
         res.sendStatus(500);

@@ -34,18 +34,18 @@ function* fetchCompletedGoals() {
     }
 };
 
-function* fetchLastGoal(){
-    try {
-        const response = yield axios.get("api/goal/last_goal")
-        console.log("response data is:", response.data);
-        yield put({
-            type: 'SET_LAST_GOAL', 
-            payload: response.data
-        });
-    } catch (error) {
-        console.log('fetchLastGoal', error)
-    }
-}
+// function* fetchLastGoal(){
+//     try {
+//         const response = yield axios.get("api/goal/last_goal")
+//         console.log("response data is:", response.data);
+//         yield put({
+//             type: 'SET_LAST_GOAL', 
+//             payload: response.data
+//         });
+//     } catch (error) {
+//         console.log('fetchLastGoal', error)
+//     }
+// }
 
 // Card View Details
 function* cardViewDetails(action) {
@@ -63,7 +63,15 @@ function* cardViewDetails(action) {
 // Creates new goal on "Create Goal" in navbar or "+" button on welcome page
 function* createNewGoal() {
     try {
+        // Create new goal in DB
         yield axios.post('/api/goal');
+
+        // Fetch most recent goal created
+        const response = yield axios.get("api/goal/last_goal")
+        yield put({
+            type: 'SET_LAST_GOAL',
+            payload: response.data
+        });
     } catch (error) {
         console.error('Failed to create new goal', error);
     }
@@ -133,7 +141,7 @@ function* deleteCompletedGoal(action){
 export default function* goalSaga(){
     yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
-    yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
+    // yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
     yield takeLatest('CREATE_NEW_GOAL', createNewGoal);
 
     yield takeLatest('POST_GOALS', postGoals);
