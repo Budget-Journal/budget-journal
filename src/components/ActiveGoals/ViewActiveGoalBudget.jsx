@@ -5,6 +5,7 @@ import { TextField, Button } from "@mui/material";
 export default function ViewActiveGoalBudget (props) {
     const dispatch = useDispatch();
 
+    // Handle expense edits on keystrokes
     const handleBudgetEdits = (e) => {
         dispatch({
             type: "UPDATE_EXPENSE",

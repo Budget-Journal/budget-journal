@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import "./Sidebar.css";
 import { useHistory } from "react-router-dom";
 

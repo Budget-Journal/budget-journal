@@ -10,6 +10,7 @@ import viewGoalDetails from './viewGoalDetails.reducer';
 import lastGoal from './lastGoal.reducer';
 import budgetTableReducer from './budgetTableReducer';
 import totalGoalCost from './totalGoalCost.reducer';
+import newExpense from './newExpense.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -30,7 +31,7 @@ const rootReducer = combineReducers({
 
   completedGoal, // will hold fetch goals that have been marked completed (TRUE in database)
 
-
+  newExpense, 
 
 
   

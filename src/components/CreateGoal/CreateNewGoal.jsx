@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 // Material UI Imports
 import { TextField, Button } from "@mui/material";
@@ -14,12 +15,18 @@ import CreateNewExpense from './CreateNewExpense';
 
 export default function CreateNewGoal() {
 
+    const expenses = useSelector(store => store.newExpense);
+
     const [quill, setQuill] = React.useState('');
     const [goal, setGoal] = React.useState("");
 
     const handleQuillChange = value => {
         // console.log('Change', value);
         setQuill(value);
+    }
+
+    const cancelCreateGoal = () => {
+        console.log('Cancel Creating New Goal')
     }
 
     const addExpenseRow = () => {
@@ -54,10 +61,13 @@ export default function CreateNewGoal() {
                     <th>Notes</th>
                 </thead>
                 <tbody>
-                    <CreateNewExpense />
+                    {expenses.map((expense, index) => (
+                        <CreateNewExpense expense={expense} index={index} />
+                    ))}
                 </tbody>
             </table>
             <Button onClick={() => addExpenseRow()}>Add Expense</Button>
+            <Button onClick={() => cancelCreateGoal()}>Cancel</Button>
             <Button>Create Goal</Button>
         </div>
     )
