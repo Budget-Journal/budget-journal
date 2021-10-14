@@ -6,8 +6,8 @@
   padding-left: 100px;
   width: 250px;
   text-align: center;
-  
 }
+
 .borderHome {
   box-sizing: border-box;
   background-size: 90%;
@@ -16,12 +16,6 @@
   border: 1px solid rgb(223, 223, 223);
   border-radius: 24px 24px 24px 24px;
   width: 650px;
-  
-}*/
-
-/* .home__Icon {
-  font-size: 40px;
-} */
 
 /* .home__title {
   /* align-items: center;
