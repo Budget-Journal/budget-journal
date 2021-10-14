@@ -97,9 +97,7 @@ function App() {
             <div className ="app__page">
 
               <BottomNavBar />
-              <CreateGoal />
-
-
+              <CreateNewGoal />
             </div>
             {/* Body of create goal component */}
           </ProtectedRoute>
@@ -126,7 +124,7 @@ function App() {
             <div className ="app__page">
 
             <BottomNavBar />
-            <GoalCard />
+            <CompletedGoal />
             </div>
             {/* Body of accomplished goals component */}
           </ProtectedRoute>
@@ -139,7 +137,7 @@ function App() {
             <div className ="app__page">
 
               <BottomNavBar />
-              <GoalCardView />
+              <CompletedGoalCardView />
             
             
            </div>

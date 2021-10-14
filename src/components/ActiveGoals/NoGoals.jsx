@@ -5,9 +5,15 @@ import { useDispatch } from "react-redux";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-
-
+import { styled } from '@mui/material/styles';
 import "./ActiveGoals.css";
+
+const Item = styled(Grid)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(4),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function NoGoals() {
     // Set hooks as variables 
@@ -32,11 +38,11 @@ export default function NoGoals() {
     
 
     return(
-        <Grid container item xs={12} justifyContent="center" direction="column" alignItems="center">
-            {/* <Grid item> */}
+        <Grid container >
+        <Grid item>
+        <Item>
                 <Card>
-            {/* <form name="frm" onSubmit={postBudget}> */}
-            {/* <div className="borderHome"> */}
+            <form name="frm" onSubmit={postBudget}>
                 <h2 className="home__title">Let's set a Goal</h2>
 
                 <AddIcon onClick={() => history.push("/creategoal")} className="home__Icon" />
@@ -56,10 +62,10 @@ export default function NoGoals() {
                     <button
                     type="submit">Set Budget</button>
                 </h4>
-            {/* </div> */}
-            {/* </form> */}
+            </form>
                 </Card>
-                        {/* </Grid> */}
+                </Item>
+            </Grid>
 
         </Grid>
     )
