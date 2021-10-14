@@ -54,9 +54,7 @@ export default function CompletedGoalCardView() {
     // Setting reducers to variables
     const goalDetails = useSelector(store => store.viewGoalDetails);
     const journal = useSelector(store => store.journalPosts);
-    const details = useSelector(store => store.details);
     const budgetDetails = useSelector(store => store.budgetTableReducer);
-    console.log('DEEEETTTAAAAIIIILLLSSS', details)
 
 
     return (
@@ -90,7 +88,7 @@ export default function CompletedGoalCardView() {
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
                             <Typography paragraph>
-                                <div dangerouslySetInnerHTML={{__html: details.reasons}}></div>                  
+                                <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
                             </Typography>
                             <Typography paragraph>
                                 <table>

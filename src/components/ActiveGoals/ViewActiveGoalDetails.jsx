@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import React, {useState} from "react";
 import { TextField, Button } from "@mui/material";
 
+// import ReactQuill from "react-quill";
+// import EditorToolbar, { modules, formats } from "./EditorToolbar";
+// import "react-quill/dist/quill.snow.css";
+
 // Import other components
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
@@ -14,6 +18,9 @@ export default function ViewActiveGoalDetails() {
     React.useEffect(() => {
 
     }, [budgetDetails]);
+
+    // // Quill local state
+    // const [state, setState] = React.useState('');
 
     // Obtaining data from reducers
     const goalDetails = useSelector(store => store.viewGoalDetails);

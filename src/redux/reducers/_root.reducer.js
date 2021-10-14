@@ -3,7 +3,6 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import journal from './journal.reducer';
 import completedGoal from './completedGoal.reducer';
-import details from './cardDetails.reducer';
 import selectGoal from './journalSelectGoal.reducer';
 import journalPosts from './journalPosts.reducer';
 import activeGoals from './activeGoals.reducer';
@@ -32,7 +31,6 @@ const rootReducer = combineReducers({
   completedGoal, // will hold fetch goals that have been marked completed (TRUE in database)
 
 
-  details, // will hold goal and budget details based on a specific goal
 
 
   
