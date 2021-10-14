@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
 import Paper from '@mui/material/Paper';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';

@@ -58,7 +58,7 @@ export default function CompletedGoalCardView() {
 
 
     return (
-        <Grid container className={classes.gridContainer}>
+        <Grid container spacing={2} className={classes.gridContainer}>
             <Grid>
                 <Card>
                     <CardHeader 

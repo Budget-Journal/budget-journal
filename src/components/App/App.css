@@ -127,9 +127,10 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
-
-
-.app__page {
-  display: flex;
-  
+.noGoal{
+  background-image: url('https://www.emeraldgrouppublishing.com/sites/default/files/2019-12/SER1.1.1%20-%20FW%20-%20Stack%20of%20Journals.jpg')
 }
+
+
+
+
