@@ -53,7 +53,7 @@ export default function GoalCardView() {
     const journal = useSelector(store => store.journalPosts);
     console.log("Journal Entries related to this goal", journal);
 
-    const goalDetails = useSelector(store => store.activeGoalDetails);
+   
     const completedGoals= useSelector(store => store.completedGoal);
     console.log('GOALS***', completedGoals);
 
@@ -116,12 +116,12 @@ export default function GoalCardView() {
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                <Typography paragraph>
-                    <JournalPosts journal = {journal}/>
-                </Typography>
-                <Typography paragraph>
-                <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
-                </Typography>
+                  <Typography paragraph>
+                      <JournalPosts journal = {journal}/>
+                  </Typography>
+                  <Typography paragraph>
+                    <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
+                  </Typography>
                 </CardContent>
               </Collapse>
             </Card>

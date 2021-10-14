@@ -81,37 +81,37 @@ export default function RenderedGoals({goal, index}) {
     }
 
     return(
-                <div>
-                    <Card  sx={{width: '100%'}}>
-                        <CardHeader
-                            avatar={
-                            <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
-                            } 
-                            title={goal.name}
-                            subheader={goal.total_goal_cost}
-                            
-                        />
-                        <CardActions>
-                            <Button 
-                            size="small" 
-                            onClick={() => { handleCompleteGoal(goal)}}>
-                            <Checkbox {...label} default color="success" />
-                            </Button>
+        <div>
+            <Card  sx={{width: '100%'}}>
+                <CardHeader
+                    avatar={
+                    <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
+                    } 
+                    title={goal.name}
+                    subheader={goal.total_goal_cost}
+                    
+                />
+                <CardActions>
+                    <Button 
+                        size="small" 
+                        onClick={() => { handleCompleteGoal(goal)}}>
+                    <Checkbox {...label} default color="success" />
+                    </Button>
 
-                            <Button 
-                            size="small" 
-                            onClick={() => { handleViewGoalDetails(goal)}}>
-                            View
-                            </Button>
+                    <Button 
+                        size="small" 
+                        onClick={() => { handleViewGoalDetails(goal)}}>
+                    View
+                    </Button>
 
-                            <Button 
-                            color="error" 
-                            size="small" 
-                            onClick={() => { handleDeleteGoal(goal)}}>
-                            Delete
-                            </Button>                   
-                        </CardActions>
-                    </Card>
-                </div>
+                    <Button 
+                        color="error" 
+                        size="small" 
+                        onClick={() => { handleDeleteGoal(goal)}}>
+                    Delete
+                    </Button>                   
+                </CardActions>
+            </Card>
+        </div>
     )
 };

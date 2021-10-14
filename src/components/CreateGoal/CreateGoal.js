@@ -9,35 +9,21 @@ import { useSelector, useDispatch } from "react-redux";
 import Expenses from '../CreateGoal/Expenses';
 
 export default function CreateGoal() {
-    const history = useHistory();
-
 
     const [state, setState] = React.useState('');
-    // const [reasons, setReasons] = useState("");
-
-
-
     const [goal, setGoal] = useState("");
     const [addExpensesButtonClick, setAddExpensesButtonClick] = useState(true);
     const dispatch = useDispatch();
-
-
-    const submitGoal = () => {
-        history.push('/activegoals');
-    }
     
     const handleChange = value =>{
         console.log('Change', value);
         setState(value);
     }
-console.log(state);
-
-
+    console.log(state);
 
     // Toggle the Add Expenses Button (we need to make this untoggleable later)
     const addExpenses = () => {
         setAddExpensesButtonClick(!addExpensesButtonClick);
-
     }
     const submitExpenses = () => {
         if (addExpensesButtonClick) {
@@ -105,22 +91,7 @@ console.log(state);
                     onChange={(event) => setReasons(event.target.value)}
                 /> */}
 
-   {/* <td>
-                        <TextField
-                            label="Price"
-                            size="small"
-                            type="number"
-                            value={price}
-                            onChange={(event) => setPrice(event.target.value)}
-                        />
-                    </td> */}
 
 
-                        {/* <Button
-                    variant="contained"
-                    onClick={addExpenses}
-                >
-                    Add Expenses
-                </Button>
-                {submitExpenses()} */}
+                       
 

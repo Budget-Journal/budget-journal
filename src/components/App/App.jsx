@@ -24,6 +24,9 @@ import CreateGoal from '../CreateGoal/CreateGoal';
 import Footer from '../Footer/Footer';
 import ViewActiveGoalDetails from '../ActiveGoals/ViewActiveGoalDetails';
 
+import CompletedGoal from '../CompletedGoal/CompletedGoals';
+import CompletedGoalCardView from '../CompletedGoal/CompletedGoalCardView';
+
 import './App.css';
 
 function App() {
@@ -80,6 +83,7 @@ function App() {
             <div className ="app__page">
               <SideBar />
               <ViewActiveGoalDetails />
+
             </div>
               {/* Body of activegoals page component */}
           </ProtectedRoute>
@@ -120,7 +124,8 @@ function App() {
             
             <div className ="app__page">
             <SideBar />
-            <GoalCard />
+            {/* <GoalCard /> */}
+            <CompletedGoal />
 
             </div>
             {/* Body of accomplished goals component */}
@@ -133,9 +138,10 @@ function App() {
             
             <div className ="app__page">
               <SideBar />
-              <GoalCardView />
-            
-            
+              {/* <GoalCardView /> */}
+              <CompletedGoalCardView />
+
+
             </div>
             
           </ProtectedRoute>
