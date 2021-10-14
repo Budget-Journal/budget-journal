@@ -12,7 +12,8 @@ import './ActiveGoals.css'
 const useStyles = makeStyles({
   gridContainer: {
     paddingLeft: "50px",
-    paddingRight: "10px"
+    paddingRight: "10px",
+    marginTop: 15,
   },
   subtractBudgetBtn: {
     margin: 5,
@@ -25,6 +26,10 @@ const useStyles = makeStyles({
     paddingBottom: 8,
     paddingRight: 88,
   },
+  totalGoalCostCard: {
+    marginTop: 65,
+    marginLeft: 30
+  }
 });
 
 export default function ActiveGoals() {
@@ -86,9 +91,9 @@ export default function ActiveGoals() {
         
       :
         <Grid container spacing={4} justify="center" className={classes.gridContainer}>
-        <Card  
+        {/* <Card  
           className= "totalGoalCostCard" 
-          sx={{width: '79%'}}
+          sx={{width: '100%'}}
         >
             <div>
               <center>
@@ -106,7 +111,7 @@ export default function ActiveGoals() {
                 >
                   Add to Budget
                 </Button>
-                <br />
+                
                 <TextField
                   value={subtractFromBudget}
                   onChange={(e) => setSubtractFromBudget(e.target.value)}
@@ -121,12 +126,48 @@ export default function ActiveGoals() {
                 </Button>
               </center>
             </div>
-        </Card>
+        </Card> */}
           {activeGoals.map((goal, index) => (
             <Grid item xs={12} sm={6} md={4}>
               <RenderedGoals goal={goal} index={index} />
             </Grid>
           ))}
+          <Card
+            className={classes.totalGoalCostCard}
+            sx={{ width: '100%' }}
+          >
+            <div>
+              <center>
+                <TextField
+                  className={classes.addInput}
+                  value={addToBudget}
+                  onChange={(e) => setAddToBudget(e.target.value)}
+                >
+                </TextField>
+                <Button
+                  className={classes.addBudgetBtn}
+                  variant="contained"
+                  color="primary"
+                  onClick={handleAddToBudget}
+                >
+                  Add to Budget
+                </Button>
+
+                <TextField
+                  value={subtractFromBudget}
+                  onChange={(e) => setSubtractFromBudget(e.target.value)}
+                ></TextField>
+                <Button
+                  className={classes.subtractBudgetBtn}
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleSubtractFromBudget}
+                >
+                  Subtract from Budget
+                </Button>
+              </center>
+            </div>
+          </Card>
         </Grid>
       }
     </div>
