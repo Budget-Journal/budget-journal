@@ -5,6 +5,7 @@ export default function* budgetSaga() {
     yield takeLatest("ADD_EXPENSE", addExpense)
     yield takeLatest("FETCH_ACTIVE_BUDGET_DETAILS", fetchActiveBudgetDetails);
     yield takeLatest("UPDATE_EXPENSE", updateExpense);
+    yield takeLatest("DELETE_EXPENSE", deleteExpense);
 
     // Creates a new expense row for the user
     function* addExpense(action) {
@@ -20,11 +21,25 @@ export default function* budgetSaga() {
         }
     }
 
+    // Delete an expense based on it's id
+    function* deleteExpense(action) {
+        try {
+            yield axios.delete(`/api/budget/${action.payload.id}`);
+            const response = yield axios.get(`/api/budget/details/${action.payload.goal_id}`);
+            yield put({
+                type: "SET_ACTIVE_BUDGET_DETAILS",
+                payload: response.data
+            })
+        } catch (error) {
+            console.error('Failed to delete expense', error)
+        }
+    }
+
     // Fetches the expenses pertaining to a specific goal
     function* fetchActiveBudgetDetails(action) {
         try {
             const response = yield axios.get(`/api/budget/details/${action.payload}`);
-            yield put ({
+            yield put({
                 type: "SET_ACTIVE_BUDGET_DETAILS",
                 payload: response.data
             })

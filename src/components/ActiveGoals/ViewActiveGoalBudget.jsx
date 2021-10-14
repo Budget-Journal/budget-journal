@@ -17,11 +17,15 @@ export default function ViewActiveGoalBudget (props) {
         })
     };
 
-    const deleteExpense = (id) => {
-        console.log('Expense to delete', id);
+    // Delete an expense
+    const deleteExpense = (detail) => {
+        console.log(`Expense to delete ${detail.id} from Goal ${detail.goal_id}`);
         dispatch({
             type: "DELETE_EXPENSE",
-            payload: id
+            payload: {
+                id: detail.id,
+                goal_id: detail.goal_id
+            }
         })
     };
 
@@ -48,7 +52,9 @@ export default function ViewActiveGoalBudget (props) {
                         onChange={handleBudgetEdits}
                     />
                 </td>
-                <td><Button onClick={() => deleteExpense(props.detail.id)}>Delete</Button></td>
+                <td>
+                    <Button onClick={() => deleteExpense(props.detail)}>Delete</Button>
+                </td>
             </tr>
     )
 }
