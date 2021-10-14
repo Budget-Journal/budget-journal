@@ -28,7 +28,9 @@ const useStyles = makeStyles({
   },
   totalGoalCostCard: {
     marginTop: 65,
-    marginLeft: 30
+    marginLeft: 30,
+    paddingTop: 15,
+    paddingBottom: 15
   }
 });
 
