@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, {useState} from "react";
 import { TextField, Button } from "@mui/material";
+import { useHistory } from "react-router-dom";
+
 
 // import ReactQuill from "react-quill";
 // import EditorToolbar, { modules, formats } from "./EditorToolbar";
@@ -11,9 +13,13 @@ import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
 
 
+//Array to hold each expense price
+//This needs to be outside the function to work
+
 
 export default function ViewActiveGoalDetails() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     React.useEffect(() => {
 
@@ -27,6 +33,37 @@ export default function ViewActiveGoalDetails() {
     const budgetDetails = useSelector(store => store.budgetTableReducer);
     const journal = useSelector(store => store.journalPosts);
     console.log("Goal details", goalDetails);
+    console.log("budgetDetails", budgetDetails);
+    console.log("budgetDetails", budgetDetails.length);
+    console.log("Goal details", goalDetails.totalExpenseCost);
+
+    let totalExpenseCost = [];
+
+    for (let i = 0; i < budgetDetails.length; i++){
+        totalExpenseCost.push(parseInt(budgetDetails[i].price));
+        console.log(totalExpenseCost);
+    }
+    function addExpenses(array) {
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+            sum = sum + array[i]
+        }
+        return sum;
+    }
+    //extractExpense()
+    //console.log(totalExpenseCost);
+
+    //totalExpenseCost.push(budgetDetails.price)
+
+    // function addPrice(array){
+    //     let sum = 0
+    //     for (let i = 0; i < budgetDetails.length; i++){
+    //         let price = budgetDetails[i].price;
+    //         sum = sum + array[price];
+    //         console.log(sum);
+    //     }
+    // }
+    //console.log(addPrice(budgetDetails))
 
     // Local state to handle any edits a user makes to their goals
     // State begins as their previous information
@@ -43,10 +80,12 @@ export default function ViewActiveGoalDetails() {
 
     const submitChanges = (e) => {
         e.preventDefault(e);
-        dispatch({
-            type: "UPDATE_GOAL",
-            payload: goalEdits
-        });
+        console.log('ADD EXPENSE',addExpenses(totalExpenseCost));
+        //history.push('/accomplishedgoals');
+        // dispatch({
+        //     type: "UPDATE_GOAL",
+        //     payload: goalEdits
+        // });
     };
 
     const addExpenseRow = () => {
