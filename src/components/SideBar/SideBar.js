@@ -21,13 +21,20 @@ function SideBar() {
   const [value, setValue] = React.useState(0);
   const ref = React.useRef(null);
 
+  // Set hooks to variables
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const goToActiveGoals = () => {
     history.push("/activegoals");
   };
   
+  // Handles functionality when create goal tab is clicked
   const createGoal = () => {
+    // Create a new goal to be used in create goal page
+    dispatch({
+      type: "CREATE_NEW_GOAL"
+    })
     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
   };
   

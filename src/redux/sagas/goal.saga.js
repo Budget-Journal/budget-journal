@@ -60,6 +60,15 @@ function* cardViewDetails(action) {
     }
 };
 
+// Creates new goal on "Create Goal" in navbar or "+" button on welcome page
+function* createNewGoal() {
+    try {
+        yield axios.post('/api/goal');
+    } catch (error) {
+        console.error('Failed to create new goal', error);
+    }
+}
+
 function* postGoals(action) {
     try{
         yield axios.post('/api/goal', action.payload)
@@ -125,6 +134,8 @@ export default function* goalSaga(){
     yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
     yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
+    yield takeLatest('CREATE_NEW_GOAL', createNewGoal);
+
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('COMPLETED_GOAL_DETAILS', cardViewDetails);
     yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal);

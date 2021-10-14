@@ -26,7 +26,8 @@ export default function CreateNewGoal() {
     }
 
     const cancelCreateGoal = () => {
-        console.log('Cancel Creating New Goal')
+        console.log('Cancel Creating New Goal');
+        // Will dispatch to delete the created goal
     }
 
     const addExpenseRow = () => {
