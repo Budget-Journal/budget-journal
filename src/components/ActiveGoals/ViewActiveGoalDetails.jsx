@@ -30,7 +30,8 @@ export default function ViewActiveGoalDetails() {
     // console.log("Goal details", goalDetails);
     // console.log("budgetDetails", budgetDetails);
     // console.log("budgetDetails", budgetDetails.length);
-    // console.log("Goal details", goalDetails.totalExpenseCost);
+    console.log("Goal details", goalDetails.id);
+    let goalId = goalDetails.id
 
     let totalExpenseCost = [];
 
@@ -45,6 +46,7 @@ export default function ViewActiveGoalDetails() {
         }
         return sum;
     }
+    let totalGoalCost = addExpenses(totalExpenseCost)
 
     // Local state to handle any edits a user makes to their goals
     // State begins as their previous information
@@ -61,12 +63,16 @@ export default function ViewActiveGoalDetails() {
 
     const submitChanges = (e) => {
         e.preventDefault(e);
-        console.log('ADD EXPENSE',addExpenses(totalExpenseCost));
-        //history.push('/accomplishedgoals');
+        console.log('ADD EXPENSE', totalGoalCost);
         dispatch({
-            type: "UPDATE_GOAL",
-            payload: goalEdits
+            type: "UPDATE_TOTAL_GOAL_COST",
+            payload: { goalId, totalGoalCost }
         });
+        history.push('/activegoals');
+        // dispatch({
+        //     type: "UPDATE_GOAL",
+        //     payload: goalEdits
+        // });
     };
 
     const addExpenseRow = () => {

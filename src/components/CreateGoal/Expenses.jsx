@@ -80,6 +80,7 @@ export default function Expenses() {
         return sum;
     }
     let totalGoalCost = addExpenses(totalExpenseCost);
+    console.log('goalId***',goalId);
 
     // Adds Total cos of a goal to the database on submit
     const submitTotalGoalCost = () => {
