@@ -25,10 +25,6 @@ export default function* budgetSaga() {
     function* deleteExpense(action) {
         try {
             yield axios.delete(`/api/budget/${action.payload}`);
-            yield put({
-                type: "FETCH_ACTIVE_BUDGET_DETAILS",
-                payload: action.payload
-            })
         } catch (error) {
             console.error('Failed to delete expense', error)
         }
