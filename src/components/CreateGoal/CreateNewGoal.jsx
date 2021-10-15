@@ -31,11 +31,14 @@ export default function CreateNewGoal() {
         setState(value);
     };
 
+    // Delete goal and expenses
+    // Take user back to home page
     const cancelCreateGoal = () => {
         console.log('Cancel Creating New Goal');
         // Will dispatch to delete the created goal
     };
 
+    // Add a new expense row
     const addExpenseRow = () => {
         console.log('Add Expense Row');
         dispatch({
@@ -46,12 +49,13 @@ export default function CreateNewGoal() {
         })
     };
 
+    // Update the goal's information from user inputs
     const createGoal = () => {
         console.log('Create new goal')
         dispatch({
             type: "UPDATE_LATEST_GOAL_CREATED",
             payload: {
-                id: lastGoal[0].id,
+                id: lastGoal[0].goal_id,
                 name: goal,
                 reasons: state
             }

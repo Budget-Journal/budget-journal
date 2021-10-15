@@ -85,6 +85,16 @@ function* createNewGoal() {
     }
 }
 
+// Updates the goal that create when user selects "Create Goal" or "+" button on welcome page
+function* updateNewGoal(action) {
+    try {
+        yield axios.put(`/api/goal/update_goal/${action.payload.id}`, action.payload);
+    } catch (error) {
+        console.error('Failed to update new goal', error);
+    }
+
+};
+
 function* postGoals(action) {
     try{
         yield axios.post('/api/goal', action.payload)
@@ -151,6 +161,7 @@ export default function* goalSaga(){
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
     // yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
     yield takeLatest('CREATE_NEW_GOAL', createNewGoal);
+    yield takeLatest('UPDATE_LATEST_GOAL_CREATED', updateNewGoal)
 
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('COMPLETED_GOAL_DETAILS', cardViewDetails);

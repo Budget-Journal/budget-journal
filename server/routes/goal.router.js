@@ -178,6 +178,29 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.put('/update_goal/:id', rejectUnauthenticated, (req, res) => {
+    console.log('NEW UPDATES', req.body);
+    const sqlText = `
+        UPDATE "goal"
+        SET "name" = $1, "reasons" = $2
+        WHERE "id" = $3 AND "user_id" = $4
+    `;
+
+    const sqlParams = [
+        req.body.name,
+        req.body.reasons,
+        req.params.id,
+        req.user.id
+    ]
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.error('Failed to update goal', error);
+        res.sendStatus(500);
+    })
+})
+
 // router.post('/', rejectUnauthenticated, (req, res) => {
 //     //console.log('Goal to POST:', req.body);
     
