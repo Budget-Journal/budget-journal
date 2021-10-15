@@ -52,6 +52,8 @@ export default function ProfilePage() {
     const [addToBudget, setAddToBudget] = useState('');
     const [subtractFromBudget, setSubtractFromBudget] = useState('');
 
+    const [editBudgetButtonClick, setEditBudgetButtonClick] = useState(true);
+
     //const classes = useStyles();
 
     // Set variable to user redux store data
@@ -100,6 +102,47 @@ export default function ProfilePage() {
         history.go(0);
     }
 
+    const toggleUpdateBudget = () => {
+        setEditBudgetButtonClick(!editBudgetButtonClick)
+    }
+    const updateBudget = () => {
+        if (editBudgetButtonClick) {
+            return;
+        } else {
+            return (
+                <div>
+                    <TextField
+                        // className={classes.addInput}
+                        value={addToBudget}
+                        onChange={(e) => setAddToBudget(e.target.value)}
+                    >
+                    </TextField>
+                    <Button
+                        // className={classes.addBudgetBtn}
+                        variant="contained"
+                        color="primary"
+                        onClick={handleAddToBudget}
+                    >
+                        Add Funds
+                    </Button>
+
+                    <TextField
+                        value={subtractFromBudget}
+                        onChange={(e) => setSubtractFromBudget(e.target.value)}
+                    ></TextField>
+                    <Button
+                        // className={classes.subtractBudgetBtn}
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleSubtractFromBudget}
+                    >
+                        Subtract Funds
+                    </Button>
+                </div>
+            )
+        }
+    }
+
 
     // Subtract the totalGoalCost amount from the user budget total 
     const remainingBalance = user.total_budget - totalGoalCostSum;
@@ -108,15 +151,16 @@ export default function ProfilePage() {
         <div>
             <h1>Profile</h1>
             <h1>Total Budget: $ {user.total_budget}</h1>
-            {/* <Button>Edit Budget</Button>
-            <TextField></TextField> */}
+            <Button onClick={toggleUpdateBudget}>Update Budget</Button>
+            {updateBudget()}
+            
             <h2>Total Goal Cost: {totalGoalCostSum.toFixed(2)}</h2>
             <h2>Balance: {remainingBalance.toFixed(2)}</h2>
 
 
                 <div>
                     <center>
-                        <TextField
+                        {/* <TextField
                             // className={classes.addInput}
                             value={addToBudget}
                             onChange={(e) => setAddToBudget(e.target.value)}
@@ -142,7 +186,7 @@ export default function ProfilePage() {
                             onClick={handleSubtractFromBudget}
                         >
                             Subtract Funds
-                        </Button>
+                        </Button> */}
                     </center>
                 </div>
             

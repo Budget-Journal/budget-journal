@@ -23,6 +23,16 @@ export default function RenderedGoals({goal, index}) {
     const dispatch = useDispatch();
     const history = useHistory();
     let goalId;
+
+    // const user = useSelector((store) => store.user);
+    // const activeGoals = useSelector(store => store.activeGoals);
+    // console.log('**********',activeGoals)
+
+    // let completeActiveGoal = []
+    // for (let i = 0; i < activeGoals.length; i++){
+    //     completeActiveGoal.push(activeGoals[i])
+    //     console.log(completeActiveGoal)
+    // }
     
     // Will store the goal details in a reducer and fetch all the journal posts related to the goal
     // Dispatch data will be displayed in ViewActiveGoalDetails
@@ -56,7 +66,7 @@ export default function RenderedGoals({goal, index}) {
             else{
                  return false;
             }
-        console.log('Goal id', goal.id);
+        // console.log('Goal id', goal.id);
         goalId = {
             id: goal.id
         }
