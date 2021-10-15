@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch } from "react-redux";
 
 // Material UI Imports
-import { Button, TextField} from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
-export default function CreateNewExpense({goal, expense}) {
+export default function CreateNewExpense({ goal, expense }) {
     const dispatch = useDispatch();
 
     // Handle expense edits on keystrokes
@@ -13,7 +13,7 @@ export default function CreateNewExpense({goal, expense}) {
             type: "UPDATE_EXPENSE",
             payload: {
                 id: expense.id,
-                update: {...expense, [e.target.name]: e.target.value},
+                update: { ...expense, [e.target.name]: e.target.value },
                 goal_id: expense.goal_id
             }
         })
@@ -34,21 +34,21 @@ export default function CreateNewExpense({goal, expense}) {
     return (
         <tr key={expense.id}>
             <td>
-                <TextField 
+                <TextField
                     name="expense"
                     value={expense.expense}
                     onChange={(e) => handleExpenseEdits(e)}
                 />
             </td>
             <td>
-                <TextField 
+                <TextField
                     name="price"
                     value={expense.price}
                     onChange={(e) => handleExpenseEdits(e)}
                 />
-                </td>
+            </td>
             <td>
-                <TextField 
+                <TextField
                     name="notes"
                     value={expense.notes}
                     onChange={(e) => handleExpenseEdits(e)}

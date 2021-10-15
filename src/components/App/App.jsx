@@ -40,7 +40,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav/>
+        <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/activegoals" />
@@ -58,15 +58,15 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          
-          
+
+
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/activegoals"
           >
-            
-            <div className ="app__page">
+
+            <div className="app__page">
               <BottomNavBar />
               <ActiveGoals />
             </div>
@@ -78,23 +78,23 @@ function App() {
             exact
             path="/active_goal_details"
           >
-            
-            <div className ="app__page">
+
+            <div className="app__page">
               <BottomNavBar />
               <ViewActiveGoalDetails />
 
             </div>
-              {/* Body of activegoals page component */}
+            {/* Body of activegoals page component */}
           </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/creategoal"
-            
+
           >
-            
-            <div className ="app__page">
+
+            <div className="app__page">
 
               <BottomNavBar />
               <CreateNewGoal />
@@ -107,8 +107,8 @@ function App() {
             exact
             path="/journal"
           >
-            
-            <div className ="app__page">
+
+            <div className="app__page">
               <BottomNavBar />
               <Journal />
             </div>
@@ -120,11 +120,11 @@ function App() {
             exact
             path="/accomplishedgoals"
           >
-            
-            <div className ="app__page">
 
-            <BottomNavBar />
-            <CompletedGoal />
+            <div className="app__page">
+
+              <BottomNavBar />
+              <CompletedGoal />
             </div>
             {/* Body of accomplished goals component */}
           </ProtectedRoute>
@@ -133,15 +133,15 @@ function App() {
             exact
             path="/view"
           >
-            
-            <div className ="app__page">
+
+            <div className="app__page">
 
               <BottomNavBar />
               <CompletedGoalCardView />
-            
-            
-           </div>
-            
+
+
+            </div>
+
           </ProtectedRoute>
 
           <Route
@@ -154,10 +154,10 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
-              
+
               <LoginPage />
-            
-              
+
+
             }
           </Route>
 
@@ -185,7 +185,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the Landing page
-              {/* <LandingPage /> */}
+              {/* <LandingPage /> */ }
             }
           </Route>
 
