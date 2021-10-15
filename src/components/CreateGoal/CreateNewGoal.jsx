@@ -17,14 +17,14 @@ export default function CreateNewGoal() {
     const dispatch = useDispatch();
 
     const lastGoal = useSelector(store => store.lastGoal);
-    const expenses = useSelector(store => store.newExpense);
+    const budgetDetails = useSelector(store => store.budgetTableReducer);
 
     const [state, setState] = React.useState('');
     const [goal, setGoal] = React.useState('');
 
     React.useEffect(() => {
 
-    }, [])
+    }, [budgetDetails])
 
     const handleQuillChange = value => {
         // console.log('Change', value);
@@ -86,8 +86,8 @@ export default function CreateNewGoal() {
                     <th>Notes</th>
                 </thead>
                 <tbody>
-                    {lastGoal.map((expense, index) => (
-                        <CreateNewExpense expense={expense} index={index} />
+                    {budgetDetails.map((expense) => (
+                        <CreateNewExpense lastGoal={goal} expense={expense} />
                     ))}
                 </tbody>
             </table>

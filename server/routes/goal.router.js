@@ -89,7 +89,6 @@ router.get('/completed', rejectUnauthenticated, (req, res) => {
 });
 
 // Get last goal that was created
-// I WILL USE THIS ROUTE *******************************************************
 router.get('/last_goal', (req, res) => {
     // GET route code here
     const sqlText = `
@@ -116,8 +115,6 @@ router.get('/last_goal', (req, res) => {
 
 // Fetch goal details
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
-    // TO DO -- If statement to check if there is a budget or not
-    // If there is now budget data for a goal, the below query will fail
     const sqlText = `
         SELECT 
             "budget"."id",
@@ -148,7 +145,6 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
 
 // Creating a new goal, budget, and new expense?
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('***Create New Goal***');
 
     const sqlText = `
         INSERT INTO "goal" ("user_id")
@@ -160,7 +156,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
     // First query creates the goal
     pool.query(sqlText, sqlParams).then(result => {
-        console.log('New Goal ID', result.rows[0].id);
 
         const sqlText = `
             INSERT INTO "budget" ("goal_id")
@@ -182,9 +177,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     });
 });
-
-
-
 
 // router.post('/', rejectUnauthenticated, (req, res) => {
 //     //console.log('Goal to POST:', req.body);
@@ -210,6 +202,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 //         res.sendStatus(500);
 //     })
 // });
+
 
 // router.post('/budget', rejectUnauthenticated, (req, res) => {
 //     //console.log('Data to add too budget', req.body);

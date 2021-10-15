@@ -11,7 +11,6 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchActiveGoals() {
     try{
         const response = yield axios.get ("api/goal/active");
-        console.log("Current active goals*****************", response.data);
         yield put ({
             type: 'SET_ACTIVE_GOALS',
             payload: response.data
@@ -24,9 +23,8 @@ function* fetchActiveGoals() {
 function* fetchCompletedGoals() {
     try{
         const goals = yield axios.get ("api/goal/completed") //Server
-        console.log("get goals", goals.data);
         yield put({ 
-            type: 'SET_COMPLETED_GOALS', //Set
+            type: 'SET_COMPLETED_GOALS', 
             payload: goals.data
         });
     }catch(error){
@@ -67,14 +65,21 @@ function* createNewGoal() {
         yield axios.post('/api/goal');
 
         // Fetch most recent goal created
-        const response = yield axios.get("api/goal/last_goal")
+        const response = yield axios.get("api/goal/last_goal");
+        console.log('***** NEW GOAL INFO *****', response.data);
+        let goalId = response.data[0].goal_id
+        console.log('**********NEW GOAL ID FOR FETCHING EXPENSES', goalId);
         yield put({
             type: 'SET_LAST_GOAL',
             payload: response.data
         });
 
-        // FETCH 
-
+        // Fetch expenses to new goal
+        const expenses = yield axios.get(`/api/budget/details/${goalId}`);
+        yield put({
+            type: "SET_ACTIVE_BUDGET_DETAILS",
+            payload: expenses.data
+        })
     } catch (error) {
         console.error('Failed to create new goal', error);
     }

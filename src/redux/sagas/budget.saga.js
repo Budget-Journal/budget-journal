@@ -26,7 +26,11 @@ export default function* budgetSaga() {
     function* createNewExpense(action) {
         try {
             yield axios.post(`/api/budget/creating/new_expense/${action.payload.id}`);
-            const response = yield axios.get(`/api/budget/`)
+            const response = yield axios.get(`/api/budget/details/${action.payload.id}`);
+            yield put({
+                type: "SET_ACTIVE_BUDGET_DETAILS",
+                payload: response.data
+            })
         } catch (error) {
             console.error('Failed to create a new expense', error);
         }
