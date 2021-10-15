@@ -178,6 +178,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+// Update an existing goal
 router.put('/update_goal/:id', rejectUnauthenticated, (req, res) => {
     console.log('NEW UPDATES', req.body);
     const sqlText = `
@@ -253,6 +254,7 @@ router.put('/update_goal_cost', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Handles edits to the goal name
 router.put('/edit_goal_name/:id', rejectUnauthenticated,(req, res) => {
     
     const sqlText = `
@@ -275,6 +277,7 @@ router.put('/edit_goal_name/:id', rejectUnauthenticated,(req, res) => {
     })
 });
 
+// Handle edits in the Quill editor
 router.put('/edit_quill/:id', rejectUnauthenticated,(req, res) => {
     
     const sqlText = `

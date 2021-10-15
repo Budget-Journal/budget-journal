@@ -62,14 +62,14 @@ export default function CreateGoal() {
                 <br />
 
 
-                <TextField
+                {/* <TextField
                     className="reasonsBox"
                     placeholder="What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
                     multiline
                     rows={4}
                     value={reasons.value}
                     onChange={(event) => setReasons(event.target.value)}
-                />
+                /> */}
                 <br />
                 <Button
                     variant="contained"
