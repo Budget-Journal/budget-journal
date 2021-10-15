@@ -93,7 +93,7 @@ function Nav() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={() => history.push('/createGoal')}>Profile</MenuItem>
+                <MenuItem onClick={() => history.push('/profile')}>Profile</MenuItem>
                 <MenuItem onClick={() => dispatch({ type: 'LOGOUT' })}>Log Out</MenuItem>
               </Menu> 
             </Stack>
