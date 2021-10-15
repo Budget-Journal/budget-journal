@@ -31,6 +31,16 @@ export default function NoGoals() {
     let [budget, setBudget]= useState("")
     const dispatch = useDispatch();
 
+
+    const createGoal = () => {
+        dispatch({
+            type: "CREATE_NEW_GOAL"
+        });
+
+        history.push("/creategoal");
+    };
+
+
     const postBudget = () => {
         dispatch({
             type: "POST_BUDGET",
@@ -59,7 +69,7 @@ export default function NoGoals() {
                     <AddIcon 
                     fontSize="large" 
                     variant="outlined"
-                    onClick={() => history.push("/creategoal")}/>
+                    onClick={() => createGoal()}/>
 
                     <h4 className="home__subtitle">
                         Click the '+' to add a Goal

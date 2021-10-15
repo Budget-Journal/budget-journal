@@ -5,6 +5,7 @@ import { TextField, Button } from "@mui/material";
 export default function ViewActiveGoalBudget (props) {
     const dispatch = useDispatch();
 
+    // Handle expense edits on keystrokes
     const handleBudgetEdits = (e) => {
         dispatch({
             type: "UPDATE_EXPENSE",
@@ -17,7 +18,7 @@ export default function ViewActiveGoalBudget (props) {
         })
     };
 
-    // Delete an expense
+    // Delete an expense by id
     const deleteExpense = (detail) => {
         console.log(`Expense to delete ${detail.id} from Goal ${detail.goal_id}`);
         dispatch({
