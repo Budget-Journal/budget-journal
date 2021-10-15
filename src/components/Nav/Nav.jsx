@@ -13,7 +13,34 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import CardMedia from '@mui/material/CardMedia';
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
+
+
 function Nav() {
+  //Handle menu from Avatar
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   //Grab from redux store
   const user = useSelector((store) => store.user);
 
@@ -21,26 +48,58 @@ function Nav() {
 
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{background: '#71aac9'}} position="static">
-        <Toolbar placement="right-bottom">
+        <Toolbar>
           <img height="100px" width="auto" src={JournalLogo} alt="" />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          
+          **Render Balance / Budget**
           </Typography>
            {/* If no user is logged in, show these links */}
-
-        {user.id === null &&
-          // If there's no user, show login/registration links
-          <Link className="navLink" to="/login">
-            Login / Register
-          </Link>
-        }
+            {user.id === null &&
+              // If there's no user, show login/registration links
+              <Link className="navLink" to="/login">
+                Login / Register
+              </Link>
+            }
 
         {/* If a user is logged in, show these links */}
         {user.id && (
-          <>
-            <h1 className="user">{user ? <h2 className="userLog"> {user.username} <br/></h2> : <h3>No user logged-in</h3>}</h1>
-            <LogOutButton className="navLink" />
-          </>
+          <div className="user">
+            {user ? <h6 className="userLog"> 
+            <Stack direction="row" spacing={2}>
+                  <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                 <Avatar 
+                  alt={user.username}
+                  src="/static/images/avatar/1.jpg" />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={() => history.push('/createGoal')}>Profile</MenuItem>
+                <MenuItem onClick={() => dispatch({ type: 'LOGOUT' })}>Log Out</MenuItem>
+              </Menu> 
+            </Stack>
+            <br/>
+            </h6> : <h3>No user logged-in</h3>}
+          </div>
         )}
         </Toolbar>
       </AppBar>

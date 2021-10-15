@@ -38,7 +38,6 @@ export default function ActiveGoals() {
     <div>
       {lengthOfActiveGoals <= 0 ?
         <NoGoals />
-        
       :
         <Grid container spacing={4} justify="center" className={classes.gridContainer}>
           {activeGoals.map((goal, index) => (
