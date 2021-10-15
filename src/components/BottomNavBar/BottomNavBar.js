@@ -1,9 +1,6 @@
 import React from "react";
-<<<<<<< HEAD:src/components/SideBar/SideBar.js
+
 import { useDispatch } from "react-redux";
-import "./Sidebar.css";
-=======
->>>>>>> master:src/components/BottomNavBar/BottomNavBar.js
 import { useHistory } from "react-router-dom";
 
 //Bottom Navigation
@@ -31,24 +28,21 @@ function SideBar() {
     history.push("/activegoals");
   };
   
-<<<<<<< HEAD:src/components/SideBar/SideBar.js
+
   // Handles functionality when create goal tab is clicked
   const createGoal = () => {
     // Create a new goal to be used in create goal page
     dispatch({
       type: "CREATE_NEW_GOAL"
     })
-    history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
-=======
-  const createGoal = (value) => {
     setValue(false)
-     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
->>>>>>> master:src/components/BottomNavBar/BottomNavBar.js
+    history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
   };
   
   const journal = () => {
     history.push("/journal");
   };
+  
   const accomplishedGoals = () => {
     history.push("/accomplishedgoals");
   };
