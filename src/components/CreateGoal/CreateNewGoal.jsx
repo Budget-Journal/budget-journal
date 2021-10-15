@@ -21,6 +21,24 @@ export default function CreateNewGoal() {
     const lastGoal = useSelector(store => store.lastGoal);
     const budgetDetails = useSelector(store => store.budgetTableReducer);
 
+    // Set array to push each goal price into
+    let totalGoalCost = [];
+
+    // Push the price of the budgetDetails to the totalGoalCost array
+    for (let i = 0; i < budgetDetails.length; i++) {
+        totalGoalCost.push(parseInt(budgetDetails[i].price));
+        console.log(totalGoalCost);
+    }
+
+    // Set totalGoalCostSum to 0
+    let totalGoalCostSum = 0;
+
+    // Add each price of the totalGoalCost array to the totalGoalCostSum
+    for (let i = 0; i < budgetDetails.length; i++) {
+        totalGoalCostSum = totalGoalCostSum + totalGoalCost[i];
+        totalGoalCostSum.toFixed(2)
+    }
+
     const [state, setState] = React.useState('');
     const [goal, setGoal] = React.useState('');
 
@@ -59,8 +77,13 @@ export default function CreateNewGoal() {
             payload: {
                 id: lastGoal[0].goal_id,
                 name: goal,
-                reasons: state
+                reasons: state,
             }
+        })
+        // Update the total goal cost
+        dispatch({
+            type: "PUT_TOTAL_GOAL_COST",
+            payload: { goalId: lastGoal[0].goal_id, totalGoalCostSum }
         })
 
         history.push('/activegoals');
@@ -68,7 +91,7 @@ export default function CreateNewGoal() {
 
     return (
         <div>
-            <TextField 
+            <TextField
                 label="What is your next goal?"
                 size="small"
                 value={goal}

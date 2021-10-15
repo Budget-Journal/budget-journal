@@ -201,62 +201,8 @@ router.put('/update_goal/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
-// router.post('/', rejectUnauthenticated, (req, res) => {
-//     //console.log('Goal to POST:', req.body);
-    
-//     const sqlText = `
-//         INSERT INTO "goal" ("user_id", "name", "reasons")
-//         VALUES ($1, $2, $3)
-//         RETURNING "id";
-//     `;
-
-//     const sqlParams = [
-//         req.user.id,            // $1
-//         req.body.name,          // $2
-//         req.body.reasons,       // $3
-//     ]
-
-//     // First query makes the goal
-//     pool.query(sqlText, sqlParams).then(result => {
-//         //console.log('Post results', result.rows);
-//         res.sendStatus(200);
-//     }).catch(error => {
-//         console.error("Creating Goal & Budget Failed", error);
-//         res.sendStatus(500);
-//     })
-// });
-
-
-// router.post('/budget', rejectUnauthenticated, (req, res) => {
-//     //console.log('Data to add too budget', req.body);
-//     //const goalId = result.rows[0].id;
-
-//     const sqlText = `
-//             INSERT INTO "budget" ("goal_id", "expense", "price", "notes")
-//             VALUES ($1, $2, $3, $4)
-//         `;
-
-//     console.log(req.body.goalId.id);
-//     const sqlParams = [
-//         req.body.goalId.id,             // $1
-//         req.body.expense,   // $2
-//         req.body.price,     // $3
-//         req.body.notes      // $4
-//     ]
-//         //console.log('*******', sqlParams);
-
-//     // Second query creates the budget
-//     pool.query(sqlText, sqlParams).then(result => {
-//         res.sendStatus(201)
-//     }).catch(error => {
-//         console.error("Creating Budget Failed", error);
-//         res.sendStatus(500);
-//     })
-// });
-
+// Set the total goal cost when the goal is first created
 router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
-    console.log('Data to add to total goal cost', req.body);
-    const goalId = req.body.goalId.id
 
     const sqlText = `
             UPDATE "goal"
@@ -264,10 +210,10 @@ router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
             WHERE "goal".id = $2 AND "user_id" = $3
         `;
 
-    console.log('goal id is:',goalId);
+    //console.log('goal id is:',goalId);
     const sqlParams = [
-        req.body.totalGoalCost,
-        goalId,
+        req.body.totalGoalCostSum,
+        req.body.goalId,
         req.user.id
     ]
     console.log('******* SqlParams is:', sqlParams);
@@ -280,6 +226,7 @@ router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Update the total goal cost once the goal is edited
 router.put('/update_goal_cost', rejectUnauthenticated, (req, res) => {
     console.log('Data to add to total goal cost', req.body);
     const goalId = req.body.goalId
