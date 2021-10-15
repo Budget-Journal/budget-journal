@@ -66,3 +66,37 @@ Font-Size: 15px; */
 .noGoal{
   background-image: url('https://www.emeraldgrouppublishing.com/sites/default/files/2019-12/SER1.1.1%20-%20FW%20-%20Stack%20of%20Journals.jpg')
 }
+
+
+.text-editor {
+    
+  padding-right: 200px;
+  
+  margin: 0 auto;
+  Font-Family: 'Open Sans', Sans-Serif;
+  border: 1px solid rgb(223, 223, 223);
+  box-sizing: border-box;
+  border-radius: 24px 24px 24px 24px;
+  width: 1000px;
+  padding-left: 100px;
+  padding-bottom: 145px;
+  height: 500px;
+  
+}
+.ql-editor {
+  display: flex;
+  width: 1000px;
+  height: 500px;
+  
+}
+
+/* Changes Quill Body */
+.quill{
+  Font-Family: 'Open Sans', Sans-Serif;
+  width: 1000px;
+  height: 300px;
+  
+}
+#toolbar{
+  width:1000px;
+}

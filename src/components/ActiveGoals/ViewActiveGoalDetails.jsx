@@ -4,42 +4,35 @@ import { TextField, Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "../CreateGoal/EditorToolbar";
-
-// import ReactQuill from "react-quill";
-// import EditorToolbar, { modules, formats } from "./EditorToolbar";
-// import "react-quill/dist/quill.snow.css";
-
+ 
 // Import other components
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
 
 export default function ViewActiveGoalDetails() {
+    // Set hooks to variables 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    React.useEffect(() => {
-
-    }, [budgetDetails]);
-
-    // // Quill local state
-    // const [state, setState] = React.useState('');
+    // When budgetDetails.reducer updates, rerender the page
+    React.useEffect(() => {}, [budgetDetails]);
 
     // Obtaining data from reducers
     const goalDetails = useSelector(store => store.viewGoalDetails);
     const budgetDetails = useSelector(store => store.budgetTableReducer);
     const journal = useSelector(store => store.journalPosts);
-    console.log("Goal details", goalDetails.name);
-    // console.log("budgetDetails", budgetDetails);
-    // console.log("budgetDetails", budgetDetails.length);
-    console.log("Goal details", goalDetails.id);
     let goalId = goalDetails.id
 
+    // Create an array to store all the prices
     let totalExpenseCost = [];
 
+    // Add prices to the totalExpenseCost array
     for (let i = 0; i < budgetDetails.length; i++){
         totalExpenseCost.push(parseInt(budgetDetails[i].price));
         console.log(totalExpenseCost);
     }
+
+    // Calculate the sum of the prices
     function addExpenses(array) {
         let sum = 0;
         for (let i = 0; i < array.length; i++) {
@@ -47,7 +40,9 @@ export default function ViewActiveGoalDetails() {
         }
         return sum;
     }
+    // Variable used to send off
     let totalGoalCost = addExpenses(totalExpenseCost)
+
 
     // Local state of Quill
     const [state, setState] = React.useState(goalDetails.reasons);
@@ -75,25 +70,22 @@ export default function ViewActiveGoalDetails() {
         })
     }
 
-    // const submitChanges = (e) => {
-    //     e.preventDefault(e);
-    //     console.log('ADD EXPENSE', totalGoalCost);
-    //     dispatch({
-    //         type: "UPDATE_TOTAL_GOAL_COST",
-    //         payload: { goalId, totalGoalCost }
-    //     });
-       
-    //     goalEdits={
-    //         name: goal,
-    //         reasons: state
-    //     }
-    //     history.push('/activegoals');
-    //     dispatch({
-    //         type: "UPDATE_GOAL",
-    //         payload: goalEdits
-    //     });
-    // };
+    // Updates the total goal cost in DB
+    // Sends user back to home page
+    const submitChanges = () => {
+        console.log('Total Goal Cost', totalGoalCost);
 
+        dispatch({
+            type: "UPDATE_TOTAL_GOAL_COST",
+            payload: { 
+                goalId, 
+                totalGoalCost }
+        });
+       
+        history.push('/activegoals');
+    };
+
+    // Add a new expense row
     const addExpenseRow = () => {
         console.log('Add Expense Row');
         dispatch({
@@ -108,16 +100,7 @@ export default function ViewActiveGoalDetails() {
 
     return (
       <div>
-        {/* <Card>
-                <CardContent>
-                     <p>{goalDetails.name}</p>
-                    <p>{goalDetails.price}</p>
-                     <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>                  
-                    <p>{goalDetails.notes}</p>
-                 </CardContent>
-            </Card> */}
-
-        <form>
+    
           <TextField
             label="Goal Name"
             size="small"
@@ -131,8 +114,6 @@ export default function ViewActiveGoalDetails() {
           <ReactQuill
             className="quill"
             theme="snow"
-            // value={<div dangerouslySetInnerHTML={{__html: goalEdits.reasons}}></div> }
-            name="reasons"
             value={state}
             onChange={handleQuillEdits}
             placeholder={
@@ -141,16 +122,6 @@ export default function ViewActiveGoalDetails() {
             modules={modules}
             formats={formats}
           />
-          {/* <TextField
-                    label="Reasons"
-                    className="reasonsBox"
-                    placeholder="What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
-                    multiline
-                    rows={4}
-                    name="reasons"
-                    value={goalEdits.reasons}
-                    onChange={handleGoalEdits}
-                /> */}
 
           <br />
           <br />
@@ -171,8 +142,7 @@ export default function ViewActiveGoalDetails() {
           </table>
           <Button onClick={() => addExpenseRow()}>New Expense</Button>
           <br />
-          <Button type="submit">Submit Changes</Button>
-        </form>
+          <Button onClick={submitChanges}>Submit Changes</Button>
 
         <div>
           <JournalPosts journal={journal} />

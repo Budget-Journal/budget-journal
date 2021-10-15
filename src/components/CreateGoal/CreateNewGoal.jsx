@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
+
 // Material UI Imports
 import { TextField, Button } from "@mui/material";
 
@@ -91,12 +92,15 @@ export default function CreateNewGoal() {
 
     return (
         <div>
+           
             <TextField
-                label="What is your next goal?"
+                label="Set a Goal..."
                 size="small"
                 value={goal}
                 onChange={(event) => setGoal(event.target.value)}
             />
+            <br/>
+            <br/>
 
             <EditorToolbar />
             <ReactQuill className="quill"
@@ -109,6 +113,7 @@ export default function CreateNewGoal() {
                 modules={modules}
                 formats={formats}
             />
+            
             <table>
                 <thead>
                     <th>Expense</th>
