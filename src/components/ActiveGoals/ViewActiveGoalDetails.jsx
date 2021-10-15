@@ -49,29 +49,21 @@ export default function ViewActiveGoalDetails() {
     }
     let totalGoalCost = addExpenses(totalExpenseCost)
 
-    // Local state to handle any edits a user makes to their goals
-    // State begins as their previous information
+    // Local state of Quill
     const [state, setState] = React.useState(goalDetails.reasons);
-    const [goal, setGoal] = useState('');  
 
-    // const handleGoalChange = (e) => {
-    //    setGoal(e.target.value)
-    // };
-    // const handleQuillChange = value =>{
-    //     console.log('Change', value);
-    //     setState(value);
-    // };
-
+    // Handles edits to the goal title
     const handleEditGoal = (e) => {
         dispatch({
             type: "UPDATE_GOAL",
             payload: {
                 id: goalDetails.id,
-                update: {...goalDetails.name, [e.target.name]: e.target.value},
+                update: {...goalDetails, [e.target.name]: e.target.value},
             } 
         })
     }
 
+    // Handle edits to Quill
     const handleQuillEdits = value => {
         setState(value);
         dispatch({

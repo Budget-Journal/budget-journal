@@ -159,6 +159,24 @@ function* updateGoal(action){
     }
 }
 
+function* updateGoalName(action){
+    try {
+        yield axios.put(`/api/goal/edit_goal_name/${action.payload.id}`, action.payload);
+    }
+    catch (error) {
+        console.error('PUT updateGoal has an error', error)
+    }
+}
+
+function* updateQuillReasons(action){
+    try {
+        yield axios.put(`/api/goal/edit_quill/${action.payload.id}`, action.payload);
+    }
+    catch (error) {
+        console.error('PUT updateQuill has an error', error)
+    }
+}
+
 // Delete an active goal
 function* deleteActiveGoal(action){
     try {
@@ -187,6 +205,10 @@ export default function* goalSaga(){
     // yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
     yield takeLatest('CREATE_NEW_GOAL', createNewGoal);
     yield takeLatest('UPDATE_LATEST_GOAL_CREATED', updateNewGoal)
+
+    // Used when a user is editing their previous information
+    yield takeLatest('UPDATE_GOAL', updateGoalName);
+    yield takeLatest('UPDATE_QUILL', updateQuillReasons);
 
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('COMPLETED_GOAL_DETAILS', cardViewDetails);
