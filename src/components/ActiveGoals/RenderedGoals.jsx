@@ -23,10 +23,18 @@ export default function RenderedGoals({goal, index}) {
     const dispatch = useDispatch();
     const history = useHistory();
     let goalId;
+    let goalCost = goal.total_goal_cost;
+    let onCompleteGoalId = goal.id;
+    console.log('*******', goalCost);
+    console.log('*******', onCompleteGoalId)
+    const user = useSelector((store) => store.user);
+    console.log(user.total_budget);
+    const updateBudget = user.total_budget - goalCost;
+    console.log(updateBudget)
 
     // const user = useSelector((store) => store.user);
-    // const activeGoals = useSelector(store => store.activeGoals);
-    // console.log('**********',activeGoals)
+    const activeGoals = useSelector(store => store.activeGoals);
+    //console.log('**********',activeGoals)
 
     // let completeActiveGoal = []
     // for (let i = 0; i < activeGoals.length; i++){
@@ -61,20 +69,26 @@ export default function RenderedGoals({goal, index}) {
             //Alerts user to either confirm if the goal is completed or cancel if its not.
         let isConfirm = confirm('Is this trip really completed? You wont be able to undo once completed.')
             if (isConfirm) {
-                history.push('/activeGoals')
+                goalId = {
+                    id: goal.id,
+                }
+                dispatch({
+                    type: "UPDATE_GOAL_COMPLETED",
+                    payload: goalId
+                })
+                dispatch({
+                    type: "UPDATE_ON_COMPLETE_GOAL",
+                    payload: { updateBudget }
+                })
+                
+                //history.push('/activeGoals')
             }
             else{
                  return false;
             }
         // console.log('Goal id', goal.id);
-        goalId = {
-            id: goal.id
-        }
-        dispatch({
-            type: "UPDATE_GOAL_COMPLETED",
-            payload: goalId
-        })
-        history.go(0);
+        
+        //history.go(0);
     }
 
     // Will delete a goal from the dom and database

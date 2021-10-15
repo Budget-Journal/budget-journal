@@ -68,6 +68,25 @@ router.put('/subtract_from_budget', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.put('/on_completed_goal', rejectUnauthenticated, (req, res) => {
+    console.log('TESTING ******', req.body);
+    const queryText = `
+        UPDATE "user" 
+        SET "total_budget" = $1
+        WHERE "user".id=$2
+    `;
+    let queryParams = [
+        req.body.updateBudget,
+        req.user.id
+    ];
+    pool.query(queryText, queryParams).then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error', error);
+        res.sendStatus(500);
+    })
+})
+
 // Fetch all expenses based on goal id
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
