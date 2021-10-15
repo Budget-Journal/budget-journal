@@ -18,7 +18,7 @@ export default function ViewActiveGoalBudget (props) {
         })
     };
 
-    // Delete an expense
+    // Delete an expense by id
     const deleteExpense = (detail) => {
         console.log(`Expense to delete ${detail.id} from Goal ${detail.goal_id}`);
         dispatch({

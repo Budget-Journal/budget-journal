@@ -19,8 +19,16 @@ export default function CreateNewExpense({goal, expense}) {
         })
     }
 
-    const deleteExpense = (id) => {
-        console.log('Delete expense', id);
+    // Delete an expense by id
+    const deleteExpense = (expense) => {
+        console.log(`Expense to delete ${expense.id} from Goal ${expense.goal_id}`);
+        dispatch({
+            type: "DELETE_EXPENSE",
+            payload: {
+                id: expense.id,
+                goal_id: expense.goal_id
+            }
+        })
     }
 
     return (
