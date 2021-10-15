@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 // Material UI Imports
 import { TextField, Button } from "@mui/material";
@@ -15,6 +16,7 @@ import CreateNewExpense from './CreateNewExpense';
 
 export default function CreateNewGoal() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const lastGoal = useSelector(store => store.lastGoal);
     const budgetDetails = useSelector(store => store.budgetTableReducer);
@@ -60,6 +62,8 @@ export default function CreateNewGoal() {
                 reasons: state
             }
         })
+
+        history.push('/activegoals');
     };
 
     return (
