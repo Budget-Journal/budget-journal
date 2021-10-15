@@ -42,7 +42,7 @@ function Nav() {
 
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{background: '#71aac9'}} position="static">
-        <Toolbar placement="right-bottom">
+        <Toolbar>
           <img height="100px" width="auto" src={JournalLogo} alt="" />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           
@@ -58,12 +58,20 @@ function Nav() {
 
         {/* If a user is logged in, show these links */}
         {user.id && (
-          <>
-            <h1 className="user">{user ? <h2 className="userLog"> {user.username} <br/>$ {user.total_budget}</h2> : <h3>No user logged-in</h3>}</h1>
-           <h2>Total Goal Cost: {totalGoalCostSum.toFixed(2)}</h2>
-            <h2>Remaining Balance: {remainingBalance.toFixed(2)}</h2>
+          <div className="user">
+            <h1 >
+            {user ? <h6 className="userLog"> 
+            {user.username} 
+            <br/>
+            {/* ${user.total_budget}  */}
+            <br/>
+            Balance: {remainingBalance.toFixed(2)}
+            <br />
+            Goal Total: {totalGoalCostSum.toFixed(2)} 
+            <br/>
             <LogOutButton className="navLink" />
-          </>
+            </h6> : <h3>No user logged-in</h3>}</h1>
+          </div>
         )}
         </Toolbar>
       </AppBar>

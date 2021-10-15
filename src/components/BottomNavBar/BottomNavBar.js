@@ -15,7 +15,7 @@ import HomeIcon from '@mui/icons-material/Home';
 
 
 function SideBar() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('');
   const ref = React.useRef(null);
 
   const history = useHistory();
@@ -25,7 +25,8 @@ function SideBar() {
   };
   
   const createGoal = (value) => {
-    setValue(false)
+    console.log('@#$%^&^&%', event.target.value);
+  
      history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
   };
   
@@ -53,8 +54,8 @@ function SideBar() {
           icon={<HomeIcon />} />
 
           <BottomNavigationAction 
-          onClick={createGoal}
-          value= {value}
+          onChange={event => setValue(event.target.value)}
+          value= {createGoal}
           label="Create a Goal" 
           icon={<AddToPhotosIcon />} />
 

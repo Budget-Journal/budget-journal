@@ -16,20 +16,20 @@ const useStyles = makeStyles({
     marginTop: 15,
   },
   subtractBudgetBtn: {
-    margin: 5,
-    paddingTop: 12,
-    paddingBottom: 8
+    margin: 0,
+    paddingTop: 0,
+    paddingBottom: 0
   },
   addBudgetBtn: {
-    margin: 5,
-    paddingTop: 12,
-    paddingBottom: 8,
-    paddingRight: 88,
+    margin: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingRight: 0,
   },
   totalGoalCostCard: {
-    marginTop: 65,
+    marginTop: 5,
     marginLeft: 30,
-    paddingTop: 15,
+    paddingTop: 5,
     paddingBottom: 15
   }
 });
@@ -92,7 +92,48 @@ export default function ActiveGoals() {
         <NoGoals />
         
       :
+      
         <Grid container spacing={4} justify="center" className={classes.gridContainer}>
+        <Card
+            className={classes.totalGoalCostCard}
+            sx={{ width: '100%' }}
+          >
+            <div>
+              <center>
+                <TextField
+                  size="small"
+                  className={classes.addInput}
+                  value={addToBudget}
+                  onChange={(e) => setAddToBudget(e.target.value)}
+                >
+                </TextField>
+                <Button
+                  size="small"
+                  className={classes.addBudgetBtn}
+                  variant="contained"
+                  color="primary"
+                  onClick={handleAddToBudget}
+                >
+                  Add to Budget
+                </Button>
+
+                <TextField
+                  size="small"
+                  value={subtractFromBudget}
+                  onChange={(e) => setSubtractFromBudget(e.target.value)}
+                ></TextField>
+                <Button
+                  size="small"
+                  className={classes.subtractBudgetBtn}
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleSubtractFromBudget}
+                >
+                  Subtract from Budget
+                </Button>
+              </center>
+            </div>
+          </Card>
         {/* <Card  
           className= "totalGoalCostCard" 
           sx={{width: '100%'}}
@@ -134,42 +175,7 @@ export default function ActiveGoals() {
               <RenderedGoals goal={goal} index={index} />
             </Grid>
           ))}
-          <Card
-            className={classes.totalGoalCostCard}
-            sx={{ width: '100%' }}
-          >
-            <div>
-              <center>
-                <TextField
-                  className={classes.addInput}
-                  value={addToBudget}
-                  onChange={(e) => setAddToBudget(e.target.value)}
-                >
-                </TextField>
-                <Button
-                  className={classes.addBudgetBtn}
-                  variant="contained"
-                  color="primary"
-                  onClick={handleAddToBudget}
-                >
-                  Add to Budget
-                </Button>
 
-                <TextField
-                  value={subtractFromBudget}
-                  onChange={(e) => setSubtractFromBudget(e.target.value)}
-                ></TextField>
-                <Button
-                  className={classes.subtractBudgetBtn}
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleSubtractFromBudget}
-                >
-                  Subtract from Budget
-                </Button>
-              </center>
-            </div>
-          </Card>
         </Grid>
       }
     </div>
