@@ -55,7 +55,8 @@ function* updateSubtractFromBudget(action) {
   }
 }
 
-function* updateOnCompleteGoal(action) {
+// Update the budget when the user completes a goal
+function* updateBudgetOnCompleteGoal(action) {
   try {
     yield axios.put('/api/budget/on_completed_goal', action.payload);
   } catch {
@@ -68,7 +69,7 @@ function* userSaga() {
   yield takeLatest('POST_BUDGET', postBudget); //Post the initial user budget
   yield takeLatest('UPDATE_ADD_TO_USER_BUDGET', updateAddToBudget); // Add to the user budget
   yield takeLatest('UPDATE_SUBTRACT_TO_USER_BUDGET', updateSubtractFromBudget); // Subtract from user budget
-  yield takeLatest('UPDATE_ON_COMPLETE_GOAL', updateOnCompleteGoal);
+  yield takeLatest('UPDATE_BUDGET_ON_COMPLETE_GOAL', updateBudgetOnCompleteGoal); // Update the budget when the user completes a goal
 }
 
 export default userSaga;

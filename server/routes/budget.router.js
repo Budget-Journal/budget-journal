@@ -30,6 +30,8 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+
+// Add to Budget
 router.put('/add_to_budget', rejectUnauthenticated, (req, res) => {
     console.log('TESTING ******', req.body);
     const queryText = `
@@ -49,6 +51,7 @@ router.put('/add_to_budget', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// Subtract from total budget
 router.put('/subtract_from_budget', rejectUnauthenticated, (req, res) => {
     console.log('TESTING ******', req.body);
     const queryText = `
@@ -68,6 +71,7 @@ router.put('/subtract_from_budget', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// Subtract from budget when user completes a goal
 router.put('/on_completed_goal', rejectUnauthenticated, (req, res) => {
     console.log('TESTING ******', req.body);
     const queryText = `

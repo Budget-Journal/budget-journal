@@ -22,25 +22,12 @@ export default function RenderedGoals({goal, index}) {
     // Set hooks to variables
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const user = useSelector((store) => store.user);
+
     let goalId;
     let goalCost = goal.total_goal_cost;
-    let onCompleteGoalId = goal.id;
-    console.log('*******', goalCost);
-    console.log('*******', onCompleteGoalId)
-    const user = useSelector((store) => store.user);
-    console.log(user.total_budget);
-    const updateBudget = user.total_budget - goalCost;
-    console.log(updateBudget)
-
-    // const user = useSelector((store) => store.user);
-    const activeGoals = useSelector(store => store.activeGoals);
-    //console.log('**********',activeGoals)
-
-    // let completeActiveGoal = []
-    // for (let i = 0; i < activeGoals.length; i++){
-    //     completeActiveGoal.push(activeGoals[i])
-    //     console.log(completeActiveGoal)
-    // }
+    let updateBudget = user.total_budget - goalCost;
     
     // Will store the goal details in a reducer and fetch all the journal posts related to the goal
     // Dispatch data will be displayed in ViewActiveGoalDetails
@@ -77,18 +64,14 @@ export default function RenderedGoals({goal, index}) {
                     payload: goalId
                 })
                 dispatch({
-                    type: "UPDATE_ON_COMPLETE_GOAL",
+                    type: "UPDATE_BUDGET_ON_COMPLETE_GOAL",
                     payload: { updateBudget }
                 })
-                
-                //history.push('/activeGoals')
+                history.go(0);
             }
             else{
                  return false;
             }
-        // console.log('Goal id', goal.id);
-        
-        //history.go(0);
     }
 
     // Will delete a goal from the dom and database
