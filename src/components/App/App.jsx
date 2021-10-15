@@ -26,6 +26,8 @@ import ViewActiveGoalDetails from '../ActiveGoals/ViewActiveGoalDetails';
 import CompletedGoal from '../CompletedGoal/CompletedGoals';
 import CompletedGoalCardView from '../CompletedGoal/CompletedGoalCardView';
 
+import ProfilePage from '../ProfilePage/ProfilePage';
+
 import './App.css';
 
 function App() {
@@ -59,6 +61,20 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/profile"
+          >
+
+            <div className="app__page">
+             
+              <ProfilePage />
+              <BottomNavBar />
+            </div>
+            {/* Body of activegoals page component */}
+          </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
