@@ -253,6 +253,50 @@ router.put('/update_goal_cost', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.put('/edit_goal_name/:id', rejectUnauthenticated,(req, res) => {
+    
+    const sqlText = `
+        UPDATE "goal"
+        SET "name" = $1
+        WHERE "goal".id = $2 AND "user_id" = $3
+    `;
+
+    const sqlParams = [
+      req.body.update.name,
+      req.params.id,
+      req.user.id, 
+    ];
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(200);
+    }).catch (error => {
+        console.error('Failed to update an exisiting goal', error);
+        res.sendStatus(500);
+    })
+});
+
+router.put('/edit_quill/:id', rejectUnauthenticated,(req, res) => {
+    
+    const sqlText = `
+        UPDATE "goal"
+        SET "reasons" = $1
+        WHERE "goal".id = $2 AND "user_id" = $3
+    `;
+
+    const sqlParams = [
+      req.body.update,
+      req.params.id,
+      req.user.id, 
+    ];
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(200);
+    }).catch (error => {
+        console.error('Failed to update an exisiting goal', error);
+        res.sendStatus(500);
+    })
+});
+
 
 module.exports = router;
 
