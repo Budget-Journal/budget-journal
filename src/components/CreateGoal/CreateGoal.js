@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
-import { TextField, Button } from "@mui/material";
+import { Card, Container, CardContent, Typography, TextField, Button } from "@mui/material";
+
 import { useHistory } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import Expenses from '../CreateGoal/Expenses';
+
 
 export default function CreateGoal() {
 
@@ -47,7 +49,7 @@ export default function CreateGoal() {
         }
     }
     return (
-        <div className="text-editor">
+        <Container>
             <form name="frm" onSubmit={submitExpenses} >
                 <p>Goal:</p>
                 <TextField
@@ -58,8 +60,38 @@ export default function CreateGoal() {
                 />
                 <br />
                 <br />
-            
+
+
+                <TextField
+                    className="reasonsBox"
+                    placeholder="What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
+                    multiline
+                    rows={4}
+                    value={reasons.value}
+                    onChange={(event) => setReasons(event.target.value)}
+                />
+                <br />
+                <Button
+                    variant="contained"
+                    onClick={addExpenses}
+                >
+                    Add Expenses
+                </Button>
+                {submitExpenses()}
+               
+
+                    {/* <td>
+                        <TextField
+                            label="Price"
+                            size="small"
+                            type="number"
+                            value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                        />
+                    </td> */}
+
                  <EditorToolbar />
+
                 <ReactQuill className="quill"
                     theme="snow"
                     value={state}
@@ -78,7 +110,7 @@ export default function CreateGoal() {
                 </Button>
                 {submitExpenses()} 
             </form>
-        </div>
+        </Container>
     );
 };
 

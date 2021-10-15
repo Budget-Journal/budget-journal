@@ -49,16 +49,9 @@ export default function GoalCardView() {
     };
     // Setting reducers to variables
     const details = useSelector(store => store.details);
-    console.log("Goal details", details);
     const journal = useSelector(store => store.journalPosts);
-    console.log("Journal Entries related to this goal", journal);
-
-   
     const completedGoals= useSelector(store => store.completedGoal);
-    console.log('GOALS***', completedGoals);
 
-
-    
     return (
       <Grid container className={classes.gridContainer}>
         <Grid item xs={11.5}>

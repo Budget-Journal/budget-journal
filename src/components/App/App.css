@@ -102,7 +102,7 @@ Alert
 Form Treatment
 -------------------------------------------------------------------------------- */
 
-.formPanel {
+/* .formPanel {
 
   display: inline-block;
   box-sizing: border-box;
@@ -117,23 +117,20 @@ Form Treatment
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
   color: white;
   Font-Family: 'Work Sans', Sans-Serif;
-}
+} */
 
 .titlePanel{
   text-align: center;
 }
 
-
-
 input {
   margin: 5px;
   margin-bottom: 10px;
-  
+}
+.noGoal{
+  background-image: url('https://www.emeraldgrouppublishing.com/sites/default/files/2019-12/SER1.1.1%20-%20FW%20-%20Stack%20of%20Journals.jpg')
+}
 
-  
- 
-}
-.app__page {
-  display: flex;
-  
-}
+
+
+

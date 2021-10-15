@@ -1,6 +1,9 @@
 import React from "react";
+<<<<<<< HEAD:src/components/SideBar/SideBar.js
 import { useDispatch } from "react-redux";
 import "./Sidebar.css";
+=======
+>>>>>>> master:src/components/BottomNavBar/BottomNavBar.js
 import { useHistory } from "react-router-dom";
 
 //Bottom Navigation
@@ -9,7 +12,6 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
 import Paper from '@mui/material/Paper';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
@@ -29,6 +31,7 @@ function SideBar() {
     history.push("/activegoals");
   };
   
+<<<<<<< HEAD:src/components/SideBar/SideBar.js
   // Handles functionality when create goal tab is clicked
   const createGoal = () => {
     // Create a new goal to be used in create goal page
@@ -36,6 +39,11 @@ function SideBar() {
       type: "CREATE_NEW_GOAL"
     })
     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
+=======
+  const createGoal = (value) => {
+    setValue(false)
+     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
+>>>>>>> master:src/components/BottomNavBar/BottomNavBar.js
   };
   
   const journal = () => {
@@ -63,6 +71,7 @@ function SideBar() {
 
           <BottomNavigationAction 
           onClick={createGoal}
+          value= {value}
           label="Create a Goal" 
           icon={<AddToPhotosIcon />} />
 

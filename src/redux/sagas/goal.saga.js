@@ -8,6 +8,7 @@ import { put, takeLatest } from 'redux-saga/effects';
     Handles completing a goal
 */
 
+// Fetch all the goals marked as false
 function* fetchActiveGoals() {
     try{
         const response = yield axios.get ("api/goal/active");
@@ -20,9 +21,12 @@ function* fetchActiveGoals() {
     }
 };
 
+// Fetch all goals marked as true
 function* fetchCompletedGoals() {
     try{
-        const goals = yield axios.get ("api/goal/completed") //Server
+
+        const goals = yield axios.get ("api/goal/completed")
+
         yield put({ 
             type: 'SET_COMPLETED_GOALS', 
             payload: goals.data
@@ -32,10 +36,11 @@ function* fetchCompletedGoals() {
     }
 };
 
+
+// Fetch the most recent goal
 // function* fetchLastGoal(){
 //     try {
 //         const response = yield axios.get("api/goal/last_goal")
-//         console.log("response data is:", response.data);
 //         yield put({
 //             type: 'SET_LAST_GOAL', 
 //             payload: response.data
@@ -57,6 +62,7 @@ function* cardViewDetails(action) {
         console.log('cardDetails saga ERROR', error)
     }
 };
+
 
 // Creates new goal on "Create Goal" in navbar or "+" button on welcome page
 function* createNewGoal() {
@@ -95,6 +101,8 @@ function* updateNewGoal(action) {
 
 };
 
+
+// Post goals to DB
 function* postGoals(action) {
     try{
         yield axios.post('/api/goal', action.payload)
@@ -109,6 +117,8 @@ function* postGoals(action) {
         console.log('Post Goals has an error', error)
     }
 };
+
+// Post new expense to the DB
 function* postNewExpense(action){
     try {
         yield axios.post('/api/goal/budget', action.payload)
@@ -118,6 +128,7 @@ function* postNewExpense(action){
     }
 }
 
+//Set the Total goal cost once the goal is first created based on expense data
 function* putTotalGoalCost(action) {
     try {
         yield axios.put('/api/goal/total_goal_cost', action.payload);
@@ -127,6 +138,17 @@ function* putTotalGoalCost(action) {
     }
 }
 
+//Update the total goal cost on the active goals view card page
+function* updateTotalGoalCost(action){
+    try {
+        yield axios.put('/api/goal/update_goal_cost', action.payload);
+    }
+    catch (error) {
+        console.log('Post total goal cost has an error', error)
+    }
+}
+
+//Update a goal
 function* updateGoal(action){
     try {
         yield axios.put(`/api/completed/${action.payload.id}`)
@@ -136,6 +158,7 @@ function* updateGoal(action){
     }
 }
 
+// Delete an active goal
 function* deleteActiveGoal(action){
     try {
         yield axios.delete(`/api/goal/${action.payload.id}`)
@@ -145,6 +168,7 @@ function* deleteActiveGoal(action){
     }
 }
 
+//Delete a completed goal
 function* deleteCompletedGoal(action){
     try{
         yield axios.delete(`/api/goal/${action.payload.id}`);
@@ -170,4 +194,5 @@ export default function* goalSaga(){
     yield takeLatest('DELETE_COMPLETED_GOAL', deleteCompletedGoal);
     yield takeLatest('POST_NEW_EXPENSE', postNewExpense);
     yield takeLatest('PUT_TOTAL_GOAL_COST', putTotalGoalCost);
+    yield takeLatest('UPDATE_TOTAL_GOAL_COST', updateTotalGoalCost);
 }``

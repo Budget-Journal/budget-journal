@@ -73,7 +73,6 @@ export default function CreateNewGoal() {
                 size="small"
                 value={goal}
                 onChange={(event) => setGoal(event.target.value)}
-            
             />
 
             <EditorToolbar />
