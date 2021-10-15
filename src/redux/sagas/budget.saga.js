@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 export default function* budgetSaga() {
     yield takeLatest("FETCH_ACTIVE_BUDGET_DETAILS", fetchActiveBudgetDetails);
-    yield takeLatest("CREATE_NEW_EXPENSE_TABLE", createNewExpense)
+    yield takeLatest("CREATE_NEW_EXPENSE", createNewExpense)
     yield takeLatest("ADD_EXPENSE", addExpense)
     yield takeLatest("UPDATE_EXPENSE", updateExpense);
     yield takeLatest("DELETE_EXPENSE", deleteExpense);
@@ -11,13 +11,13 @@ export default function* budgetSaga() {
     // Creates a new expense row while creating a new goal
     function* createNewExpense(action) {
         try {
-            yield axios.post(`/api/budget/creating/new_expense${action.payload.id}`)
+            yield axios.post(`/api/budget/creating/new_expense/${action.payload.id}`)
         } catch (error) {
             console.error('Failed to create a new expense', error);
         }
     }
 
-    // Creates a new expense row while editing an existing goal
+    // Creates a new expense row on a previously made goal
     function* addExpense(action) {
         try {
             yield axios.post('/api/budget/editing/new_expense', action.payload);

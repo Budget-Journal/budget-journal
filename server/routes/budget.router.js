@@ -59,8 +59,8 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
-// Create a new expense table based on id
-router.post('/creating/:id', rejectUnauthenticated, (req, res) => {
+// Create a new expense based on id
+router.post('/creating/new_expense/:id', rejectUnauthenticated, (req, res) => {
     console.log('Goal ID to add expense table too:', req.params.id);
 })
 

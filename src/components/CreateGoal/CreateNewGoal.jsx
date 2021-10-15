@@ -19,12 +19,16 @@ export default function CreateNewGoal() {
     const lastGoal = useSelector(store => store.lastGoal);
     const expenses = useSelector(store => store.newExpense);
 
-    const [quill, setQuill] = React.useState('');
+    const [state, setState] = React.useState('');
     const [goal, setGoal] = React.useState('');
+
+    React.useEffect(() => {
+
+    }, [])
 
     const handleQuillChange = value => {
         // console.log('Change', value);
-        setQuill(value);
+        setState(value);
     };
 
     const cancelCreateGoal = () => {
@@ -35,9 +39,9 @@ export default function CreateNewGoal() {
     const addExpenseRow = () => {
         console.log('Add Expense Row');
         dispatch({
-            type: "CREATE_NEW_EXPENSE_TABLE",
+            type: "CREATE_NEW_EXPENSE",
             payload: {
-                id: lastGoal[0].id
+                id: lastGoal[0].goal_id
             }
         })
     };
@@ -49,7 +53,7 @@ export default function CreateNewGoal() {
             payload: {
                 id: lastGoal[0].id,
                 name: goal,
-                reasons: quill
+                reasons: state
             }
         })
     };
@@ -67,7 +71,7 @@ export default function CreateNewGoal() {
             <EditorToolbar />
             <ReactQuill className="quill"
                 theme="snow"
-                value={quill}
+                value={state}
                 onChange={handleQuillChange}
                 placeholder={
                     "What are your Key Motivations for achieving this goal? What steps do you need to achieve this goal? What's your Reward?"
@@ -82,7 +86,7 @@ export default function CreateNewGoal() {
                     <th>Notes</th>
                 </thead>
                 <tbody>
-                    {expenses.map((expense, index) => (
+                    {lastGoal.map((expense, index) => (
                         <CreateNewExpense expense={expense} index={index} />
                     ))}
                 </tbody>

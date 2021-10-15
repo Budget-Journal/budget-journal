@@ -63,7 +63,7 @@ function* cardViewDetails(action) {
 // Creates new goal on "Create Goal" in navbar or "+" button on welcome page
 function* createNewGoal() {
     try {
-        // Create new goal in DB
+        // Create new goal and budget in DB
         yield axios.post('/api/goal');
 
         // Fetch most recent goal created
@@ -72,6 +72,9 @@ function* createNewGoal() {
             type: 'SET_LAST_GOAL',
             payload: response.data
         });
+
+        // FETCH 
+
     } catch (error) {
         console.error('Failed to create new goal', error);
     }

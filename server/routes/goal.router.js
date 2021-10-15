@@ -93,9 +93,17 @@ router.get('/completed', rejectUnauthenticated, (req, res) => {
 router.get('/last_goal', (req, res) => {
     // GET route code here
     const sqlText = `
-        SELECT "goal"."id"
+        SELECT
+            "goal".id,
+            "budget".id,
+            "budget".goal_id,
+            "budget".expense,
+            "budget".price,
+            "budget".notes
         FROM "goal"
-            ORDER BY "id" DESC
+        JOIN "budget"
+            ON "goal".id = "budget"."goal_id"
+        ORDER BY "goal"."id" DESC
         LIMIT 1;
     `;
     pool.query(sqlText).then(result => {
@@ -138,7 +146,7 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
-// Creating a new goal and budget
+// Creating a new goal, budget, and new expense?
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('***Create New Goal***');
 
@@ -150,8 +158,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
     const sqlParams = [req.user.id];
 
+    // First query creates the goal
     pool.query(sqlText, sqlParams).then(result => {
-        res.sendStatus(201);
         console.log('New Goal ID', result.rows[0].id);
 
         const sqlText = `
@@ -161,6 +169,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
         const sqlParams = [result.rows[0].id];
 
+        // Second query create a new expense
         pool.query(sqlText, sqlParams).then(result => {
             res.sendStatus(201);
         }).catch(error => {
