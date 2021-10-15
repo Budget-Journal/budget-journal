@@ -126,7 +126,7 @@ export default function ProfilePage() {
                         Add Funds
                     </Button>
 
-                    <TextField
+                    {/* <TextField
                         value={subtractFromBudget}
                         onChange={(e) => setSubtractFromBudget(e.target.value)}
                     ></TextField>
@@ -137,7 +137,7 @@ export default function ProfilePage() {
                         onClick={handleSubtractFromBudget}
                     >
                         Subtract Funds
-                    </Button>
+                    </Button> */}
                 </div>
             )
         }
