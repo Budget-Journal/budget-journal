@@ -11,7 +11,6 @@ import lastGoal from './lastGoal.reducer';
 import budgetTableReducer from './budgetTableReducer';
 import totalGoalCost from './totalGoalCost.reducer';
 
-
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -29,7 +28,6 @@ const rootReducer = combineReducers({
 
 
   completedGoal, // will hold fetch goals that have been marked completed (TRUE in database)
-
 
 
 

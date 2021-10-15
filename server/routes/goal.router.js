@@ -13,6 +13,7 @@ const {
     
 */
 
+// Delete a goal, it's expenses, and journal posts
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         DELETE FROM "budget"
@@ -47,6 +48,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Fetch all goals that have not been completed
 router.get('/active', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const sqlText = `
@@ -66,6 +68,7 @@ router.get('/active', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Fetch all goals that have been completed
 router.get('/completed', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const sqlText = `
@@ -85,12 +88,21 @@ router.get('/completed', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Get last goal that was created
 router.get('/last_goal', (req, res) => {
     // GET route code here
     const sqlText = `
-        SELECT "goal"."id"
+        SELECT
+            "goal".id,
+            "budget".id,
+            "budget".goal_id,
+            "budget".expense,
+            "budget".price,
+            "budget".notes
         FROM "goal"
-            ORDER BY "id" DESC
+        JOIN "budget"
+            ON "goal".id = "budget"."goal_id"
+        ORDER BY "goal"."id" DESC
         LIMIT 1;
     `;
     pool.query(sqlText).then(result => {
@@ -101,10 +113,8 @@ router.get('/last_goal', (req, res) => {
     })
 });
 
-//GET Card Details
+// Fetch goal details
 router.get('/details/:id', rejectUnauthenticated, (req, res) => {
-    // TO DO -- If statement to check if there is a budget or not
-    // If there is now budget data for a goal, the below query will fail
     const sqlText = `
         SELECT 
             "budget"."id",
@@ -133,62 +143,66 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
-// Creating a new goal and budget
+// Creating a new goal, budget, and new expense?
 router.post('/', rejectUnauthenticated, (req, res) => {
-    //console.log('Goal to POST:', req.body);
-    
+
     const sqlText = `
-        INSERT INTO "goal" ("user_id", "name", "reasons")
-        VALUES ($1, $2, $3)
-        RETURNING "id";
+        INSERT INTO "goal" ("user_id")
+        VALUES ($1)
+        RETURNING "id"
+    `;
+
+    const sqlParams = [req.user.id];
+
+    // First query creates the goal
+    pool.query(sqlText, sqlParams).then(result => {
+
+        const sqlText = `
+            INSERT INTO "budget" ("goal_id")
+            VALUES ($1)
+        `;
+
+        const sqlParams = [result.rows[0].id];
+
+        // Second query create a new expense
+        pool.query(sqlText, sqlParams).then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.error('Failed to create budget table', error);
+            res.sendStatus(500);
+        })
+
+    }).catch(error => {
+        console.error('Failed to create new goal', error);
+        res.sendStatus(500);
+    });
+});
+
+router.put('/update_goal/:id', rejectUnauthenticated, (req, res) => {
+    console.log('NEW UPDATES', req.body);
+    const sqlText = `
+        UPDATE "goal"
+        SET "name" = $1, "reasons" = $2
+        WHERE "id" = $3 AND "user_id" = $4
     `;
 
     const sqlParams = [
-        req.user.id,            // $1
-        req.body.name,          // $2
-        req.body.reasons,       // $3
+        req.body.name,
+        req.body.reasons,
+        req.params.id,
+        req.user.id
     ]
 
-    // First query makes the goal
     pool.query(sqlText, sqlParams).then(result => {
-        //console.log('Post results', result.rows);
         res.sendStatus(200);
     }).catch(error => {
-        console.error("Creating Goal & Budget Failed", error);
+        console.error('Failed to update goal', error);
         res.sendStatus(500);
     })
-});
+})
 
-router.post('/budget', rejectUnauthenticated, (req, res) => {
-    //console.log('Data to add too budget', req.body);
-    //const goalId = result.rows[0].id;
-
-    const sqlText = `
-            INSERT INTO "budget" ("goal_id", "expense", "price", "notes")
-            VALUES ($1, $2, $3, $4)
-        `;
-
-    console.log(req.body.goalId.id);
-    const sqlParams = [
-        req.body.goalId.id,             // $1
-        req.body.expense,   // $2
-        req.body.price,     // $3
-        req.body.notes      // $4
-    ]
-        //console.log('*******', sqlParams);
-
-    // Second query creates the budget
-    pool.query(sqlText, sqlParams).then(result => {
-        res.sendStatus(201)
-    }).catch(error => {
-        console.error("Creating Budget Failed", error);
-        res.sendStatus(500);
-    })
-}); // Skadoosh dis stuf wurk; gg if you find this // update: it did'nt work
-
+// Set the total goal cost when the goal is first created
 router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
-    console.log('Data to add to total goal cost', req.body);
-    const goalId = req.body.goalId.id
 
     const sqlText = `
             UPDATE "goal"
@@ -196,10 +210,10 @@ router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
             WHERE "goal".id = $2 AND "user_id" = $3
         `;
 
-    console.log('goal id is:',goalId);
+    //console.log('goal id is:',goalId);
     const sqlParams = [
-        req.body.totalGoalCost,
-        goalId,
+        req.body.totalGoalCostSum,
+        req.body.goalId,
         req.user.id
     ]
     console.log('******* SqlParams is:', sqlParams);
@@ -212,6 +226,7 @@ router.put('/total_goal_cost', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Update the total goal cost once the goal is edited
 router.put('/update_goal_cost', rejectUnauthenticated, (req, res) => {
     console.log('Data to add to total goal cost', req.body);
     const goalId = req.body.goalId
@@ -234,6 +249,50 @@ router.put('/update_goal_cost', rejectUnauthenticated, (req, res) => {
         res.sendStatus(201)
     }).catch(error => {
         console.error("Creating Total Goal Cost Failed", error);
+        res.sendStatus(500);
+    })
+});
+
+router.put('/edit_goal_name/:id', rejectUnauthenticated,(req, res) => {
+    
+    const sqlText = `
+        UPDATE "goal"
+        SET "name" = $1
+        WHERE "goal".id = $2 AND "user_id" = $3
+    `;
+
+    const sqlParams = [
+      req.body.update.name,
+      req.params.id,
+      req.user.id, 
+    ];
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(200);
+    }).catch (error => {
+        console.error('Failed to update an exisiting goal', error);
+        res.sendStatus(500);
+    })
+});
+
+router.put('/edit_quill/:id', rejectUnauthenticated,(req, res) => {
+    
+    const sqlText = `
+        UPDATE "goal"
+        SET "reasons" = $1
+        WHERE "goal".id = $2 AND "user_id" = $3
+    `;
+
+    const sqlParams = [
+      req.body.update,
+      req.params.id,
+      req.user.id, 
+    ];
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(200);
+    }).catch (error => {
+        console.error('Failed to update an exisiting goal', error);
         res.sendStatus(500);
     })
 });

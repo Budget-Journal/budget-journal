@@ -22,7 +22,12 @@ export default function RenderedGoals({goal, index}) {
     // Set hooks to variables
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const user = useSelector((store) => store.user);
+
     let goalId;
+    let goalCost = goal.total_goal_cost;
+    let updateBudget = user.total_budget - goalCost;
     
     // Will store the goal details in a reducer and fetch all the journal posts related to the goal
     // Dispatch data will be displayed in ViewActiveGoalDetails
@@ -51,20 +56,22 @@ export default function RenderedGoals({goal, index}) {
             //Alerts user to either confirm if the goal is completed or cancel if its not.
         let isConfirm = confirm('Is this trip really completed? You wont be able to undo once completed.')
             if (isConfirm) {
-                history.push('/activeGoals')
+                goalId = {
+                    id: goal.id,
+                }
+                dispatch({
+                    type: "UPDATE_GOAL_COMPLETED",
+                    payload: goalId
+                })
+                dispatch({
+                    type: "UPDATE_BUDGET_ON_COMPLETE_GOAL",
+                    payload: { updateBudget }
+                })
+                history.go(0);
             }
             else{
                  return false;
             }
-        console.log('Goal id', goal.id);
-        goalId = {
-            id: goal.id
-        }
-        dispatch({
-            type: "UPDATE_GOAL_COMPLETED",
-            payload: goalId
-        })
-        history.go(0);
     }
 
     // Will delete a goal from the dom and database

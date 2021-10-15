@@ -24,7 +24,9 @@ function* fetchActiveGoals() {
 // Fetch all goals marked as true
 function* fetchCompletedGoals() {
     try{
-        const goals = yield axios.get ("api/goal/completed") 
+
+        const goals = yield axios.get ("api/goal/completed")
+
         yield put({ 
             type: 'SET_COMPLETED_GOALS', 
             payload: goals.data
@@ -34,18 +36,19 @@ function* fetchCompletedGoals() {
     }
 };
 
+
 // Fetch the most recent goal
-function* fetchLastGoal(){
-    try {
-        const response = yield axios.get("api/goal/last_goal")
-        yield put({
-            type: 'SET_LAST_GOAL', 
-            payload: response.data
-        });
-    } catch (error) {
-        console.log('fetchLastGoal', error)
-    }
-}
+// function* fetchLastGoal(){
+//     try {
+//         const response = yield axios.get("api/goal/last_goal")
+//         yield put({
+//             type: 'SET_LAST_GOAL', 
+//             payload: response.data
+//         });
+//     } catch (error) {
+//         console.log('fetchLastGoal', error)
+//     }
+// }
 
 // Card View Details
 function* cardViewDetails(action) {
@@ -59,6 +62,45 @@ function* cardViewDetails(action) {
         console.log('cardDetails saga ERROR', error)
     }
 };
+
+
+// Creates new goal on "Create Goal" in navbar or "+" button on welcome page
+function* createNewGoal() {
+    try {
+        // Create new goal and budget in DB
+        yield axios.post('/api/goal');
+
+        // Fetch most recent goal created
+        const response = yield axios.get("api/goal/last_goal");
+        console.log('***** NEW GOAL INFO *****', response.data);
+        let goalId = response.data[0].goal_id
+        console.log('**********NEW GOAL ID FOR FETCHING EXPENSES', goalId);
+        yield put({
+            type: 'SET_LAST_GOAL',
+            payload: response.data
+        });
+
+        // Fetch expenses to new goal
+        const expenses = yield axios.get(`/api/budget/details/${goalId}`);
+        yield put({
+            type: "SET_ACTIVE_BUDGET_DETAILS",
+            payload: expenses.data
+        })
+    } catch (error) {
+        console.error('Failed to create new goal', error);
+    }
+}
+
+// Updates the goal that create when user selects "Create Goal" or "+" button on welcome page
+function* updateNewGoal(action) {
+    try {
+        yield axios.put(`/api/goal/update_goal/${action.payload.id}`, action.payload);
+    } catch (error) {
+        console.error('Failed to update new goal', error);
+    }
+
+};
+
 
 // Post goals to DB
 function* postGoals(action) {
@@ -90,6 +132,7 @@ function* postNewExpense(action){
 function* putTotalGoalCost(action) {
     try {
         yield axios.put('/api/goal/total_goal_cost', action.payload);
+        console.log('******PutTOTALGOALCOST', action.payload);
     }
     catch (error) {
         console.log('Post total goal cost has an error', error)
@@ -113,6 +156,24 @@ function* updateGoal(action){
     }
     catch (error) {
         console.error('PUT updateGoal has an error', error)
+    }
+}
+
+function* updateGoalName(action){
+    try {
+        yield axios.put(`/api/goal/edit_goal_name/${action.payload.id}`, action.payload);
+    }
+    catch (error) {
+        console.error('PUT updateGoal has an error', error)
+    }
+}
+
+function* updateQuillReasons(action){
+    try {
+        yield axios.put(`/api/goal/edit_quill/${action.payload.id}`, action.payload);
+    }
+    catch (error) {
+        console.error('PUT updateQuill has an error', error)
     }
 }
 
@@ -141,7 +202,14 @@ function* deleteCompletedGoal(action){
 export default function* goalSaga(){
     yield takeLatest('FETCH_ACTIVE_GOALS', fetchActiveGoals);
     yield takeLatest('FETCH_COMPLETED_GOALS', fetchCompletedGoals);
-    yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
+    // yield takeLatest('FETCH_LAST_GOAL', fetchLastGoal);
+    yield takeLatest('CREATE_NEW_GOAL', createNewGoal);
+    yield takeLatest('UPDATE_LATEST_GOAL_CREATED', updateNewGoal)
+
+    // Used when a user is editing their previous information
+    yield takeLatest('UPDATE_GOAL', updateGoalName);
+    yield takeLatest('UPDATE_QUILL', updateQuillReasons);
+
     yield takeLatest('POST_GOALS', postGoals);
     yield takeLatest('COMPLETED_GOAL_DETAILS', cardViewDetails);
     yield takeLatest('UPDATE_GOAL_COMPLETED', updateGoal);
