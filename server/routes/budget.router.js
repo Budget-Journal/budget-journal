@@ -62,6 +62,20 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
 // Create a new expense based on id
 router.post('/creating/new_expense/:id', rejectUnauthenticated, (req, res) => {
     console.log('Goal ID to add expense table too:', req.params.id);
+
+    const sqlText = `
+        INSERT INTO "budget" ("goal_id")
+        VALUES ($1)
+    `;
+
+    const sqlParams = [req.params.id];
+
+    pool.query(sqlText, sqlParams).then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.error('Failed to create new expense', error);
+        res.sendStatus(500);
+    })
 })
 
 // Update an existing expense based on id 
