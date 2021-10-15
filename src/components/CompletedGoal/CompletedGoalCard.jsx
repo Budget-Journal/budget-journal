@@ -52,7 +52,7 @@ export default function CompletedGoalCard ({goal, index}) {
         console.log('Goal id', goal.id);
 
         dispatch({
-            // type: "DELETE_ACTIVE_GOAL",        NEED TO CHANGE TO COMPLETE GOAL
+            type: "DELETE_COMPLETED_GOAL", //NEED TO FIX THIS
             payload: goal.id
         })
         history.go(0);

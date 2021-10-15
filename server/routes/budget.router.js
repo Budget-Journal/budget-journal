@@ -30,6 +30,8 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+
+// Add to Budget
 router.put('/add_to_budget', rejectUnauthenticated, (req, res) => {
     console.log('TESTING ******', req.body);
     const queryText = `
@@ -49,6 +51,7 @@ router.put('/add_to_budget', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// Subtract from total budget
 router.put('/subtract_from_budget', rejectUnauthenticated, (req, res) => {
     console.log('TESTING ******', req.body);
     const queryText = `
@@ -64,6 +67,26 @@ router.put('/subtract_from_budget', rejectUnauthenticated, (req, res) => {
         res.sendStatus(201);
     }).catch(error => {
         console.log('Error in Put BUDGET AMT', error);
+        res.sendStatus(500);
+    })
+})
+
+// Subtract from budget when user completes a goal
+router.put('/on_completed_goal', rejectUnauthenticated, (req, res) => {
+    console.log('TESTING ******', req.body);
+    const queryText = `
+        UPDATE "user" 
+        SET "total_budget" = $1
+        WHERE "user".id=$2
+    `;
+    let queryParams = [
+        req.body.updateBudget,
+        req.user.id
+    ];
+    pool.query(queryText, queryParams).then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error', error);
         res.sendStatus(500);
     })
 })
