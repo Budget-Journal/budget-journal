@@ -134,7 +134,7 @@ export default function ActiveGoals() {
               <RenderedGoals goal={goal} index={index} />
             </Grid>
           ))}
-          <Card
+          {/* <Card
             className={classes.totalGoalCostCard}
             sx={{ width: '100%' }}
           >
@@ -169,7 +169,7 @@ export default function ActiveGoals() {
                 </Button>
               </center>
             </div>
-          </Card>
+          </Card> */}
         </Grid>
       }
     </div>
