@@ -29,12 +29,7 @@ function SideBar() {
   };
 
   // Handles functionality when create goal tab is clicked
-  const createGoal = () => {
-    // Create a new goal to be used in create goal page
-    dispatch({
-      type: "CREATE_NEW_GOAL"
-    })
-    setValue(false)
+  const createGoal = () => {   
     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
   };
   
