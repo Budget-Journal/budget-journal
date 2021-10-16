@@ -80,7 +80,7 @@ export default function Journal () {
 
 
   return (
-   <Container>
+   <Container className="container">
       <form onSubmit={PostEntry}>
         <TextField 
           type="text"
