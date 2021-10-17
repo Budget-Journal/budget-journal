@@ -8,7 +8,6 @@ export default function CompletedGoalsJournalPosts({journal}) {
 
     return (
         <div>
-            <h5>Journal Posts</h5>
             {journal.map(entry => (
                 <p>{entry.post_text}</p>
             ))}
