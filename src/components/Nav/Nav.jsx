@@ -43,6 +43,7 @@ function Nav() {
   };
   //Grab from redux store
   const user = useSelector((store) => store.user);
+  console.log('****TOTAL BUDGET', user.total_budget);
 
   return (
 
@@ -51,7 +52,8 @@ function Nav() {
         <Toolbar>
           <img height="100px" width="auto" src={JournalLogo} alt="" />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          **Render Balance / Budget**
+          
+          Total Budget: ${user.total_budget}
           </Typography>
            {/* If no user is logged in, show these links */}
             {user.id === null &&
