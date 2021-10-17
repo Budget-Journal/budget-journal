@@ -5,33 +5,7 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import Card from '@mui/material/Card';
 import { Button, TextField } from "@mui/material";
-
-
-// const useStyles = makeStyles({
-//     gridContainer: {
-//         paddingLeft: "50px",
-//         paddingRight: "10px",
-//         marginTop: 15,
-//     },
-//     subtractBudgetBtn: {
-//         margin: 5,
-//         paddingTop: 12,
-//         paddingBottom: 8
-//     },
-//     addBudgetBtn: {
-//         margin: 5,
-//         paddingTop: 12,
-//         paddingBottom: 8,
-//         paddingRight: 88,
-//     },
-//     totalGoalCostCard: {
-//         marginTop: 65,
-//         marginLeft: 30,
-//         paddingTop: 15,
-//         paddingBottom: 15
-//     }
-// });
-
+import { Paper, TableBody, TableCell, TableSortLabel, TableRow, TableHead, Table} from '@material-ui/core';
 
 export default function ProfilePage() {
 
@@ -52,9 +26,8 @@ export default function ProfilePage() {
     const [addToBudget, setAddToBudget] = useState('');
     const [subtractFromBudget, setSubtractFromBudget] = useState('');
 
+    // Toggle update total button
     const [editBudgetButtonClick, setEditBudgetButtonClick] = useState(true);
-
-    //const classes = useStyles();
 
     // Set variable to user redux store data
     const userTotalBudget = user.total_budget;
@@ -111,33 +84,28 @@ export default function ProfilePage() {
         } else {
             return (
                 <div>
+                <br />
+                    
                     <TextField
                         // className={classes.addInput}
                         value={addToBudget}
                         onChange={(e) => setAddToBudget(e.target.value)}
+                        fullWidth
                     >
                     </TextField>
-                    <Button
-                        // className={classes.addBudgetBtn}
-                        variant="contained"
-                        color="primary"
-                        onClick={handleAddToBudget}
-                    >
-                        Add Funds
-                    </Button>
 
-                    {/* <TextField
-                        value={subtractFromBudget}
-                        onChange={(e) => setSubtractFromBudget(e.target.value)}
-                    ></TextField>
-                    <Button
-                        // className={classes.subtractBudgetBtn}
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleSubtractFromBudget}
-                    >
-                        Subtract Funds
-                    </Button> */}
+                    <center>
+                        <Button
+                            // className={classes.addBudgetBtn}
+                            className={classes.btn}
+                            variant="contained"
+                            color="primary"
+                            onClick={handleAddToBudget}
+                            size="small"
+                        >
+                            Add Funds
+                        </Button>
+                    </center>
                 </div>
             )
         }
@@ -147,49 +115,62 @@ export default function ProfilePage() {
     // Subtract the totalGoalCost amount from the user budget total 
     const remainingBalance = user.total_budget - totalGoalCostSum;
 
+    // Style Table and buttons
+    const useStyles = makeStyles(theme => ({
+        table: {
+            marginTop: 10,
+            width: 60,
+            marginTop: 80,
+            '& tr': {
+                fontWeight: '600',
+                color: '1F4364',
+                backgroundColor: '#71aac9',
+            },
+            '& td': {
+                fontWeight: '500',
+            },
+            '& tr:hover': {
+                backgroundColor: 'grey',
+                cursor: 'pointer'
+            },
+        },
+        btn: {
+            backgroundColor: '#71aac9',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'grey'
+            }
+        }
+    }))
+    const classes = useStyles();
+
     return (
         <div>
-            <h1>Profile</h1>
-            <h1>Total Budget: $ {user.total_budget}</h1>
-            <Button onClick={toggleUpdateBudget}>Update Budget</Button>
-            {updateBudget()}
-            
-            <h2>Total Goal Cost: {totalGoalCostSum.toFixed(2)}</h2>
-            <h2>Balance: {remainingBalance.toFixed(2)}</h2>
-
-
-                <div>
-                    <center>
-                        {/* <TextField
-                            // className={classes.addInput}
-                            value={addToBudget}
-                            onChange={(e) => setAddToBudget(e.target.value)}
-                        >
-                        </TextField>
-                        <Button
-                            // className={classes.addBudgetBtn}
-                            variant="contained"
-                            color="primary"
-                            onClick={handleAddToBudget}
-                        >
-                            Add Funds
-                        </Button>
-
-                        <TextField
-                            value={subtractFromBudget}
-                            onChange={(e) => setSubtractFromBudget(e.target.value)}
-                        ></TextField>
-                        <Button
-                            // className={classes.subtractBudgetBtn}
-                            variant="contained"
-                            color="secondary"
-                            onClick={handleSubtractFromBudget}
-                        >
-                            Subtract Funds
-                        </Button> */}
-                    </center>
-                </div>
-            
+            <center>
+                <Table className={classes.table} style={{ width: 700 }}>
+                    <TableRow>
+                        <TableCell>Username</TableCell>
+                        <TableCell>{user.username}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Total Budget:</TableCell>
+                        <TableCell>$ {user.total_budget}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Total Goal Cost:</TableCell>
+                        <TableCell>{totalGoalCostSum.toFixed(2)}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Balance: </TableCell>
+                        <TableCell>{remainingBalance.toFixed(2)}</TableCell>
+                    </TableRow>
+                <Button className={classes.btn} onClick={toggleUpdateBudget} align="right" color="error"
+                    size="small" >Update Total Budget</Button>
+                <br />
+                {updateBudget()}
+                </Table>
+                <br />
+            </center>
         </div>
     )
 } 
