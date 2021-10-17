@@ -4,23 +4,7 @@ import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
 //Material UI Imports
-import Card from '@mui/material/Card';
-import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+
 //End Material UI Imports
 
 
@@ -34,6 +18,7 @@ const useStyles = makeStyles({
 
 export default function GoalCard() {
   // Set hooks as variables
+  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

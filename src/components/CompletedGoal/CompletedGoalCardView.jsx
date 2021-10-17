@@ -49,7 +49,8 @@ export default function CompletedGoalCardView() {
                             <Divider />
                              <br/>
                             <div className={classes.imageSection}>
-                                <img className={classes.media} src="https://iajw.org/wp-content/uploads/2019/09/What-is-journal-writing-image-of-blank-journal.jpg" />
+                                <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>
+                                {/* <img className={classes.media} src="https://iajw.org/wp-content/uploads/2019/09/What-is-journal-writing-image-of-blank-journal.jpg" /> */}
                             </div>
                              
                                 <TableContainer>

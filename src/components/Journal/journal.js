@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { FormHelperText, TextField, Container, Select, Button,  Grid, InputLabel, FormControl, makeStyles, MenuItem, } from '@material-ui/core';
+import { Divider, Box, styled, Card, Paper, FormHelperText, TextField, Container, Select, Button,  Grid, InputLabel, FormControl, makeStyles, MenuItem, } from '@material-ui/core';
 import "./styles.css";
 import JournalEntries from "./journalEntries";
 import userReducer from "../../redux/reducers/user.reducer";
 import Tooltip from '@mui/material/Tooltip';
 
 
-
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Journal () {
   // Set react hooks to variables
@@ -82,6 +87,7 @@ export default function Journal () {
   return (
    <Container className="container">
       <form onSubmit={PostEntry}>
+        <Card>
         <TextField 
           type="text"
           name="entry"
@@ -94,7 +100,7 @@ export default function Journal () {
         />
 
         <FormControl className="dropdown-menu">
-          <InputLabel id="current-active-goals">Select Goal</InputLabel>
+          <InputLabel id="current-active-goals">Select a Goal</InputLabel>
           <Select
             style={{width: "135%"}}
             labelId="current-active-goals"
@@ -113,8 +119,10 @@ export default function Journal () {
           
         </FormControl>
         <FormHelperText>Optional: Select a Goal this post is related too</FormHelperText>
+        </Card>
          <Tooltip>
             <Button
+              style={{float: "right"}}
               size="small"
               variant="outlined"
               type="submit"
@@ -123,14 +131,20 @@ export default function Journal () {
             </Button>
         </Tooltip>
         <br />
-        
       </form>
-
-    <div>
+      <br/>
+      <h2 align="center">Journal</h2>
+    <Divider />
+    <br/>
+    <Grid container spacing={2}>
         {journal.map((entry, index) => (
+          <Grid item xs={12}>
+          <Item>
           <JournalEntries entry={entry} index={index} />
+          </Item>
+          </Grid>
         ))}
-    </div>
+    </Grid>
    </Container>
   );
 };

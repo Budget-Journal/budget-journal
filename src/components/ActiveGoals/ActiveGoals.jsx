@@ -39,7 +39,7 @@ export default function ActiveGoals() {
       {lengthOfActiveGoals <= 0 ?
         <NoGoals />
       :
-        <Grid container spacing={4} justify="center" className={classes.gridContainer}>
+        <Grid container spacing={4} justifyContent="center" className={classes.gridContainer}>
           {activeGoals.map((goal, index) => (
             <Grid item xs={12} sm={6} md={4}>
               <RenderedGoals goal={goal} index={index} />

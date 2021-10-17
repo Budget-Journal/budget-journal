@@ -4,17 +4,45 @@ import { useHistory } from "react-router-dom";
 
 //Material UI Imports
 import Button  from '@mui/material/Button';
-import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardHeader from '@mui/material/CardHeader';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import Checkbox from '@mui/material/Checkbox';
-
+import Card from '@mui/material/Card';
+import { makeStyles } from '@mui/styles';
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import Alert from '@mui/material/Alert';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 //End Material UI Imports
 
+const useStyles = makeStyles({
+  gridContainer: {
+    paddingLeft: "0px",
+    paddingRight: "0px"
+  }
+});
+
 export default function CompletedGoalCard ({goal, index}) {
+    //Material UI
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     // Set hooks to variables
     const dispatch = useDispatch();
     const history = useHistory();
@@ -55,35 +83,61 @@ export default function CompletedGoalCard ({goal, index}) {
             type: "DELETE_COMPLETED_GOAL", //NEED TO FIX THIS
             payload: goal.id
         })
-        history.go(0);
     }
 
     return (
         <div>
             <div>
+            <Grid
+                container
+                className={classes.gridContainer}
+                justifyContent="center"
+                spacing={4}
+                >
+                <Grid item xs={12} sm={6} md={4} >
                 <Card sx={{ width: '100%' }}>
                     <CardHeader
                         avatar={
                             <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg" />
                         }
+                         action={
+                        <IconButton>
+                            <DeleteOutlineIcon color="error" onClick={handleClickOpen} /> 
+                        </IconButton>
+                        }
                         title={goal.name}
                         subheader={goal.total_goal_cost}
-                    />
+                        />
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description">
+                             <DialogTitle id="alert-dialog-title">
+                            {"Are you sure about deleting this goal?"}
+                            </DialogTitle>
+                            <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                                You wont be able to undo this goal once it is deleted. Are you sure?
+                            </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                            <Button onClick={handleClose}>Disagree</Button>
+                            <Button onClick={() => handleDeleteGoal(goal) && {handleClose}}  autoFocus>
+                                Agree
+                            </Button>
+                            </DialogActions>
+                        </Dialog>
                     <CardActions>
                         <Button
                             size="small"
                             onClick={() => { handleViewGoalDetails(goal) }}>
-                            View
-                        </Button>
-
-                        <Button
-                            color="error"
-                            size="small"
-                            onClick={() => { handleDeleteGoal(goal) }}>
-                            Delete
+                            <VisibilityIcon />
                         </Button>
                     </CardActions>
                 </Card>
+                </Grid>
+                </Grid>
             </div>
         </div>
     )

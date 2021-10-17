@@ -108,7 +108,7 @@ export default function RenderedGoals({goal, index}) {
                     <Button 
                         size="small" 
                         onClick={() => { handleViewGoalDetails(goal)}}>
-                    View
+                    Edit
                     </Button>
 
                     <Button 

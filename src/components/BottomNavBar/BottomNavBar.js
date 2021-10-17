@@ -44,8 +44,9 @@ function SideBar() {
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Paper  sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
+          style={{background: '#71aac9'}}
           showLabels
           value={value}
           onChange={(event, newValue) => {

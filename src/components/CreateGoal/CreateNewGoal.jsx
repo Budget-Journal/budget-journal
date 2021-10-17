@@ -55,6 +55,7 @@ export default function CreateNewGoal() {
     // Delete goal and expenses
     // Take user back to home page
     const cancelCreateGoal = () => {
+        history.push('/activegoals')
         console.log('Cancel Creating New Goal');
         // Will dispatch to delete the created goal
     };
