@@ -50,7 +50,7 @@ export default function CompletedGoalCardView() {
                              <br/>
                             <div className={classes.imageSection}>
                                 <div dangerouslySetInnerHTML={{__html: goalDetails.reasons}}></div>
-                                {/* <img className={classes.media} src="https://iajw.org/wp-content/uploads/2019/09/What-is-journal-writing-image-of-blank-journal.jpg" /> */}
+                            <img className={classes.media} src="https://cdn.travelpulse.com/images/abaaedf4-a957-df11-b491-006073e71405/25b80fab-d2f1-4ff0-b531-9f266118cd28/630x355.jpg" />
                             </div>
                              
                                 <TableContainer>
