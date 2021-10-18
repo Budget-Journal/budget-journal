@@ -59,8 +59,7 @@ function SideBar() {
           icon={<HomeIcon />} />
 
           <BottomNavigationAction 
-          onChange={event => setValue(event.target.value)}
-          value= {createGoal}
+          onClick={createGoal}
           label="Create a Goal" 
           icon={<AddToPhotosIcon />} />
 
