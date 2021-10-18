@@ -29,12 +29,7 @@ function SideBar() {
   };
 
   // Handles functionality when create goal tab is clicked
-  const createGoal = () => {
-    // Create a new goal to be used in create goal page
-    dispatch({
-      type: "CREATE_NEW_GOAL"
-    })
-    setValue(false)
+  const createGoal = () => {   
     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
   };
   
@@ -49,8 +44,9 @@ function SideBar() {
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Paper  sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
+          style={{background: '#71aac9'}}
           showLabels
           value={value}
           onChange={(event, newValue) => {

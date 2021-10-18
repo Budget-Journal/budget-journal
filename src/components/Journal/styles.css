@@ -1,20 +1,19 @@
 
 form{
-  margin-top: 70px;
+  margin-top: 0px;
 }
 
 
 
 .dropdown-menu {
-  width: 15%;
- 
+  width: 14.8%;
 }
 
 .inputField {
-  width: 70%;
+  width: 80%;
   
 }
 
-.journal-posts {
+/* .journal-posts {
   margin-top: 20px;
-}
+} */

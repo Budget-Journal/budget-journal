@@ -35,11 +35,11 @@ export default function JournalEntries({entry, index}){
 
 
     return (
-        <Box sx={{ maxWidth: 775 }}>
+        // <Box sx={{ maxWidth: 775 }}>
             <Card 
                 variant="outlined"
                 className="journal-posts"
                 >{card}</Card>
-        </Box>
+        // </Box>
     )
 }
