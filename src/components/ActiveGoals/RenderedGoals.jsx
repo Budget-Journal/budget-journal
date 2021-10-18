@@ -87,6 +87,11 @@ export default function RenderedGoals({goal, index}) {
         history.go(0);
     }
 
+    var formatter = Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    })
+
     return(
         <div>
             <Card  sx={{width: '100%'}}>
@@ -95,7 +100,7 @@ export default function RenderedGoals({goal, index}) {
                     <Avatar src="https://www.royalcaribbean.com/content/dam/royal/ports-and-destinations/destinations/alaska-cruise-tours/wonder-lake-denali-national-park-mountains-background.jpg"/>                                
                     } 
                     title={goal.name}
-                    subheader={goal.total_goal_cost}
+                    subheader={formatter.format(goal.total_goal_cost)}
                     
                 />
                 <CardActions>
