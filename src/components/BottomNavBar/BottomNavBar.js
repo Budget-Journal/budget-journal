@@ -2,7 +2,6 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 //Bottom Navigation
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Box from '@mui/material/Box';
@@ -29,7 +28,11 @@ function SideBar() {
   };
 
   // Handles functionality when create goal tab is clicked
-  const createGoal = () => {   
+  const createGoal = () => {  
+     dispatch({
+       type: "CREATE_NEW_GOAL"
+     })
+     setValue(false); 
     history.push("/creategoal"); // HOW CAN I LINK can I pass it as prop
   };
   
@@ -44,8 +47,9 @@ function SideBar() {
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-      <Paper  sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}elevation={3}>
         <BottomNavigation
+          className="BottomNav"
           style={{background: '#71aac9'}}
           showLabels
           value={value}
@@ -59,8 +63,7 @@ function SideBar() {
           icon={<HomeIcon />} />
 
           <BottomNavigationAction 
-          onChange={event => setValue(event.target.value)}
-          value= {createGoal}
+          onClick={createGoal}
           label="Create a Goal" 
           icon={<AddToPhotosIcon />} />
 
