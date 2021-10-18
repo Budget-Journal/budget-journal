@@ -144,6 +144,11 @@ export default function ProfilePage() {
     }))
     const classes = useStyles();
 
+    var formatter = Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    })
+
     return (
         <div>
             <center>
@@ -154,15 +159,15 @@ export default function ProfilePage() {
                     </TableRow>
                     <TableRow>
                         <TableCell>Total Budget:</TableCell>
-                        <TableCell>$ {user.total_budget}</TableCell>
+                        <TableCell>{formatter.format(user.total_budget)}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Total Goal Cost:</TableCell>
-                        <TableCell>{totalGoalCostSum.toFixed(2)}</TableCell>
+                        <TableCell>{formatter.format(totalGoalCostSum)}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Balance: </TableCell>
-                        <TableCell>{remainingBalance.toFixed(2)}</TableCell>
+                        <TableCell>{formatter.format(remainingBalance)}</TableCell>
                     </TableRow>
                 <Button className={classes.btn} onClick={toggleUpdateBudget} align="right" color="error"
                     size="small" >Update Total Budget</Button>

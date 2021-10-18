@@ -45,6 +45,11 @@ function Nav() {
   const user = useSelector((store) => store.user);
   console.log('****TOTAL BUDGET', user.total_budget);
 
+  var formatter = Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
+
   return (
 
     <Box sx={{ flexGrow: 1 }}>
@@ -53,7 +58,7 @@ function Nav() {
           <img height="100px" width="auto" src={JournalLogo} alt="" />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           
-          Total Budget: ${user.total_budget}
+          Total Budget: {formatter.format(user.total_budget)}
           </Typography>
            {/* If no user is logged in, show these links */}
             {user.id === null &&
