@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 //Material UI Imports
 import Button  from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
 import CardHeader from '@mui/material/CardHeader';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
@@ -87,14 +88,7 @@ export default function CompletedGoalCard ({goal, index}) {
 
     return (
         <div>
-            <div>
-            <Grid
-                container
-                className={classes.gridContainer}
-                justifyContent="center"
-                spacing={4}
-                >
-                <Grid item xs={12} sm={6} md={4} >
+            <div>        
                 <Card sx={{ width: '100%' }}>
                     <CardHeader
                         avatar={
@@ -136,8 +130,6 @@ export default function CompletedGoalCard ({goal, index}) {
                         </Button>
                     </CardActions>
                 </Card>
-                </Grid>
-                </Grid>
             </div>
         </div>
     )

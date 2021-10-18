@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import NoGoals from "./NoGoals";
 import RenderedGoals from "./RenderedGoals";
 import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
 import { makeStyles } from '@mui/styles';
 import Card from '@mui/material/Card';
 import { Button, TextField } from "@mui/material";
@@ -36,6 +37,8 @@ export default function ActiveGoals() {
 
   return (
     <div>
+          <h2 align="center">Active Goals</h2>
+      <Divider />
       {lengthOfActiveGoals <= 0 ?
         <NoGoals />
       :

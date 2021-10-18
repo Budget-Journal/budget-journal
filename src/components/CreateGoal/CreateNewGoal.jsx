@@ -81,7 +81,8 @@ export default function CreateNewGoal() {
                 name: goal,
                 reasons: state,
             }
-        })
+        });
+        
         // Update the total goal cost
         dispatch({
             type: "PUT_TOTAL_GOAL_COST",

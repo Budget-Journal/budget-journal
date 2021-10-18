@@ -1,4 +1,4 @@
-.sidebar {
+/* .sidebar {
   flex: 0.2;
 }
 .sidebar > hr {
@@ -7,4 +7,7 @@
   background-color: rgb(241, 239, 239);
   margin-top: 15px;
   margin-bottom: 15px;
+} */
+.BottomNav {
+  overflow: hidden;
 }

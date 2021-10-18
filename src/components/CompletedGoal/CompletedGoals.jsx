@@ -5,13 +5,13 @@ import CompletedGoalCard from './CompletedGoalCard';
 
 // Material UI
 import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
 import { makeStyles } from '@mui/styles';
 
 
 const useStyles = makeStyles({
   gridContainer: {
-    paddingLeft: "50px",
-    paddingRight: "10px"
+   marginTop: '10px'
   }
 });
 
@@ -33,9 +33,11 @@ export default function CompletedGoals() {
     }, []); //activeGoals?
     return (
         <div>
-            <Grid container spacing={4} justify="center" className={classes.gridContainer}>
+         <h2 align="center">Accomplished Goals</h2>
+                <Divider />
+            <Grid container spacing={4} justifyContent="center" className={classes.gridContainer} >
                 {goals.map((goal, index) => (
-                    <Grid item xs={12} md={10}>
+                    <Grid item xs={12} sm={6} md={4}>
                         <CompletedGoalCard goal={goal} index={index} />
                     </Grid>
                 ))}

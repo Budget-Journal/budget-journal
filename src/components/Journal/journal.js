@@ -118,7 +118,6 @@ export default function Journal () {
           </Select >
           
         </FormControl>
-        <FormHelperText>Optional: Select a Goal this post is related too</FormHelperText>
         </Card>
          <Tooltip>
             <Button
