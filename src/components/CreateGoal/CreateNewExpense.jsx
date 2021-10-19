@@ -55,7 +55,7 @@ export default function CreateNewExpense({ goal, expense }) {
                 />
             </td>
             <td>
-                <Button onClick={() => deleteExpense(expense)}>Delete</Button>
+                <Button style={{color: 'red'}}  onClick={() => deleteExpense(expense)}>Delete</Button>
             </td>
         </tr>
     )

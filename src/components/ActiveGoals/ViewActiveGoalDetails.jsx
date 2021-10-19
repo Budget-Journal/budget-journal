@@ -4,7 +4,13 @@ import { TextField, Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "../CreateGoal/EditorToolbar";
- 
+import Table from '@mui/material/Table';
+import Divider from '@mui/material/Divider';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 // Import other components
 import JournalPosts from '../JournalPostsByGoal/JournalPostsByGoal';
 import BudgetTable from './ViewActiveGoalBudget';
@@ -126,23 +132,26 @@ export default function ViewActiveGoalDetails() {
           <br />
           <br />
 
-          <table>
-            <thead>
-              <tr>
-                <th>Expense</th>
-                <th>Price</th>
-                <th>Notes</th>
-              </tr>
-            </thead>
-            <tbody>
+           <TableContainer>
+            <Table>
+                <TableHead>
+                    <TableCell>Expense</TableCell>
+                    <TableCell>Price</TableCell>
+                    <TableCell>Notes</TableCell>
+                </TableHead>
+                <TableBody>
               {budgetDetails.map((detail) => (
                 <BudgetTable goal={goalDetails} detail={detail} />
               ))}
-            </tbody>
-          </table>
-          <Button onClick={() => addExpenseRow()}>New Expense</Button>
+            </TableBody>
+            </Table>
+            </TableContainer>
+            <br/>
+            <Divider />
+            <br/>
+          <Button variant="outlined" onClick={() => addExpenseRow()}>New Expense</Button>
           <br />
-          <Button onClick={submitChanges}>Submit Changes</Button>
+          <Button variant="outlined" onClick={submitChanges}>Submit Changes</Button>
 
         <div>
           <JournalPosts journal={journal} />

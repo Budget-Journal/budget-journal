@@ -5,7 +5,13 @@ import { useHistory } from 'react-router';
 
 // Material UI Imports
 import { TextField, Button } from "@mui/material";
-
+import Table from '@mui/material/Table';
+import Divider from '@mui/material/Divider';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 // Quill Imports
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
@@ -93,7 +99,7 @@ export default function CreateNewGoal() {
     };
 
     return (
-        <div>
+        <div justifyContent="center">
            
             <TextField
                 label="Set a Goal..."
@@ -115,22 +121,26 @@ export default function CreateNewGoal() {
                 modules={modules}
                 formats={formats}
             />
-            
-            <table>
-                <thead>
-                    <th>Expense</th>
-                    <th>Price</th>
-                    <th>Notes</th>
-                </thead>
-                <tbody>
+            <TableContainer>
+            <Table>
+                <TableHead>
+                    <TableCell>Expense</TableCell>
+                    <TableCell>Price</TableCell>
+                    <TableCell>Notes</TableCell>
+                </TableHead>
+                <TableBody>
                     {budgetDetails.map((expense) => (
                         <CreateNewExpense lastGoal={goal} expense={expense} />
                     ))}
-                </tbody>
-            </table>
-            <Button onClick={() => addExpenseRow()}>Add Expense</Button>
-            <Button onClick={() => cancelCreateGoal()}>Cancel</Button>
-            <Button onClick={() => createGoal()}>Create Goal</Button>
+                </TableBody>
+            </Table>
+            </TableContainer>
+            <br/>
+            <Divider />
+            <br/>
+            <Button variant="outlined" onClick={() => addExpenseRow()}>Add Expense</Button>
+            <Button variant="outlined" style={{float: "right"}} align="right" onClick={() => createGoal()}>Create Goal</Button>
+            <Button  style={{color: 'red', float: "right"}} onClick={() => cancelCreateGoal()}>Cancel</Button>
         </div>
     )
 } // end CreateNewGoal
