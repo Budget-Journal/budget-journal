@@ -54,7 +54,7 @@ export default function ViewActiveGoalBudget (props) {
                     />
                 </td>
                 <td>
-                    <Button onClick={() => deleteExpense(props.detail)}>Delete</Button>
+                    <Button style={{color: 'red'}} onClick={() => deleteExpense(props.detail)}>Delete</Button>
                 </td>
             </tr>
     )

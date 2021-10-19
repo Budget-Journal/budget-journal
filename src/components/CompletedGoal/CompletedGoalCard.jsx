@@ -117,7 +117,7 @@ export default function CompletedGoalCard ({goal, index}) {
                             </DialogContent>
                             <DialogActions>
                             <Button onClick={handleClose}>Disagree</Button>
-                            <Button onClick={() => handleDeleteGoal(goal) && {handleClose}}  autoFocus>
+                            <Button onClick={handleClose}  autoFocus>
                                 Agree
                             </Button>
                             </DialogActions>
