@@ -4,9 +4,9 @@ const userReducer = (state = {}, action) => {
     //   return state = 0, + Number(action.payload.total_budget);
     // case 'DEDUCT_FROM_BUDGET':
     //   return state = 0, - Number(action.payload.total_budget);
-    case 'SET_USER':
+    case "SET_USER":
       return action.payload;
-    case 'UNSET_USER':
+    case "UNSET_USER":
       return {};
     default:
       return state;

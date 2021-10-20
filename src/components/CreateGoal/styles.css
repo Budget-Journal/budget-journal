@@ -15,7 +15,7 @@
   .ql-editor {
     display: flex;
     width: 300px;
-    /* height: 500px; */
+    
     
   }
   .quill{
@@ -42,11 +42,5 @@
     text-align: center;
   }
 
- 
-
-  /* Font-Family: 'Work Sans', Sans-Serif;
-Font-Size: 45px;
-Font-Family: 'Open Sans', Sans-Serif;
-Font-Size: 15px; */
 
  

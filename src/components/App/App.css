@@ -5,7 +5,7 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
 }
 
@@ -38,15 +38,10 @@ Button
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
-  justify-content:baseline;
+  justify-content: baseline;
   min-height: 30px;
   min-width: 80px;
 }
-
-/* .btn_sizeMin {
-  min-height: 30px;
-  min-width: 80px;
-} */
 
 .btn_sizeSm {
   padding: 5px 10px;
@@ -72,9 +67,7 @@ Button
   background: none;
   font: inherit;
   color: rgb(93, 93, 102);
-  Font-Family: 'Work Sans', Sans-Serif;
-  
-
+  font-family: "Work Sans", Sans-Serif;
 }
 
 .btn_asLink:hover {
@@ -97,40 +90,3 @@ Alert
   color: #e01616;
   font-size: 0.8rem;
 }
-
-/* --------------------------------------------------------------------------------
-Form Treatment
--------------------------------------------------------------------------------- */
-
-/* .formPanel {
-
-  display: inline-block;
-  box-sizing: border-box;
-  width: 375px;
-  height:300px;
-  max-width: 50%;
-  padding: 25px;
-  margin-left: 400px;
-  margin-top: 135px;
-  background-color: #2e5c86;
-  border-radius: 10px 10px 10px 10px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
-  color: white;
-  Font-Family: 'Work Sans', Sans-Serif;
-} */
-
-.titlePanel{
-  text-align: center;
-}
-
-input {
-  margin: 5px;
-  margin-bottom: 10px;
-}
-.noGoal{
-  background-image: url('https://www.emeraldgrouppublishing.com/sites/default/files/2019-12/SER1.1.1%20-%20FW%20-%20Stack%20of%20Journals.jpg')
-}
-
-
-
-

@@ -46,13 +46,13 @@ Font.whitelist = [
   "courier-new",
   "georgia",
   "helvetica",
-  "lucida"
+  "lucida",
 ];
 Quill.register(Font, true);
 
 //Temp
-const Block = Quill.import('blots/block');
-Block.tagName = 'div';
+const Block = Quill.import("blots/block");
+Block.tagName = "div";
 Quill.register(Block);
 
 // Modules object for setting up the Quill editor
@@ -61,14 +61,14 @@ export const modules = {
     container: "#toolbar",
     handlers: {
       undo: undoChange,
-      redo: redoChange
-    }
+      redo: redoChange,
+    },
   },
   history: {
     delay: 500,
     maxStack: 100,
-    userOnly: true
-  }
+    userOnly: true,
+  },
 };
 
 // Formats objects for setting up the Quill editor
@@ -90,7 +90,7 @@ export const formats = [
   "link",
   "image",
   "color",
-  "code-block"
+  "code-block",
 ];
 
 // Quill Toolbar component
@@ -145,19 +145,6 @@ export const QuillToolbar = () => (
       <button className="ql-image" />
       <button className="ql-video" />
     </span>
-    {/* <span className="ql-formats">
-      <button className="ql-formula" />
-      <button className="ql-code-block" />
-      <button className="ql-clean" />
-    </span> */}
-    {/* <span className="ql-formats">
-      <button className="ql-undo">
-        <CustomUndo />
-      </button>
-      <button className="ql-redo">
-        <CustomRedo />
-      </button>
-    </span> */}
   </div>
 );
 
